@@ -1,4 +1,4 @@
-/* BRUTALIST STYLES */
+/* EDITORIAL STYLES - INSPIRED BY STUDIO SPADING */
 
 * {
     margin: 0;
@@ -6,167 +6,409 @@
     box-sizing: border-box;
 }
 
+/* Custom cursor - dark gray square - applied everywhere */
+* {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"><rect width="12" height="12" fill="%23444444"/></svg>') 6 6, auto;
+}
+
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: #000000;
-    color: #FFFFFF;
-    line-height: 1.6;
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #F4f3f2;
+    color: #444444;
+    line-height: 1.7;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-size: 17px;
+    transition: background-color 0.5s ease;
+}
+
+/* Text hover effects - color inversion */
+p, h1, h2, h3, h4, h5, h6, li, span, .tagline, .accordion-header {
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+/* Dark gray text (#444444) changes to slightly lighter gray on hover */
+p:hover, h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover, li:hover, span:hover, .tagline:hover, .accordion-header:hover {
+    color: #666666;
+}
+
+/* Exclude links from paragraph hover - links have their own hover styles */
+p:hover a, h1:hover a, h2:hover a, h3:hover a, h4:hover a, h5:hover a, h6:hover a {
+    color: inherit;
+}
+
+/* Off-white text class - changes to gray on hover */
+.text-offwhite, .text-offwhite p, .text-offwhite h1, .text-offwhite h2 {
+    color: #F4F4F4;
+}
+
+.text-offwhite:hover, .text-offwhite p:hover, .text-offwhite h1:hover, .text-offwhite h2:hover {
+    color: #333333;
+}
+
+/* Info page specific background */
+body.info-page {
+    background-color: #dddddd;
 }
 
 header {
-    border-bottom: 4px solid #FFFFFF;
-    padding: 1rem 2rem;
-    background-color: #000000;
-}
-
-nav {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-nav a {
-    color: #FFFFFF;
-    text-decoration: none;
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 600;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 0.5rem 1rem;
-    border: 2px solid transparent;
-    transition: border 0.2s;
-}
-
-nav a:hover {
-    border: 2px solid #FFFFFF;
-}
-
-nav a.active {
-    border: 2px solid #FFFFFF;
-    background-color: #FFFFFF;
-    color: #000000;
-}
-
-main {
-    flex: 1;
-    padding: 4rem 2rem;
-    max-width: 1200px;
+    padding: 2rem 0 1.5rem 0;
+    background-color: transparent;
+    max-width: 900px;
     width: 100%;
     margin: 0 auto;
 }
 
+nav {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+/* Navigation links with underline on hover */
+nav a {
+    color: #444444;
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+    font-size: 24px;
+    text-transform: none;
+    letter-spacing: 0;
+    padding: 0;
+    position: relative;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+/* Underline animation on hover */
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: #444444;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover {
+    opacity: 1;
+}
+
+nav a.active {
+    opacity: 1;
+}
+
+nav a.active::after {
+    width: 100%;
+}
+
+main {
+    flex: 1;
+    padding: 3rem 0 5rem 0;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Hero section - minimal, clean */
 .hero {
-    text-align: center;
-    margin-bottom: 4rem;
-    border: 4px solid #FFFFFF;
-    padding: 3rem 2rem;
-    background-color: #000000;
+    margin-bottom: 5rem;
+    padding: 0;
 }
 
 .hero h1 {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 4rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
     line-height: 1.2;
+    color: #444444;
 }
 
 .tagline {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 17px;
+    text-transform: none;
+    letter-spacing: 0;
     font-weight: 400;
+    color: #444444;
+    line-height: 1.7;
 }
 
 .content {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 4rem;
+}
+
+/* No gap between accordion sections */
+.content:has(.accordion-section) {
+    gap: 0;
 }
 
 .block {
-    border: 4px solid #FFFFFF;
-    padding: 2rem;
-    background-color: #000000;
+    padding: 0;
 }
 
 .block h2 {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 2rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0;
+    color: #444444;
+}
+
+/* Accordion sections for info page */
+.accordion-section {
+    margin-bottom: 0;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    width: 100vw;
+    background-color: #dddddd;
+    border-top: 1px solid rgba(68, 68, 68, 0.2);
+    border-bottom: 1px solid rgba(68, 68, 68, 0.2);
+    border-left: none;
+    border-right: none;
+    transition: background-color 0.5s ease;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.accordion-section:hover {
+    background-color: #F4f3f2;
+}
+
+.accordion-header {
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    padding: 1.5rem 0;
+    margin-bottom: 0;
+    color: #444444;
+    pointer-events: none;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.accordion-section.active .accordion-content {
+    max-height: 1000px;
+    padding: 0 0 1.5rem 0;
+}
+
+.accordion-content p {
     margin-bottom: 1rem;
-    border-bottom: 2px solid #FFFFFF;
-    padding-bottom: 0.5rem;
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    color: #444444;
+}
+
+/* Info page body text responsive font size */
+.info-page .accordion-content p {
+    font-size: max(24px, min(4vw, 35px));
+}
+
+.accordion-content p:last-child {
+    margin-bottom: 0;
+}
+
+.accordion-content a {
+    color: #444444;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+}
+
+.accordion-content a:visited {
+    color: #444444;
+}
+
+.accordion-content a:hover {
+    color: #666666 !important;
+    opacity: 1;
 }
 
 .block p {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 1.2rem;
-    line-height: 1.8;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    text-transform: none;
+    letter-spacing: 0;
     font-weight: 400;
+    color: #444444;
+    margin-bottom: 1.5rem;
+}
+
+/* Links in content with underline */
+.block a,
+.content a {
+    color: #444444;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+}
+
+.block a:visited,
+.content a:visited {
+    color: #444444;
+}
+
+.block a:hover,
+.content a:hover,
+p a:hover {
+    color: #666666 !important;
+    opacity: 1;
+}
+
+/* List styles for work/projects */
+.block ul {
+    list-style: none;
+    padding: 0;
+}
+
+.block li {
+    margin-bottom: 1rem;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.block li::before {
+    content: '●';
+    margin-right: 0.5rem;
+    color: #444444;
 }
 
 footer {
-    border-top: 4px solid #FFFFFF;
-    padding: 2rem;
-    text-align: center;
-    background-color: #000000;
+    padding: 3rem 0 2rem 0;
+    text-align: left;
+    background-color: transparent;
     margin-top: auto;
+    border-top: 1px solid rgba(68, 68, 68, 0.1);
+    max-width: 900px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 footer p {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-size: 15px;
+    text-transform: none;
+    letter-spacing: 0;
     font-weight: 400;
+    color: #444444;
+}
+
+footer a {
+    color: #444444;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+}
+
+footer a:visited {
+    color: #444444;
+}
+
+footer a:hover {
+    color: #666666 !important;
+    opacity: 1;
 }
 
 /* RESPONSIVE */
 
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.5rem;
+    body {
+        font-size: 16px;
     }
 
-    .tagline {
-        font-size: 1.2rem;
+    header {
+        padding: 1.5rem 1.5rem 1rem 1.5rem;
     }
 
     nav {
-        gap: 1rem;
+        gap: 2rem;
     }
 
     nav a {
-        font-size: 1rem;
-        padding: 0.4rem 0.8rem;
+        font-size: 20px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .tagline {
+        font-size: 16px;
     }
 
     main {
-        padding: 2rem 1rem;
+        padding: 2rem 1.5rem 4rem 1.5rem;
     }
 
-    .block {
-        padding: 1.5rem;
+    .content {
+        gap: 3rem;
+    }
+
+    .content:has(.accordion-section) {
+        gap: 0;
+    }
+
+    .accordion-header {
+        padding: 1.25rem 1.5rem;
+        font-size: 1.1rem;
+        margin-left: 0;
+        margin-right: 0;
+        max-width: none;
+    }
+
+    .accordion-content {
+        padding: 0 1.5rem;
+        margin-left: 0;
+        margin-right: 0;
+        max-width: none;
+    }
+
+    .accordion-section.active .accordion-content {
+        padding: 0 1.5rem 1.25rem 1.5rem;
     }
 
     .block h2 {
-        font-size: 1.5rem;
+        font-size: 1.1rem;
     }
 
     .block p {
-        font-size: 1rem;
+        font-size: 16px;
     }
 }
-

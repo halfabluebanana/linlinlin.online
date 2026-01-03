@@ -6,38 +6,61 @@
     <title>INFO | linlinlin.online</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="info-page">
     <header>
         <nav>
-            <a href="index.html">HOME</a>
-            <a href="info.html" class="active">INFO</a>
-            <a href="work.html">WORK</a>
+            <a href="index.html">projects</a>
+            <a href="info.html" class="active">info</a>
+            <a href="writings.html">writings</a>
         </nav>
     </header>
 
     <main>
+        <!-- PAGE TITLE
         <section class="hero">
-            <h1>INFO</h1>
-        </section>
+            <h1>Information</h1>
+        </section> -->
 
+        <!-- CONTENT SECTIONS: Accordion style - click to expand/collapse -->
         <section class="content">
-            <div class="block">
-                <h2>ABOUT</h2>
-                <p>THIS IS WHERE INFORMATION GOES.</p>
+            <!-- ABOUT SECTION: Your background, interests, what you do -->
+            <div class="accordion-section">
+                <h2 class="accordion-header">About</h2>
+                <div class="accordion-content">
+                    <!-- Add your bio, background, interests, what you do -->
+                    <!-- Example: "I'm a designer/developer interested in [topics]. I work with [tools/technologies]." -->
+                    <p>This is where information goes.</p>
+                </div>
             </div>
 
-            <div class="block">
-                <h2>CONTACT</h2>
-                <p>ADD YOUR CONTACT INFORMATION HERE.</p>
+            <!-- CONTACT SECTION: Email, social links, etc. -->
+            <div class="accordion-section">
+                <h2 class="accordion-header">Contact</h2>
+                <div class="accordion-content">
+                    <!-- Add contact information, email, social media links -->
+                    <!-- Use <a href="mailto:...">email@example.com</a> for email links -->
+                    <!-- Use <a href="https://...">Link Text</a> for social links -->
+                    <p>Add your contact information here.</p>
+                </div>
             </div>
+
+            <!-- OPTIONAL: Add more sections like Skills, Education, etc. -->
+            <!--
+            <div class="accordion-section">
+                <h2 class="accordion-header">Skills</h2>
+                <div class="accordion-content">
+                    <p>List your skills or areas of expertise here.</p>
+                </div>
+            </div>
+            -->
         </section>
     </main>
 
     <footer>
-        <p>© 2024</p>
+        <p>adeline setiawan © 2026 | <a href="https://github.com/halfabluebanana" target="_blank" rel="noopener noreferrer">GitHub</a></p>
     </footer>
 
     <script src="script.js"></script>
