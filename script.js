@@ -91,7 +91,7 @@ function initCarousel() {
             slide.dataset.index = index;
             
             // Check if thumbnail is a video file
-            const isVideo = project.thumbnail && /\.(mp4|mov|webm|avi|m4v)$/i.test(project.thumbnail);
+            const isVideo = project.thumbnail && /\.(mp4|mov|webm|avi|m4v|mkv)$/i.test(project.thumbnail);
             
             // Detect Chrome browser
             const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
@@ -115,6 +115,8 @@ function initCarousel() {
                         videoType = 'video/x-msvideo';
                     } else if (ext === 'm4v') {
                         videoType = 'video/mp4'; // M4V uses MP4 codec
+                    } else if (ext === 'mkv') {
+                        videoType = 'video/x-matroska'; // MKV format
                     }
                     
                     // For .mov files, add multiple source formats for better browser compatibility
