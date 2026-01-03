@@ -32,3 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Password protection for links
+function passwordProtect(url) {
+    const password = prompt('Enter password:');
+    // Replace 'your-password-here' with your actual password
+    if (password === 'twentytwentysix') {
+        window.open(url, '_blank');
+    } else if (password !== null) {
+        alert('Incorrect password');
+    }
+    return false;
+}
+

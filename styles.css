@@ -19,7 +19,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    font-size: 17px;
+    font-size: 24px;
     transition: background-color 0.5s ease;
 }
 
@@ -130,7 +130,7 @@ main {
     text-transform: none;
     letter-spacing: -0.02em;
     margin-bottom: 1.5rem;
-    line-height: 1.2;
+    line-height: 1.3;
     color: #444444;
 }
 
@@ -177,8 +177,8 @@ main {
     margin-right: calc(50% - 50vw);
     width: 100vw;
     background-color: #dddddd;
-    border-top: 1px solid rgba(68, 68, 68, 0.2);
-    border-bottom: 1px solid rgba(68, 68, 68, 0.2);
+    border-top: 1px solid rgba(100, 100, 100, 1);
+    border-bottom: none;
     border-left: none;
     border-right: none;
     transition: background-color 0.5s ease;
@@ -195,7 +195,7 @@ h2.accordion-header,
 .accordion-section h2.accordion-header,
 .accordion-section .accordion-header {
     font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: max(24px, min(4vw, 35px)) !important;
+    font-size: max(24px, min(4vw, 24px)) !important;
     font-weight: 400;
     text-transform: none;
     letter-spacing: 0;
@@ -219,15 +219,15 @@ h2.accordion-header,
 }
 
 .accordion-section.active .accordion-content {
-    max-height: 1000px;
+    max-height: 5000px;
     padding: 0 0 1.5rem 0;
 }
 
 .accordion-content p {
     margin-bottom: 1rem;
     font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 17px;
-    line-height: 1.7;
+    font-size: 24px;
+    line-height: 1.2;
     text-transform: none;
     letter-spacing: 0;
     font-weight: 400;
@@ -236,7 +236,8 @@ h2.accordion-header,
 
 /* Info page body text responsive font size */
 .info-page .accordion-content p {
-    font-size: max(24px, min(4vw, 35px));
+    font-size: max(24px, min(4vw, 24px));
+    line-height: 1.2;
 }
 
 .accordion-content p:last-child {
@@ -249,6 +250,15 @@ h2.accordion-header,
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
     transition: color 0.2s ease;
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 24px;
+    line-height: 1.3;
+}
+
+/* Info page accordion links - same size as accordion paragraphs */
+.info-page .accordion-content a {
+    font-size: max(24px, min(4vw, 24px));
+    line-height: 1.2 !important;
 }
 
 .accordion-content a:visited {
@@ -262,7 +272,7 @@ h2.accordion-header,
 
 .block p {
     font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 17px;
+    font-size: 14px;
     line-height: 1.7;
     text-transform: none;
     letter-spacing: 0;
@@ -393,7 +403,7 @@ footer a:hover {
     .accordion-section h2.accordion-header,
     .accordion-section .accordion-header {
         padding: 1.25rem 1.5rem;
-        font-size: max(24px, min(4vw, 35px)) !important;
+        font-size: max(24px, min(4vw, 24px)) !important;
         margin-left: 0;
         margin-right: 0;
         max-width: none;
@@ -407,6 +417,7 @@ footer a:hover {
     }
 
     .accordion-section.active .accordion-content {
+        max-height: 5000px;
         padding: 0 1.5rem 1.25rem 1.5rem;
     }
 
