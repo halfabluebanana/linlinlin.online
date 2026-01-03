@@ -115,6 +115,13 @@ main {
     max-width: 900px;
     width: 100%;
     margin: 0 auto;
+    overflow: visible;
+}
+
+main:has(.projects-carousel-container) {
+    max-width: 100%;
+    padding: 0;
+    overflow: visible;
 }
 
 /* Hero section - minimal, clean */
@@ -148,6 +155,13 @@ main {
     display: flex;
     flex-direction: column;
     gap: 4rem;
+    overflow: visible;
+}
+
+.content:has(.projects-carousel-container) {
+    overflow: visible;
+    max-width: 100%;
+    padding: 0;
 }
 
 /* No gap between accordion sections */
@@ -359,6 +373,270 @@ footer a:hover {
     opacity: 1;
 }
 
+/* PROJECT INFO CONTAINER */
+.project-info-container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    margin-top: 3rem;
+}
+
+.project-info-title {
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: #444444;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.project-info-description {
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #444444;
+    margin: 0;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+}
+
+/* PROJECTS CAROUSEL */
+.projects-carousel-container {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+}
+
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    flex: 1 1 auto;
+    min-height: 100vh !important;
+    height: 100% !important;
+    background-color: transparent;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    will-change: transform;
+    height: 100% !important;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    padding: 0;
+    height: 100% !important;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+}
+
+.carousel-slide-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.carousel-slide-link:hover .carousel-slide-image,
+.carousel-slide-link:hover .carousel-slide-video {
+    opacity: 0.9;
+}
+
+.carousel-slide-content {
+    position: relative;
+    width: 100%;
+    height: 100% !important;
+    min-height: 100vh;
+    display: block;
+}
+
+.carousel-slide-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-color: #dddddd;
+    z-index: 1;
+    display: block;
+}
+
+.carousel-slide-info {
+    position: absolute;
+    bottom: 4rem;
+    right: 4rem;
+    text-align: right;
+    z-index: 10;
+    max-width: 600px;
+    padding: 0;
+    pointer-events: none;
+}
+
+.carousel-slide-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    color: #F4f3f2;
+    text-transform: none;
+    letter-spacing: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-slide-description {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #F4f3f2;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.carousel-btn {
+    background: rgba(68, 68, 68, 0.7);
+    border: none;
+    color: #F4f3f2;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 48px;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 0 0 auto;
+    pointer-events: auto;
+    backdrop-filter: blur(4px);
+    width: auto;
+    height: auto;
+    line-height: 1;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(68, 68, 68, 0.9);
+    color: #F4f3f2;
+}
+
+.carousel-btn:active {
+    transform: scale(0.95);
+}
+
+.carousel-btn span {
+    display: inline-block;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    z-index: 3;
+}
+
+.carousel-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid #F4f3f2;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+}
+
+.carousel-indicator:hover {
+    background-color: #F4f3f2;
+    transform: scale(1.2);
+}
+
+.carousel-indicator.active {
+    background-color: #F4f3f2;
+}
+
+/* CAROUSEL VIDEO THUMBNAIL */
+.carousel-slide-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    display: block;
+}
+
+.carousel-slide-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* Fallback for browsers that don't support the video */
+.carousel-slide-video video:not([src]) {
+    background-color: #dddddd;
+}
+
+.carousel-slide-video::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+    z-index: 2;
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 768px) {
@@ -426,6 +704,90 @@ footer a:hover {
     }
 
     .block p {
+        font-size: 16px;
+    }
+    
+    .projects-carousel-container {
+        min-height: 100vh !important;
+        height: 100vh !important;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+    }
+    
+    .carousel-wrapper {
+        min-height: 100vh !important;
+        height: 100% !important;
+    }
+    
+    .carousel-slide-image {
+        height: 100% !important;
+        min-height: 100vh;
+    }
+    
+    .carousel-slide-video {
+        height: 100% !important;
+        min-height: 100vh;
+    }
+    
+    .carousel-slide-title {
+        font-size: 1.8rem;
+    }
+    
+    .carousel-slide-description {
+        font-size: 12px;
+    }
+    
+    .carousel-slide-info {
+        bottom: 2rem;
+        right: 1.5rem;
+        max-width: calc(100% - 3rem);
+    }
+    
+    .carousel-controls {
+        padding: 0 1rem;
+    }
+    
+    .carousel-btn {
+        font-size: 36px;
+        padding: 0.8rem 1.2rem;
+    }
+    
+    .carousel-slide-video video {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .carousel-slide-content {
+        padding: 1rem 0;
+    }
+    
+    .carousel-slide-title {
+        font-size: 1.2rem;
+    }
+    
+    .carousel-slide-description {
+        font-size: 16px;
+    }
+    
+    .carousel-controls {
+        margin-top: 1.5rem;
+    }
+    
+    .carousel-btn {
+        font-size: 20px;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .project-info-container {
+        padding: 0 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .project-info-title {
+        font-size: 1.2rem;
+    }
+    
+    .project-info-description {
         font-size: 16px;
     }
 }

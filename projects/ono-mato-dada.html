@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ono-Mato-Dada | linlinlin.online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* Project-specific styles */
+        .project-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .project-header {
+            margin-bottom: 3rem;
+        }
+        
+        .project-title {
+            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #444444;
+        }
+        
+        .project-description {
+            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 17px;
+            line-height: 1.7;
+            color: #444444;
+            margin-bottom: 2rem;
+        }
+        
+        .project-content {
+            margin-top: 0;
+        }
+        
+        .project-embed-container {
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+            margin-top: 0;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(68, 68, 68, 0.1);
+            min-height: 600px;
+        }
+        
+        main.project-page {
+            padding: 0;
+            max-width: 100%;
+        }
+        
+        body {
+            background-color: #000000;
+        }
+        
+        .project-info-container {
+            background-color: #000000;
+        }
+        
+        .project-info-title,
+        .project-info-description {
+            color: #F4f3f2;
+        }
+        
+        header nav a {
+            color: #F4f3f2;
+        }
+        
+        footer p,
+        footer a {
+            color: #F4f3f2;
+        }
+        
+        .project-iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+        }
+        
+        .project-back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 17px;
+            color: #444444;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.2s ease;
+        }
+        
+        .project-back-link:hover {
+            color: #666666;
+        }
+        
+        .project-version-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .version-btn {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 17px;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid #444444;
+            color: #444444;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+        
+        .version-btn:hover {
+            background-color: #444444;
+            color: #F4f3f2;
+        }
+        
+        .version-btn.active {
+            background-color: #444444;
+            color: #F4f3f2;
+        }
+        
+        .collaborative-btn {
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .version-note {
+            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 14px;
+            color: #666666;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 1.5rem;
+            }
+            
+            .project-description {
+                font-size: 16px;
+            }
+            
+            .project-iframe {
+                height: 400px;
+            }
+            
+            .project-version-selector {
+                flex-direction: column;
+            }
+            
+            .version-btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .project-embed-container {
+                margin-left: calc(50% - 50vw);
+                margin-right: calc(50% - 50vw);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html">projects</a>
+            <a href="../info.html">info</a>
+            <a href="../writings.html">writings</a>
+        </nav>
+    </header>
+
+    <main class="project-page">
+        <div class="project-content">
+            <!-- Version selector -->
+            <!--
+            <div class="project-version-selector">
+                <button class="version-btn active" data-version="standalone" id="standaloneBtn">
+                    Standalone Version
+                </button>
+                <a href="#" class="version-btn collaborative-btn" id="collaborativeBtn" onclick="alert('Please update the server URL in ono-mato-dada.html. See SERVER_SETUP.md for instructions.'); return false;">
+                    Real-time Collaborative Version →
+                </a>
+            </div>
+            -->
+            
+            <!-- Standalone version (embedded) -->
+            <div class="project-embed-container" id="standaloneVersion">
+                <iframe 
+                    class="project-iframe"
+                    src="02_Ono-Mato-Dada-v3-standalone/index.html"
+                    title="Ono-Mato-Dada Interactive Project (Standalone)"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+        
+        <!-- PROJECT INFO -->
+        <div class="project-info-container">
+            <h2 class="project-info-title">Ono-Mato-Dada</h2>
+            <p class="project-info-description">
+                An interactive exploration of sound and visual patterns through phoneme manipulation. 
+                Adjust sliders to control sound duration and create dynamic visualizations.
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>adeline setiawan © 2026 | <a href="https://github.com/halfabluebanana" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
+
