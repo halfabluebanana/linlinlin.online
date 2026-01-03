@@ -190,9 +190,12 @@ main {
     background-color: #F4f3f2;
 }
 
-.accordion-header {
+.accordion-header,
+h2.accordion-header,
+.accordion-section h2.accordion-header,
+.accordion-section .accordion-header {
     font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 1.2rem;
+    font-size: max(24px, min(4vw, 35px)) !important;
     font-weight: 400;
     text-transform: none;
     letter-spacing: 0;
@@ -385,9 +388,12 @@ footer a:hover {
         gap: 0;
     }
 
-    .accordion-header {
+    .accordion-header,
+    h2.accordion-header,
+    .accordion-section h2.accordion-header,
+    .accordion-section .accordion-header {
         padding: 1.25rem 1.5rem;
-        font-size: 1.1rem;
+        font-size: max(24px, min(4vw, 35px)) !important;
         margin-left: 0;
         margin-right: 0;
         max-width: none;
