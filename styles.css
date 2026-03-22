@@ -305,6 +305,22 @@ main {
     overflow: hidden;
 }
 
+/* Ono-Mato-Dada tile — project still */
+#project-ono-mato-dada .projects-gallery-thumb {
+    background-color: #000000;
+    background-image: url("/projects/ono-mato-dada/still_ono-mato-dada.png");
+    background-size: cover;
+    background-position: center;
+}
+
+#project-ono-mato-dada.projects-gallery-item.is-highlighted .projects-gallery-thumb,
+#project-ono-mato-dada.projects-gallery-item:target .projects-gallery-thumb {
+    background-color: #000000;
+    background-image: url("/projects/ono-mato-dada/still_ono-mato-dada.png");
+    background-size: cover;
+    background-position: center;
+}
+
 .projects-gallery-title {
     font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 11px;
