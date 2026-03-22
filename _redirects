@@ -1,4 +1,4 @@
-/  /projects.html  200
+# / → projects is handled in netlify.toml (301 + force)
 /projects  /projects.html  200
 /pages  /pages/home.html  200
 /pages/home  /pages/home.html  200

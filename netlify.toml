@@ -2,3 +2,10 @@
 # Netlify reads `_redirects` from the publish directory automatically.
 [build]
   publish = "."
+
+# Force apex / to projects (301 so it always wins over any default document)
+[[redirects]]
+  from = "/"
+  to = "/projects.html"
+  status = 301
+  force = true
