@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <!--
+    Socket.io client — loaded from CDN.
+    When you deploy the Node.js server (see README / server/ folder), replace the
+    SOCKET_SERVER_URL below with your deployed server address, e.g.:
+      https://ono-mato-dada.up.railway.app
+  -->
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <link href="ono-mato-dada/style.css?v=9" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
+  <title>Ono-Mato-Dada — live</title>
+  <style>
+    #liveStatus {
+      position: fixed;
+      top: 12px;
+      right: 16px;
+      z-index: 30;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65em;
+      color: #444444;
+      pointer-events: none;
+    }
+    #liveStatus.connected {
+      color: #55aa55;
+    }
+    #liveStatus.disconnected {
+      color: #aa5555;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="sliderContainer"></div>
+  <div class="chart"></div>
+  <div id="micPrompt">click anywhere to enable microphone</div>
+  <div id="liveStatus">connecting…</div>
+
+  <script>
+    // ── Asset base path (phonemes.json, sounds/) relative to this page ──────
+    window.ASSETS_BASE = 'ono-mato-dada/';
+
+    // ── Server URL ───────────────────────────────────────────────────────────
+    // Replace this with your deployed WebSocket server URL, e.g.:
+    //   https://ono-mato-dada.up.railway.app
+    // Leave as null to run standalone (no real-time collaboration).
+    window.SOCKET_SERVER = 'http://localhost:3000';
+
+    // Update the status indicator once socket connects / disconnects
+    document.addEventListener('DOMContentLoaded', function () {
+      var statusEl = document.getElementById('liveStatus');
+      if (!window.SOCKET_SERVER) {
+        statusEl.textContent = 'standalone mode';
+        statusEl.className = '';
+        return;
+      }
+      // Socket is initialised by app.js — poll for it
+      var poll = setInterval(function () {
+        if (typeof socket !== 'undefined' && socket) {
+          clearInterval(poll);
+          socket.on('connect', function () {
+            statusEl.textContent = 'live ●';
+            statusEl.className = 'connected';
+          });
+          socket.on('disconnect', function () {
+            statusEl.textContent = 'disconnected';
+            statusEl.className = 'disconnected';
+          });
+        }
+      }, 100);
+    });
+  </script>
+
+  <script src="ono-mato-dada/app.js?v=14"></script>
+</body>
+
+</html>

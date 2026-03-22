@@ -1,4 +1,11 @@
+/  /home.html  200
+/pages  /pages/home.html  200
+/pages/home  /pages/home.html  200
+/pages/projects  /pages/projects.html  200
+/pages/info  /pages/info.html  200
+/pages/writings  /pages/writings.html  200
 /info  /info.html  200
 /work  /writings.html  200
 /writings  /writings.html  200
-
+/projects/ono-mato-dada/ono-mato-dada.html  /projects/ono-mato-dada.html  301
+/projects/sauna-lore/sauna-lore.html  /projects/sauna-lore.html  301

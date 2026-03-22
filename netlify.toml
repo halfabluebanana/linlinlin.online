@@ -1,0 +1,4 @@
+# Static site — HTML/CSS/JS at repo root
+# Netlify reads `_redirects` from the publish directory automatically.
+[build]
+  publish = "."

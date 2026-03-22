@@ -3,170 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ono-Mato-Dada | linlinlin.online</title>
+    <title>ono-mato-dada | linlinlin.online</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
     <style>
-        /* Project-specific styles */
-        .project-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 0;
+        body {
+            background-color: #f2f2f2;
         }
-        
-        .project-header {
-            margin-bottom: 3rem;
-        }
-        
-        .project-title {
-            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 2rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-            color: #444444;
-        }
-        
-        .project-description {
-            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 17px;
-            line-height: 1.7;
-            color: #444444;
-            margin-bottom: 2rem;
-        }
-        
-        .project-content {
-            margin-top: 0;
-        }
-        
-        .project-embed-container {
-            width: 100vw;
-            margin-left: calc(50% - 50vw);
-            margin-right: calc(50% - 50vw);
-            margin-top: 0;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(68, 68, 68, 0.1);
-            min-height: 600px;
-        }
-        
+
         main.project-page {
             padding: 0;
             max-width: 100%;
         }
-        
-        body {
-            background-color: #000000;
-        }
-        
-        .project-info-container {
-            background-color: #000000;
-        }
-        
-        .project-info-title,
-        .project-info-description {
-            color: #F4f3f2;
-        }
-        
-        header nav a {
-            color: #F4f3f2;
-        }
-        
-        footer p,
-        footer a {
-            color: #F4f3f2;
-        }
-        
-        .project-iframe {
+
+        .browser-frame {
             width: 100%;
-            height: 800px;
-            border: none;
+            max-width: 1100px;
+            margin: 0 auto 20px;
+            border-radius: 18px;
         }
-        
-        .project-back-link {
-            display: inline-block;
-            margin-bottom: 2rem;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 17px;
-            color: #444444;
-            text-decoration: underline;
-            text-decoration-thickness: 1px;
-            text-underline-offset: 3px;
-            transition: color 0.2s ease;
+
+        .browser-frame__inner {
+            position: relative;
+            width: 100%;
+            line-height: 0;
+            border-radius: 18px;
+            overflow: hidden;
+            isolation: isolate;
+            filter: drop-shadow(8px 8px 0px #c0c0c0);
         }
-        
-        .project-back-link:hover {
-            color: #666666;
+
+        .browser-frame__chrome {
+            display: block;
+            width: 100%;
+            height: auto;
+            pointer-events: none;
+            user-select: none;
         }
-        
-        .project-version-selector {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
+
+        /* Fallback until syncBrowserFrameSlot() sets px (fixes % height bugs in Chromium/Dia/Safari) */
+        .browser-frame__slot {
+            position: absolute;
+            z-index: 2;
+            left: 0;
+            top: calc(100% * 52 / 620);
+            width: calc(100% * 932 / 960);
+            height: calc(100% * 534 / 620);
+            overflow: hidden;
+            background: #000000;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-radius: 0 0 16px 16px;
+            pointer-events: auto;
         }
-        
-        .version-btn {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 17px;
-            padding: 0.75rem 1.5rem;
-            background: transparent;
-            border: 1px solid #444444;
-            color: #444444;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            display: inline-block;
+
+        .browser-frame__slot iframe {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            display: block;
         }
-        
-        .version-btn:hover {
-            background-color: #444444;
-            color: #F4f3f2;
-        }
-        
-        .version-btn.active {
-            background-color: #444444;
-            color: #F4f3f2;
-        }
-        
-        .collaborative-btn {
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        .version-note {
-            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 14px;
-            color: #666666;
-            margin-top: 1rem;
-            font-style: italic;
-        }
-        
+
         @media (max-width: 768px) {
-            .project-title {
-                font-size: 1.5rem;
-            }
-            
-            .project-description {
-                font-size: 16px;
-            }
-            
-            .project-iframe {
-                height: 400px;
-            }
-            
-            .project-version-selector {
-                flex-direction: column;
-            }
-            
-            .version-btn {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .project-embed-container {
-                margin-left: calc(50% - 50vw);
-                margin-right: calc(50% - 50vw);
+            .browser-frame {
+                max-width: 100%;
             }
         }
     </style>
@@ -174,7 +79,7 @@
 <body>
     <header>
         <nav>
-            <a href="../index.html">projects</a>
+            <a href="../projects.html" class="active">projects</a>
             <a href="../info.html">info</a>
             <a href="../writings.html">writings</a>
         </nav>
@@ -182,36 +87,46 @@
 
     <main class="project-page">
         <div class="project-content">
-            <!-- Version selector -->
-            <!--
-            <div class="project-version-selector">
-                <button class="version-btn active" data-version="standalone" id="standaloneBtn">
-                    Standalone Version
-                </button>
-                <a href="#" class="version-btn collaborative-btn" id="collaborativeBtn" onclick="alert('Please update the server URL in ono-mato-dada.html. See SERVER_SETUP.md for instructions.'); return false;">
-                    Real-time Collaborative Version →
-                </a>
-            </div>
-            -->
-            
-            <!-- Standalone version (embedded) -->
-            <div class="project-embed-container" id="standaloneVersion">
-                <iframe 
-                    class="project-iframe"
-                    src="02_Ono-Mato-Dada-v3-standalone/index.html"
-                    title="Ono-Mato-Dada Interactive Project (Standalone)"
-                    allowfullscreen>
-                </iframe>
+            <div class="browser-frame" id="standaloneVersion" aria-label="Project embed in browser frame">
+                <div class="browser-frame__inner">
+                    <img
+                        id="browserFrameChromeImg"
+                        class="browser-frame__chrome"
+                        src="ono-mato-dada/browser-frame-wireframe.svg"
+                        alt=""
+                        width="960"
+                        height="620"
+                        decoding="async"
+                        draggable="false">
+                    <div class="browser-frame__slot">
+                        <iframe
+                            id="onoMatoStandaloneIframe"
+                            src="ono-mato-dada/index.html"
+                            title="Ono-Mato-Dada Interactive Project (Standalone)"
+                            loading="eager"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <!-- PROJECT INFO -->
+
         <div class="project-info-container">
-            <h2 class="project-info-title">Ono-Mato-Dada</h2>
-            <p class="project-info-description">
-                An interactive exploration of sound and visual patterns through phoneme manipulation. 
-                Adjust sliders to control sound duration and create dynamic visualizations.
-            </p>
+            <div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start;">
+                <div>
+                    <h2 class="project-info-title">ono-mato-dada</h2>
+                    <p class="project-info-description">
+                        An interactive exploration of sound and visual patterns through phoneme manipulation.
+                        Adjust sliders to control sound duration and create dynamic visualizations.
+                    </p>
+                </div>
+                <div>
+                    <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0;">
+                        Project done in collaboration with <a href="https://aymanalao.com/wp/art/" target="_blank" rel="noopener noreferrer">Ayman Alalao</a>. A javascript project built with websockets, D3.js, audio.js.
+                    </p>
+                    <a href="ono-mato-dada-live.html" target="_blank" rel="noopener noreferrer" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #333333; text-decoration: underline; text-underline-offset: 3px;">open collaborative version →</a>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -219,7 +134,90 @@
         <p>adeline setiawan © 2026 | <a href="https://github.com/halfabluebanana" target="_blank" rel="noopener noreferrer">GitHub</a></p>
     </footer>
 
+    <script>
+    /* viewBox 960×620: slot top 52/620, height 534/620, width 932/960 — px from measured inner box */
+    (function () {
+        var VB_W = 960;
+        var VB_H = 620;
+        var TOOLBAR = 52;
+        var WIN_W = 932;
+        var CONTENT_H = 534;
+        var STANDALONE_REL = 'ono-mato-dada/index.html';
+        var CHROME_WF = 'ono-mato-dada/browser-frame-wireframe.svg';
+        var CHROME_BLUE = 'ono-mato-dada/browser-frame-blue.svg';
+
+        function resolveUrl(rel) {
+            try {
+                return new URL(rel, document.baseURI).href;
+            } catch (e) {
+                return rel;
+            }
+        }
+
+        function syncBrowserFrameSlot() {
+            var inner = document.querySelector('.browser-frame__inner');
+            var slot = document.querySelector('.browser-frame__slot');
+            if (!inner || !slot) return;
+            var w = inner.offsetWidth;
+            var h = inner.offsetHeight;
+            if (w < 2 || h < 2) return;
+            slot.style.top = (TOOLBAR / VB_H * h) + 'px';
+            slot.style.left = '0';
+            slot.style.width = (WIN_W / VB_W * w) + 'px';
+            slot.style.height = (CONTENT_H / VB_H * h) + 'px';
+        }
+
+        function wireChromeAndIframe() {
+            var frame = document.getElementById('standaloneVersion');
+            var img = document.getElementById('browserFrameChromeImg');
+            var iframe = document.getElementById('onoMatoStandaloneIframe');
+            if (frame && img) {
+                img.src = frame.classList.contains('browser-frame--blue') ? CHROME_BLUE : CHROME_WF;
+            }
+            if (iframe) {
+                iframe.src = resolveUrl(STANDALONE_REL);
+            }
+        }
+
+        function init() {
+            wireChromeAndIframe();
+            syncBrowserFrameSlot();
+            requestAnimationFrame(function () {
+                requestAnimationFrame(syncBrowserFrameSlot);
+            });
+            window.addEventListener('resize', syncBrowserFrameSlot);
+            var inner = document.querySelector('.browser-frame__inner');
+            if (inner && typeof ResizeObserver !== 'undefined') {
+                new ResizeObserver(syncBrowserFrameSlot).observe(inner);
+            }
+            window.addEventListener('load', function () {
+                wireChromeAndIframe();
+                syncBrowserFrameSlot();
+            });
+            var img = document.getElementById('browserFrameChromeImg');
+            if (img) {
+                img.addEventListener('load', syncBrowserFrameSlot);
+            }
+
+            var tries = 0;
+            var iv = window.setInterval(function () {
+                syncBrowserFrameSlot();
+                tries++;
+                var innerEl = document.querySelector('.browser-frame__inner');
+                if (innerEl && innerEl.offsetHeight > 2 && tries > 2) {
+                    window.clearInterval(iv);
+                }
+                if (tries > 80) window.clearInterval(iv);
+            }, 50);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+    </script>
     <script src="../script.js"></script>
 </body>
 </html>
-

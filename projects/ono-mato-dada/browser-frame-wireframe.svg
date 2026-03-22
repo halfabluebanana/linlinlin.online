@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" fill="none" aria-hidden="true">
+  <title>Browser window — wireframe</title>
+  <!-- No full-canvas #F2F2F2 rect (avoids a light band vs white chrome) -->
+  <!-- Outer frame -->
+  <rect x="0" y="0" width="932" height="586" rx="18" fill="#FFFFFF" stroke="#333333" stroke-width="1.5"/>
+  <line x1="0" y1="52" x2="932" y2="52" stroke="#333333" stroke-width="1.5"/>
+  <!-- Traffic lights -->
+  <g stroke="#333333" stroke-width="1.5" fill="none">
+    <circle cx="22" cy="26" r="5"/>
+    <circle cx="38" cy="26" r="5"/>
+    <circle cx="54" cy="26" r="5"/>
+  </g>
+  <!-- Back / forward -->
+  <g stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <polyline points="76,32 70,26 76,20"/>
+    <polyline points="86,26 92,32 86,38"/>
+  </g>
+  <!-- Pill URL bar -->
+  <rect x="104" y="12" width="720" height="28" rx="14" fill="#FFFFFF" stroke="#333333" stroke-width="1.5"/>
+  <g stroke="#333333" stroke-width="1.5" stroke-linecap="round" fill="none">
+    <circle cx="124" cy="26" r="6"/>
+    <path d="M128 30l4 4"/>
+  </g>
+  <!-- Right: + and overlapping squares -->
+  <g stroke="#333333" stroke-width="1.5" stroke-linecap="round">
+    <path d="M850 26h10M855 21v10"/>
+    <rect x="876" y="19" width="10" height="10" rx="1" fill="none"/>
+    <rect x="882" y="25" width="10" height="10" rx="1" fill="none"/>
+  </g>
+  <!-- Content area is full-bleed below toolbar (y≥52); no inset — iframe overlays this region in HTML -->
+</svg>
