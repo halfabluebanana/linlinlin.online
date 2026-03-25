@@ -69,6 +69,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Mobile submenu toggle (touch devices don't have :hover)
+if ('ontouchstart' in window) {
+    document.querySelectorAll('.projects-menu-item > a').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            var item = this.closest('.projects-menu-item');
+            if (item.querySelector('.projects-submenu')) {
+                e.preventDefault();
+                var isOpen = item.classList.contains('submenu-open');
+                document.querySelectorAll('.projects-menu-item').forEach(function(i) {
+                    i.classList.remove('submenu-open');
+                });
+                if (!isOpen) item.classList.add('submenu-open');
+            }
+        });
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.projects-menu-item')) {
+            document.querySelectorAll('.projects-menu-item').forEach(function(i) {
+                i.classList.remove('submenu-open');
+            });
+        }
+    });
+}
+
 // Password protection for links
 function passwordProtect(url) {
     const password = prompt('Enter password:');
