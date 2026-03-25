@@ -769,4 +769,11 @@ footer a:hover {
     .project-info-description {
         font-size: 16px;
     }
+
+    /* Mobile: project pages use an inline 2-col grid; collapse to 1 column */
+    .project-info-container > div {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+        align-items: start !important;
+    }
 }
