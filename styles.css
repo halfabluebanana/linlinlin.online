@@ -325,6 +325,22 @@ main {
     background-position: center;
 }
 
+/* Sauna Lore tile — project still */
+#project-sauna-lore .projects-gallery-thumb {
+    background-color: #000000;
+    background-image: url("/projects/sauna-lore/still_sauna-lore.png");
+    background-size: cover;
+    background-position: center;
+}
+
+#project-sauna-lore.projects-gallery-item.is-highlighted .projects-gallery-thumb,
+#project-sauna-lore.projects-gallery-item:target .projects-gallery-thumb {
+    background-color: #000000;
+    background-image: url("/projects/sauna-lore/still_sauna-lore.png");
+    background-size: cover;
+    background-position: center;
+}
+
 .projects-gallery-title {
     font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 11px;
@@ -751,6 +767,37 @@ footer a:hover {
     
     .right-menu-overlay {
         padding-right: 1.5rem;
+    }
+
+    /* Mobile: make the right-side projects menu scale down and stop overlapping */
+    .projects-menu-list {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        width: 100%;
+        margin-top: 1.5rem;
+        text-align: left;
+        align-items: flex-start;
+        gap: 1.25rem !important;
+    }
+
+    .projects-menu-list a {
+        font-size: 16px !important;
+    }
+
+    .projects-submenu {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .projects-submenu a {
+        font-size: 14px;
+    }
+
+    .projects-menu-item:hover .projects-submenu,
+    .projects-menu-item.submenu-open .projects-submenu {
+        align-items: flex-start;
+        gap: 0.75rem;
     }
     
     .menu-list a {
