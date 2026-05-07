@@ -8,6 +8,43 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
+    <style>
+        main.project-page {
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .project-img-full {
+            width: 100%;
+            display: block;
+        }
+
+        .project-img-full + .project-img-full {
+            margin-top: 2px;
+        }
+
+        .design-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+
+        .design-grid img {
+            width: 100%;
+            display: block;
+        }
+
+        .project-section-divider {
+            width: 100%;
+            height: 2px;
+            background-color: #F4f3f2;
+        }
+
+        .project-info-container + .project-img-full,
+        .project-info-container + .design-grid {
+            margin-top: 2px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,21 +56,143 @@
     </header>
 
     <main class="project-page">
+
+        <!-- Culture of Bathe-ing -->
+        <div class="project-content">
+            <img src="../media/img/portfolio/slide-23.png" class="project-img-full" alt="Culture of Bathe-ing — sauna festival poster series, Williamsburg Brooklyn 2026">
+        </div>
         <div class="project-info-container">
             <div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start;">
                 <div>
-                    <h2 class="project-info-title">design</h2>
+                    <h2 class="project-info-title">culture of bathe-ing</h2>
                     <p class="project-info-description">
-                        Placeholder page. Use this section to collect design projects or notes, using the same editorial two-column rhythm.
+                        Sauna festival poster series. Four posters for Culture of Bathe-ing at Domino Park, Williamsburg, Brooklyn — a winter sauna event running February to March 2026. Each poster develops a different visual language around the same identity: line drawings of bodies at rest, a restrained palette of yellow, green, blue, and off-white, and Helvetica set large.
                     </p>
                 </div>
                 <div>
                     <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0;">
-                        Credits / process / references.
+                        Role: designer · poster design · illustration<br><br>
+                        2026 · New York
                     </p>
                 </div>
             </div>
         </div>
+
+        <!-- JSConf Asia -->
+        <div class="project-content" style="margin-top: 6rem;">
+            <img src="../media/img/portfolio/slide-22.png" class="project-img-full" alt="JSConf Asia — currency-themed conference identity across five years">
+        </div>
+        <div class="project-info-container">
+            <div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start;">
+                <div>
+                    <h2 class="project-info-title">jsconf asia</h2>
+                    <p class="project-info-description">
+                        A currency series for the tech community. Conference designer for JSConf Asia across five years. Each year, a currency-themed illustration system was created as the visual backbone of the conference identity — themed around the things the web developer community runs on: coffee, pizza, and the payment infrastructure that powers it all (Braintree, PayPal). The series accumulated into a coherent design language across five editions of Asia's largest JavaScript conference.
+                    </p>
+                </div>
+                <div>
+                    <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0;">
+                        Role: graphic designer · illustration · visual identity<br><br>
+                        2016–2020 · Singapore
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- so-far.online -->
+        <div class="project-content" style="margin-top: 6rem;">
+            <img src="../media/img/portfolio/slide-21.png" class="project-img-full" alt="so-far.online — independent online art gallery, web design and development">
+        </div>
+        <div class="project-info-container">
+            <div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start;">
+                <div>
+                    <h2 class="project-info-title">so-far.online</h2>
+                    <p class="project-info-description">
+                        An online space for independent art. so-far.online is an independent online art gallery — a platform for artists working outside institutional contexts to show, sell, and archive work. Designed and developed using Webflow: editorial layout system, artist profile pages, exhibition archives, and navigation structure that puts the work first. Artists include Krister Olsson Studio, Hotel G, Sant RJWatana, and others.
+                    </p>
+                </div>
+                <div>
+                    <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0;">
+                        Role: designer + developer · web design · editorial design<br><br>
+                        Stack: Webflow<br><br>
+                        <a href="https://so-far.online" target="_blank" rel="noopener noreferrer" style="color: #333333; text-decoration: underline; text-underline-offset: 3px;">so-far.online →</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kantar Public — HDB -->
+        <div class="project-content" style="margin-top: 6rem;">
+            <div class="design-grid">
+                <img src="../media/img/portfolio/slide-04.png" alt="HDB HandySearch — building self-reliance for home maintenance and repairs">
+                <img src="../media/img/portfolio/slide-05.png" alt="HDB HandySearch — wireframe iterations across three phases">
+            </div>
+        </div>
+        <div class="project-info-container">
+            <div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start;">
+                <div>
+                    <h2 class="project-info-title">hdb handysearch</h2>
+                    <p class="project-info-description">
+                        Building self-reliance for home maintenance and repairs. HDB needed to help homeowners find, vet, and hire contractors on their own terms — reducing call volume while improving trust. The result was a contractor marketplace with four core features: a diagnosis tool embedded with HDB's maintenance protocols, job request form and multi-quote comparison, contractor profiles with ratings, accreditation, and cost estimates of past projects, and direct chat, appointment booking, and payment. Wireframe iterations tested across three phases: diagnostic tool, contractor search, quote comparison, in-app messaging, payment flow.
+                    </p>
+                </div>
+                <div>
+                    <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0;">
+                        Role: lead researcher · user + design research · behavioural · digital design<br><br>
+                        Client: Housing Development Board (HDB) · Kantar Public Singapore<br><br>
+                        2021–2023
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- IMDA -->
+        <div class="project-content" style="margin-top: 6rem;">
+            <div class="design-grid">
+                <img src="../media/img/portfolio/slide-09.png" alt="IMDA Better Data Driven Businesses — empowering SMEs on data innovation">
+                <img src="../media/img/portfolio/slide-10.png" alt="IMDA BDDB — approach and insights from SME focus groups">
+            </div>
+        </div>
+        <div class="project-info-container">
+            <div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start;">
+                <div>
+                    <h2 class="project-info-title">imda — better data driven businesses</h2>
+                    <p class="project-info-description">
+                        Empowering small and medium enterprises to embark on data innovation. IMDA launched the Better Data Driven Businesses (BDDB) tool — a suite of analytics tools to help Singapore SMEs become more data-driven. The challenge: SMEs across eight key industries had no experience with data visualisation tools and couldn't see the ROI of investing in them. Most built their own reports in Excel and PowerPoint. Spoke to 40 SME business owners across 8 sectors in 10×1.5hr focus group discussions. Each session covered alignment of business objectives, current data behaviour, relevance of the BDDB tool, and influences on uptake.
+                    </p>
+                </div>
+                <div>
+                    <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0;">
+                        Role: lead researcher · user + design research · behavioural · experience · digital design<br><br>
+                        Client: Infocomm Media Development Authority (IMDA) · Kantar Public Singapore<br><br>
+                        2021–2023
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- NHB -->
+        <div class="project-content" style="margin-top: 6rem;">
+            <img src="../media/img/portfolio/slide-11.png" class="project-img-full" alt="NHB — National Heritage Board, creating a unique value proposition to drive museum revenue">
+        </div>
+        <div class="project-info-container" style="margin-bottom: 5rem;">
+            <div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start;">
+                <div>
+                    <h2 class="project-info-title">nhb — national heritage board</h2>
+                    <p class="project-info-description">
+                        Creating a unique value proposition to drive more yield in museums and heritage institutions. Museums and heritage institutions in Singapore receive 97% of funding through public means. Despite free entry, most Singapore residents rarely visit. Low visitation and low engagement mutually reinforce the perception of museums as esoteric and irrelevant. NHB wanted to explore innovative ways for public museums to capture public headspace and mindshare — and reduce reliance on public funds. Deliverable: National Museum of Singapore current experience map — delight points, pain points, and revenue opportunities across pre-trip, in-museum, and post-trip phases.
+                    </p>
+                </div>
+                <div>
+                    <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0;">
+                        Role: lead researcher · user + design research · behavioural · experience design<br><br>
+                        Client: National Heritage Board (NHB) · Kantar Public Singapore<br><br>
+                        2021–2023
+                    </p>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <footer>
@@ -43,4 +202,3 @@
     <script src="../script.js"></script>
 </body>
 </html>
-

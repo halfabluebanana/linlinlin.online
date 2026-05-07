@@ -341,6 +341,46 @@ main {
     background-position: center;
 }
 
+/* Word Soup tile */
+#project-word-soup .projects-gallery-thumb {
+    background-color: #0a1a0a;
+    background-image: url("/media/img/portfolio/slide-28.png");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Hansel und Gretel tile */
+#project-hansel-and-gretel .projects-gallery-thumb {
+    background-color: #e8ddd0;
+    background-image: url("/media/img/portfolio/slide-26.png");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Relative Compass tile */
+#project-relative-compass .projects-gallery-thumb {
+    background-color: #2a2a2a;
+    background-image: url("/media/img/portfolio/slide-27.png");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Entrepreneurship (Subi Subi) tile */
+#project-entrepreneurship .projects-gallery-thumb {
+    background-color: #f0f0ec;
+    background-image: url("/media/img/portfolio/slide-20.png");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Design tile */
+#project-design .projects-gallery-thumb {
+    background-color: #e8e840;
+    background-image: url("/media/img/portfolio/slide-23.png");
+    background-size: cover;
+    background-position: center;
+}
+
 .projects-gallery-title {
     font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 11px;
