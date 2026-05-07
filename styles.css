@@ -343,10 +343,10 @@ main {
 
 /* Word Soup tile */
 #project-word-soup .projects-gallery-thumb {
-    background-color: #0a1a0a;
-    background-image: url("/media/img/portfolio/slide-28.png");
+    background-color: #111111;
+    background-image: url("/media/img/word-soup/IMG_2527.jpg");
     background-size: cover;
-    background-position: center;
+    background-position: center top;
 }
 
 /* Hansel und Gretel tile */
