@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iran war media framing | linlinlin.online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        main.project-page {
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .browser-frame {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto 20px;
+            border-radius: 18px;
+        }
+
+        .browser-frame__inner {
+            position: relative;
+            width: 100%;
+            line-height: 0;
+            border-radius: 18px;
+            overflow: hidden;
+            isolation: isolate;
+            filter: drop-shadow(8px 8px 0px #c0c0c0);
+        }
+
+        .browser-frame__chrome {
+            display: block;
+            width: 100%;
+            height: auto;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .browser-frame__slot {
+            position: absolute;
+            z-index: 2;
+            left: 0;
+            top: calc(100% * 52 / 620);
+            width: calc(100% * 932 / 960);
+            height: calc(100% * 534 / 620);
+            overflow: hidden;
+            background: #ffffff;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-radius: 0 0 16px 16px;
+            pointer-events: auto;
+        }
+
+        .browser-frame__slot iframe {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            display: block;
+        }
+
+        .embed-fallback-note {
+            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 13px;
+            color: #666666;
+            margin-top: 0.75rem;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .project-header-img {
+            width: 100%;
+            display: block;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .browser-frame {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../projects.html" class="active">projects</a>
+            <a href="../info.html">info</a>
+            <a href="../writings.html">writings</a>
+        </nav>
+    </header>
+
+    <main class="project-page">
+        <div class="project-content" style="padding: 0 0 0 0;">
+            <div class="browser-frame" aria-label="Iran War Media Framing dashboard in browser frame">
+                <div class="browser-frame__inner">
+                    <img
+                        id="browserFrameChromeImg"
+                        class="browser-frame__chrome"
+                        src="ono-mato-dada/browser-frame-wireframe.svg"
+                        alt=""
+                        width="960"
+                        height="620"
+                        decoding="async"
+                        draggable="false">
+                    <div class="browser-frame__slot">
+                        <iframe
+                            src="https://media-framing-iran-2026.streamlit.app/?page=Media+framing&embed=true"
+                            title="Iran War Media Framing"
+                            loading="eager"
+                            allowfullscreen
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            <p class="embed-fallback-note">
+                If the preview is blank, the app may block embedding. <a href="https://media-framing-iran-2026.streamlit.app/?page=Media+framing" target="_blank" rel="noopener noreferrer" style="color: #333333;">Open the live app →</a>
+            </p>
+        </div>
+
+        <div class="project-info-container">
+            <div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start;">
+                <div>
+                    <h2 class="project-info-title">iran war media framing</h2>
+                    <p class="project-info-description">
+                        How five international outlets frame the same conflict differently. A multi-source media analysis pipeline built from scratch: scrapers for Al Jazeera, AP News, BBC, Reuters, and Tehran Times → NLP framing analysis → network analysis → interactive Streamlit dashboard. The project maps how language, emphasis, and narrative structure diverge across outlets covering the Iran war — making media bias visible and navigable.
+                    </p>
+                </div>
+                <div>
+                    <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0; margin-bottom: 1rem;">
+                        Stack: Python · spaCy / BERTopic · NetworkX · Streamlit · Altair · Plotly · BeautifulSoup<br><br>
+                        Role: data engineer + designer · NLP · network analysis · data visualisation<br><br>
+                        Columbia University, 2026. Group project.
+                    </p>
+                    <a href="https://media-framing-iran-2026.streamlit.app/?page=Media+framing" target="_blank" rel="noopener noreferrer" style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; color: #333333; text-decoration: underline; text-underline-offset: 3px;">open live app →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>adeline setiawan © 2026 | <a href="https://github.com/halfabluebanana" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+    </footer>
+
+    <script>
+    (function () {
+        var VB_W = 960;
+        var VB_H = 620;
+        var TOOLBAR = 52;
+        var WIN_W = 932;
+        var CONTENT_H = 534;
+        var CHROME_WF = 'ono-mato-dada/browser-frame-wireframe.svg';
+
+        function syncSlot() {
+            var inner = document.querySelector('.browser-frame__inner');
+            var slot = document.querySelector('.browser-frame__slot');
+            if (!inner || !slot) return;
+            var w = inner.offsetWidth;
+            var h = inner.offsetHeight;
+            if (w < 2 || h < 2) return;
+            slot.style.top = (TOOLBAR / VB_H * h) + 'px';
+            slot.style.left = '0';
+            slot.style.width = (WIN_W / VB_W * w) + 'px';
+            slot.style.height = (CONTENT_H / VB_H * h) + 'px';
+        }
+
+        function init() {
+            var img = document.getElementById('browserFrameChromeImg');
+            if (img) img.src = CHROME_WF;
+            syncSlot();
+            requestAnimationFrame(function () { requestAnimationFrame(syncSlot); });
+            window.addEventListener('resize', syncSlot);
+            var inner = document.querySelector('.browser-frame__inner');
+            if (inner && typeof ResizeObserver !== 'undefined') {
+                new ResizeObserver(syncSlot).observe(inner);
+            }
+            window.addEventListener('load', syncSlot);
+            if (img) img.addEventListener('load', syncSlot);
+            var tries = 0;
+            var iv = window.setInterval(function () {
+                syncSlot();
+                tries++;
+                var el = document.querySelector('.browser-frame__inner');
+                if (el && el.offsetHeight > 2 && tries > 2) window.clearInterval(iv);
+                if (tries > 80) window.clearInterval(iv);
+            }, 50);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+    </script>
+    <script src="../script.js"></script>
+</body>
+</html>
