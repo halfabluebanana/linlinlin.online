@@ -130,7 +130,13 @@
                 <div>
                     <h2 class="project-info-title">iran war media framing</h2>
                     <p class="project-info-description">
-                        How five international outlets frame the same conflict differently. A multi-source media analysis pipeline built from scratch: scrapers for Al Jazeera, AP News, BBC, Reuters, and Tehran Times → NLP framing analysis → network analysis → interactive Streamlit dashboard. The project maps how language, emphasis, and narrative structure diverge across outlets covering the Iran war — making media bias visible and navigable.
+                        How do US and international media frame the same conflict? The project maps how language, emphasis, and narrative structure diverge across outlets covering the 2026 Iran war. How might we make media bias visible and navigable?
+                    </p>
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        We built a multi-source media analysis pipeline using web scrapers and MediaCloud queries. We used an AI-based filtering tool, Sentence Transformers (all-MiniLM-L12-v2) to filter unrelated articles based on their titles. Then we used a locally hosted large language model (Gemma4 E4B, instruction-tuned) to automatically analyse article texts on five distinct narrative frames: kinetic focus (military hardware and activity), humanitarian focus (wellbeing of civilians and disadvantaged groups), diplomatic focus (how differing parties interact), economic focus (economic impacts of the war), and culpability bias (extent to which articles use active language and strong verbs to assign moral blame). We also examine the most high-impact words across the sample.
+                    </p>
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        Click on the Data and Methods tab in the app for more information.
                     </p>
                 </div>
                 <div>
