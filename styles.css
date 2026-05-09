@@ -344,7 +344,7 @@ main {
 /* Iran War Media Framing tile */
 #project-iran-war-framing .projects-gallery-thumb {
     background-color: #f0ede8;
-    background-image: url("/media/img/portfolio/slide-15.png");
+    background-image: url("/projects/Iran-war-media-framing-newplot.png");
     background-size: cover;
     background-position: center;
 }
@@ -359,32 +359,32 @@ main {
 
 /* Hansel und Gretel tile */
 #project-hansel-and-gretel .projects-gallery-thumb {
-    background-color: #e8ddd0;
-    background-image: url("/media/img/portfolio/slide-26.png");
+    background-color: #111111;
+    background-image: url("/media/img/hansel/thumb.png");
     background-size: cover;
     background-position: center;
 }
 
 /* Relative Compass tile */
 #project-relative-compass .projects-gallery-thumb {
-    background-color: #2a2a2a;
-    background-image: url("/media/img/portfolio/slide-27.png");
+    background-color: #111111;
+    background-image: url("/media/img/compass/thumb.png");
     background-size: cover;
-    background-position: center;
+    background-position: center left;
 }
 
 /* Entrepreneurship (Subi Subi) tile */
 #project-entrepreneurship .projects-gallery-thumb {
-    background-color: #f0f0ec;
-    background-image: url("/media/img/portfolio/slide-20.png");
+    background-color: #f5f5f5;
+    background-image: url("/media/img/entrepreneurship/thumb.png");
     background-size: cover;
     background-position: center;
 }
 
 /* Design tile */
 #project-design .projects-gallery-thumb {
-    background-color: #e8e840;
-    background-image: url("/media/img/portfolio/slide-23.png");
+    background-color: #b8f0b8;
+    background-image: url("/media/img/design/thumb.jpg");
     background-size: cover;
     background-position: center;
 }
