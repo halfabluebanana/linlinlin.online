@@ -381,12 +381,12 @@ main {
     background-position: center;
 }
 
-/* Design tile */
-#project-design .projects-gallery-thumb {
-    background-color: #b8f0b8;
-    background-image: url("/media/img/design/thumb.jpg");
+/* Culture of Bathe-ing tile */
+#project-culture-of-batheing .projects-gallery-thumb {
+    background-color: #1a3aff;
+    background-image: url("/media/img/design/cob/print-02.jpg");
     background-size: cover;
-    background-position: center;
+    background-position: center top;
 }
 
 .projects-gallery-title {
