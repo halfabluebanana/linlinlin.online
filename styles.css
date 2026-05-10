@@ -381,6 +381,14 @@ main {
     background-position: center;
 }
 
+/* PINCH Ceramics tile */
+#project-pinch .projects-gallery-thumb {
+    background-color: #f5f0ee;
+    background-image: url("/media/img/pinch/pinch-01.png");
+    background-size: cover;
+    background-position: center;
+}
+
 /* Culture of Bathe-ing tile */
 #project-culture-of-batheing .projects-gallery-thumb {
     background-color: #1a3aff;
