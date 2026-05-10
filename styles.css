@@ -390,6 +390,14 @@ main {
     background-repeat: no-repeat;
 }
 
+/* Platform: The Last Big Thing tile */
+#project-platform .projects-gallery-thumb {
+    background-color: #1a0a2e;
+    background-image: url("/media/img/platform/platform-cover.png");
+    background-size: cover;
+    background-position: center top;
+}
+
 /* JSConf Asia tile */
 #project-jsconf-asia .projects-gallery-thumb {
     background-color: #1a1a2e;
