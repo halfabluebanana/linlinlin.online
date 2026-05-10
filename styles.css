@@ -385,6 +385,15 @@ main {
 #project-pinch .projects-gallery-thumb {
     background-color: #f5f0ee;
     background-image: url("/media/img/pinch/pinch-01.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* JSConf Asia tile */
+#project-jsconf-asia .projects-gallery-thumb {
+    background-color: #1a1a2e;
+    background-image: url("/media/img/jsconf/15-brackets.png");
     background-size: cover;
     background-position: center;
 }
