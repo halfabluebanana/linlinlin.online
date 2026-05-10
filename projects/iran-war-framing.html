@@ -125,12 +125,17 @@
         <div class="project-info-container">
             <div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start;">
                 <div>
-                    <h2 class="project-info-title">iran war media framing</h2>
+                    <h2 class="project-info-title">Iran war media framing</h2>
                     <p class="project-info-description">
-                        How do US and international media frame the same conflict? The project maps how language, emphasis, and narrative structure diverge across outlets covering the 2026 Iran war. How might we make media bias visible and navigable?
+                        How do US and international media outlets frame the conflict? How can we make media bias visible and navigable? This project maps how language, emphasis, and narrative structure diverge across media outlets covering the 2026 Iran war.
                     </p>
                     <p class="project-info-description" style="margin-top: 1rem;">
-                        We built a multi-source media analysis pipeline using web scrapers and MediaCloud queries. We used an AI-based filtering tool, Sentence Transformers (all-MiniLM-L12-v2) to filter unrelated articles based on their titles. Then we used a locally hosted large language model (Gemma4 E4B, instruction-tuned) to automatically analyse article texts on five distinct narrative frames: kinetic focus (military hardware and activity), humanitarian focus (wellbeing of civilians and disadvantaged groups), diplomatic focus (how differing parties interact), economic focus (economic impacts of the war), and culpability bias (extent to which articles use active language and strong verbs to assign moral blame). We also examine the most high-impact words across the sample.
+                        To collect the data, we built a multi-source media analysis pipeline using web scrapers and MediaCloud queries. We then used an AI-based filtering tool, Sentence Transformers (all-MiniLM-L12-v2) to filter unrelated articles based on their titles. To analyse the article texts, we relied on a locally hosted large language model (Gemma4, E4B, instruction tuned). The texts were clustered into five distinct narrative frames:<br><br>
+                        1. kinetic focus (military hardware and activity)<br>
+                        2. humanitarian focus (wellbeing of civilians and disadvantaged groups)<br>
+                        3. diplomatic focus (how differing parties interact)<br>
+                        4. economic focus (economic impacts of the war)<br>
+                        5. culpability bias (extent to which articles use active language and strong verbs to assign moral blame)
                     </p>
                     <p class="project-info-description" style="margin-top: 1rem;">
                         Click on the Data and Methods tab in the app for more information.
