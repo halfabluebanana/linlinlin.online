@@ -398,6 +398,14 @@ main {
     background-position: center top;
 }
 
+/* The Obs tile */
+#project-the-obs .projects-gallery-thumb {
+    background-color: #1a1f1a;
+    background-image: url("/media/img/the-obs/obs-poster.jpg");
+    background-size: cover;
+    background-position: center top;
+}
+
 /* JSConf Asia tile */
 #project-jsconf-asia .projects-gallery-thumb {
     background-color: #1a1a2e;
