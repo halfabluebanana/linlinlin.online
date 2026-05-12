@@ -1,0 +1,169 @@
+redirectsOrigin = "config"
+plugins = []
+headers = []
+
+[functions]
+
+[functions."*"]
+
+[build]
+publish = "/Users/adelinesetiawan/linlinlin.online"
+publishOrigin = "config"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[[redirects]]
+from = "/projects"
+to = "/projects.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/pages"
+to = "/pages/home.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/pages/home"
+to = "/pages/home.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/pages/projects"
+to = "/pages/projects.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/pages/info"
+to = "/pages/info.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/pages/writings"
+to = "/pages/writings.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/info"
+to = "/info.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/work"
+to = "/writings.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/writings"
+to = "/writings.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/projects/ono-mato-dada/ono-mato-dada.html"
+to = "/projects/ono-mato-dada.html"
+status = 301.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/projects/sauna-lore/sauna-lore.html"
+to = "/projects/sauna-lore.html"
+status = 301.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/"
+to = "/projects.html"
+status = 301.0
+force = true
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
