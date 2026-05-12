@@ -301,7 +301,7 @@ main {
 
 .projects-gallery-thumb {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    min-height: 120px;
     background: linear-gradient(135deg, #dddddd, #f4f3f2);
     border: 1px solid rgba(0, 0, 0, 0.08);
     margin-bottom: 0.5rem;
@@ -309,125 +309,47 @@ main {
     overflow: hidden;
 }
 
-/* Ono-Mato-Dada tile — project still */
-#project-ono-mato-dada .projects-gallery-thumb {
-    background-color: #000000;
-    background-image: url("/projects/ono-mato-dada/still_ono-mato-dada.png");
-    background-size: cover;
-    background-position: center;
+.projects-gallery-thumb img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
-#project-ono-mato-dada.projects-gallery-item.is-highlighted .projects-gallery-thumb,
-#project-ono-mato-dada.projects-gallery-item:target .projects-gallery-thumb {
-    background-color: #000000;
-    background-image: url("/projects/ono-mato-dada/still_ono-mato-dada.png");
-    background-size: cover;
-    background-position: center;
-}
+/* Ono-Mato-Dada tile */
+#project-ono-mato-dada .projects-gallery-thumb { background-color: #000000; }
 
-/* Sauna Lore tile — project still */
-#project-sauna-lore .projects-gallery-thumb {
-    background-color: #000000;
-    background-image: url("/projects/sauna-lore/still_sauna-lore.png");
-    background-size: cover;
-    background-position: center;
-}
-
-#project-sauna-lore.projects-gallery-item.is-highlighted .projects-gallery-thumb,
-#project-sauna-lore.projects-gallery-item:target .projects-gallery-thumb {
-    background-color: #000000;
-    background-image: url("/projects/sauna-lore/still_sauna-lore.png");
-    background-size: cover;
-    background-position: center;
-}
+/* Sauna Lore tile */
+#project-sauna-lore .projects-gallery-thumb { background-color: #000000; }
 
 /* Iran War Media Framing tile */
-#project-iran-war-framing .projects-gallery-thumb {
-    background-color: #f0ede8;
-    background-image: url("/projects/Iran-war-media-framing-newplot.png");
-    background-size: cover;
-    background-position: center;
-}
+#project-iran-war-framing .projects-gallery-thumb { background-color: #f0ede8; }
 
 /* Word Soup tile */
-#project-word-soup .projects-gallery-thumb {
-    background-color: #111111;
-    background-image: url("/media/img/word-soup/IMG_2527.jpg");
-    background-size: cover;
-    background-position: center top;
-}
+#project-word-soup .projects-gallery-thumb { background-color: #111111; }
 
 /* Hansel und Gretel tile */
-#project-hansel-and-gretel .projects-gallery-thumb {
-    background-color: #111111;
-    background-image: url("/media/img/hansel/thumb.png");
-    background-size: cover;
-    background-position: center;
-}
+#project-hansel-and-gretel .projects-gallery-thumb { background-color: #111111; }
 
 /* Relative Compass tile */
-#project-relative-compass .projects-gallery-thumb {
-    background-color: #111111;
-    background-image: url("/media/img/compass/thumb.png");
-    background-size: cover;
-    background-position: center left;
-}
+#project-relative-compass .projects-gallery-thumb { background-color: #111111; }
 
-/* Entrepreneurship (Subi Subi) tile */
-#project-entrepreneurship .projects-gallery-thumb {
-    background-color: #f5f5f5;
-    background-image: url("/media/img/entrepreneurship/thumb.png");
-    background-size: cover;
-    background-position: center;
-}
+/* Entrepreneurship tile */
+#project-entrepreneurship .projects-gallery-thumb { background-color: #f5f5f5; }
 
 /* PINCH Ceramics tile */
-#project-pinch .projects-gallery-thumb {
-    background-color: #f5f0ee;
-    background-image: url("/media/img/pinch/pinch-01.png");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+#project-pinch .projects-gallery-thumb { background-color: #f5f0ee; }
 
 /* Platform: The Last Big Thing tile */
-#project-platform .projects-gallery-thumb {
-    background-color: #1a0a2e;
-    background-image: url("/media/img/platform/platform-cover.png");
-    background-size: cover;
-    background-position: center top;
-}
-
-/* So-far tile */
-#project-so-far .projects-gallery-thumb {
-    background-image: url("/media/img/so-far/so-far-05.gif");
-    background-size: cover;
-    background-position: center;
-}
+#project-platform .projects-gallery-thumb { background-color: #1a0a2e; }
 
 /* The Obs tile */
-#project-the-obs .projects-gallery-thumb {
-    background-color: #1a1f1a;
-    background-image: url("/media/img/the-obs/obs-poster.jpg");
-    background-size: cover;
-    background-position: center top;
-}
+#project-the-obs .projects-gallery-thumb { background-color: #1a1f1a; }
 
 /* JSConf Asia tile */
-#project-jsconf-asia .projects-gallery-thumb {
-    background-color: #1a1a2e;
-    background-image: url("/media/img/jsconf/15-brackets.png");
-    background-size: cover;
-    background-position: center;
-}
+#project-jsconf-asia .projects-gallery-thumb { background-color: #1a1a2e; }
 
 /* Culture of Bathe-ing tile */
-#project-culture-of-batheing .projects-gallery-thumb {
-    background-color: #1a3aff;
-    background-image: url("/media/img/design/cob/print-02.jpg");
-    background-size: cover;
-    background-position: center top;
-}
+#project-culture-of-batheing .projects-gallery-thumb { background-color: #1a3aff; }
 
 .projects-gallery-title {
     font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
