@@ -241,8 +241,8 @@ nav a.active::after {
 
 main {
     flex: 1;
-    padding: 3rem 0 5rem 0;
-    max-width: 900px;
+    padding: 3rem 2rem 5rem 2rem;
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
     overflow: visible;
@@ -286,7 +286,7 @@ main {
 .projects-gallery {
     margin-top: 4rem;
     column-count: 3;
-    column-gap: 2rem;
+    column-gap: 1.25rem;
 }
 
 .projects-gallery-item {
@@ -295,7 +295,7 @@ main {
     display: block;
     -webkit-tap-highlight-color: transparent;
     break-inside: avoid;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
 }
 
 .projects-gallery-thumb {
@@ -303,7 +303,7 @@ main {
     min-height: 120px;
     background: linear-gradient(135deg, #dddddd, #f4f3f2);
     border: 1px solid rgba(0, 0, 0, 0.08);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
     position: relative;
     overflow: hidden;
 }
