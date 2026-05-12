@@ -285,11 +285,8 @@ main {
 /* Projects gallery layout (projects page) */
 .projects-gallery {
     margin-top: 4rem;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-count: 3;
     column-gap: 2rem;
-    row-gap: 1.5rem;
-    align-items: start;
 }
 
 .projects-gallery-item {
@@ -297,6 +294,8 @@ main {
     color: inherit;
     display: block;
     -webkit-tap-highlight-color: transparent;
+    break-inside: avoid;
+    margin-bottom: 2rem;
 }
 
 .projects-gallery-thumb {
@@ -832,5 +831,9 @@ footer a:hover {
         grid-template-columns: 1fr !important;
         gap: 1.25rem !important;
         align-items: start !important;
+    }
+
+    .projects-gallery {
+        column-count: 1;
     }
 }
