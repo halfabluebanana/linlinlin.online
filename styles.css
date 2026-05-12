@@ -398,6 +398,13 @@ main {
     background-position: center top;
 }
 
+/* So-far tile */
+#project-so-far .projects-gallery-thumb {
+    background-image: url("/media/img/so-far/so-far-05.gif");
+    background-size: cover;
+    background-position: center;
+}
+
 /* The Obs tile */
 #project-the-obs .projects-gallery-thumb {
     background-color: #1a1f1a;
