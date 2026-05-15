@@ -308,7 +308,8 @@ main {
     overflow: hidden;
 }
 
-.projects-gallery-thumb img {
+.projects-gallery-thumb img,
+.projects-gallery-thumb video {
     width: 100%;
     height: auto;
     display: block;
