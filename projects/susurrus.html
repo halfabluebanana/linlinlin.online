@@ -8,6 +8,35 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
+    <style>
+        main.project-page {
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .project-video-full {
+            width: 100%;
+            display: block;
+        }
+
+        .susurrus-docs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .susurrus-docs video {
+            width: 100%;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .susurrus-docs {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,17 +48,37 @@
     </header>
 
     <main class="project-page">
+        <div class="project-content">
+            <video class="project-video-full" autoplay muted loop playsinline>
+                <source src="../media/img/susurrus/grass-jitters.mp4" type="video/mp4">
+            </video>
+        </div>
+
         <div class="project-info-container">
             <div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start;">
                 <div>
                     <h2 class="project-info-title">susurrus</h2>
                     <p class="project-info-description">
-                        Placeholder page. Document what “susurrus” explores—sound, whispering motion, or ambient conditions.
+                        A breath-activated installation that dissolves boundaries between body and environment. The piece uses microphone input to detect breath — blowing separates a live camera feed into five depth layers that pull apart in three-dimensional space, as if wind could peel apart the visible world. When breath stops, the layers collapse back into stillness.
                     </p>
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        Susurrus is named for the sound of rustling and whispering — the barely-audible presence of wind. It asks: what does it mean for breath to become a force of visual perception?
+                    </p>
+
+                    <div class="susurrus-docs">
+                        <video controls muted playsinline>
+                            <source src="../media/img/susurrus/huff-puff-01.mp4" type="video/mp4">
+                        </video>
+                        <video controls muted playsinline>
+                            <source src="../media/img/susurrus/huff-puff-04.mp4" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
                 <div>
                     <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0;">
-                        Notes / installation details / collaborators.
+                        Stack: Three.js · Web Audio API · WebGL · MediaDevices API<br><br>
+                        Role: designer + maker · physical computing · interactive installation<br><br>
+                        IMA Low Residency MPS Thesis, NYU, 2025.
                     </p>
                 </div>
             </div>
@@ -43,4 +92,3 @@
     <script src="../script.js"></script>
 </body>
 </html>
-
