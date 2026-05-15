@@ -8,6 +8,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
+    <style>
+        main.project-page {
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .project-img-full {
+            width: 100%;
+            display: block;
+        }
+
+        .woodworking-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .woodworking-grid img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .woodworking-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,17 +49,33 @@
     </header>
 
     <main class="project-page">
+        <div class="project-content">
+            <img src="../media/img/woodworking/woodworking-01.jpeg" class="project-img-full" alt="Woodworking — holding a bandsaw-cut layered wood piece in the shop">
+        </div>
+
         <div class="project-info-container">
             <div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start;">
                 <div>
                     <h2 class="project-info-title">woodworking</h2>
                     <p class="project-info-description">
-                        Placeholder page. Add tools, joints, and what you want visitors to notice about the craftsmanship.
+                        Ongoing material practice in the wood shop — bandsaw cuts, joinery, lamination, and hand finishing. Each piece is an exercise in understanding wood as a living material: its grain, resistance, and the way it holds a mark.
                     </p>
+
+                    <div class="woodworking-grid">
+                        <img src="../media/img/woodworking/woodworking-02.jpeg" alt="Woodworking process">
+                        <img src="../media/img/woodworking/woodworking-03.jpeg" alt="Woodworking process">
+                        <img src="../media/img/woodworking/woodworking-04.jpeg" alt="Woodworking process">
+                        <img src="../media/img/woodworking/woodworking-05.jpeg" alt="Woodworking process">
+                        <img src="../media/img/woodworking/woodworking-06.jpeg" alt="Woodworking process">
+                        <img src="../media/img/woodworking/woodworking-07.jpeg" alt="Woodworking process">
+                        <img src="../media/img/woodworking/woodworking-08.jpeg" alt="Woodworking process">
+                        <img src="../media/img/woodworking/woodworking-09.jpeg" alt="Woodworking process">
+                        <img src="../media/img/woodworking/woodworking-10.jpeg" alt="Woodworking process">
+                    </div>
                 </div>
                 <div>
                     <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0;">
-                        Notes / credits / process details.
+                        NYU IMA, 2024–2025.
                     </p>
                 </div>
             </div>
@@ -43,4 +89,3 @@
     <script src="../script.js"></script>
 </body>
 </html>
-
