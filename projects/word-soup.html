@@ -14,34 +14,26 @@
             max-width: 100%;
         }
 
-        .project-header-img {
+        .project-video-full {
             width: 100%;
             display: block;
         }
 
-        .project-media {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-top: 3rem;
+        .word-soup-docs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
-        .project-media img,
-        .project-media video {
-            display: block;
-            max-width: 30vw;
+        .word-soup-docs img {
             width: 100%;
-            height: auto;
-        }
-
-        .project-media video {
-            padding: 1rem 0;
+            display: block;
         }
 
         @media (max-width: 768px) {
-            .project-media img,
-            .project-media video {
-                max-width: 100%;
+            .word-soup-docs {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -56,31 +48,39 @@
     </header>
 
     <main class="project-page">
-        <img src="../media/img/word-soup/IMG_2527.jpg" class="project-header-img" alt="Word Soup projected on the B-Dome ceiling, audience lying beneath, Berlin, December 2025">
+        <div class="project-content">
+            <video class="project-video-full" autoplay muted loop playsinline>
+                <source src="../media/video/word-soup/IMG_9750.mp4" type="video/mp4">
+            </video>
+        </div>
 
         <div class="project-info-container">
             <div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start;">
                 <div>
                     <h2 class="project-info-title">word soup</h2>
                     <p class="project-info-description">
-                        Language as a living visual system. Word Soup combines natural language processing with cellular automata — a system where language becomes the seed for emergent visual behaviour. Words are parsed, weighted, and fed into a grid of cells that evolve according to rules, producing patterns that feel alive without being predictable. No two runs are the same.
+                        Word soup peers into a dreamer's mind making myth. Words drift and grow, fade and combine, collide and crystallise, wandering the expanding curved space in search of meaning as it emerges, dissolves, reforms, and disappears.
                     </p>
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        The piece is driven by a custom NLP data pipeline. Source texts — Italo Calvino's <em>Invisible Cities</em> and Alan Watts — are processed using spaCy to extract and lemmatise ~800 nouns, which are then encoded into 384-dimensional semantic vectors using sentence-transformers (all-MiniLM-L6-v2). Each word is scored across three custom semantic axes — mass, abstractness, and volatility — via vector projection against pole-word clusters, and a fourth dimension — sociability — computed as cosine similarity to the corpus centroid. A cosine-similarity neighbour graph with an auto-tuned tau threshold determines which words are semantically close enough to bond.
+                    </p>
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        These properties govern behaviour in a multi-agent simulation: words drift through a Perlin flow field, attract semantically similar neighbours, crystallise into clusters, and eventually fuse — two words merging into one at the midpoint of their embedding vectors. The simulation projects onto the curved interior surface of the dome.
+                    </p>
+
+                    <div class="word-soup-docs">
+                        <img src="../media/img/word-soup/IMG_2527.jpg" alt="word soup at B-Dome Berlin">
+                        <img src="../media/img/word-soup/IMG_9755.jpg" alt="word soup at B-Dome Berlin">
+                    </div>
                 </div>
                 <div>
                     <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0; margin-bottom: 1rem;">
-                        Python: NLP pipeline — text parsing, tokenisation, semantic weighting of words, assignment of cell states.<br><br>
-                        JavaScript: cellular automata engine + canvas rendering. Each cell's next state is determined by its neighbours and its inherited semantic weight from the source text.<br><br>
-                        Screened at B-Dome, Berlin. December 2025.
+                        Stack: Python · spaCy · sentence-transformers (all-MiniLM-L6-v2) · numpy · scipy · p5.js<br><br>
+                        Role: NLP data pipeline · semantic embedding · multi-agent simulation design<br><br>
+                        Collaboration with Pim Tournaye. B-Dome, Berlin, December 2025.
                     </p>
-                    <a href="https://github.com/halfabluebanana" target="_blank" rel="noopener noreferrer" style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; color: #333333; text-decoration: underline; text-underline-offset: 3px;">github.com/halfabluebanana →</a>
+                    <a href="https://github.com/PimTournaye/b-dome" target="_blank" rel="noopener noreferrer" style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; color: #333333; text-decoration: underline; text-underline-offset: 3px;">view on GitHub →</a>
                 </div>
-            </div>
-
-            <div class="project-media">
-                <img src="../media/img/word-soup/IMG_9755.jpg" alt="Word Soup on the B-Dome ceiling, Berlin, December 2025">
-                <video autoplay muted loop playsinline>
-                    <source src="../media/video/word-soup/IMG_9750.mp4" type="video/mp4">
-                </video>
             </div>
         </div>
     </main>
