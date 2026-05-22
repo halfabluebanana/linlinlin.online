@@ -127,27 +127,32 @@
                 <div>
                     <h2 class="project-info-title">Iran war media framing</h2>
                     <p class="project-info-description">
-                        How do US and international media outlets frame the conflict? How can we make media bias visible and navigable? This project maps how language, emphasis, and narrative structure diverge across media outlets covering the 2026 Iran war.
+                        How do US and international media outlets frame the conflict? How can we make media bias visible and navigable? This project maps how language, emphasis, and narrative structure diverge across 77 sources covering the 2026 Iran war.
                     </p>
                     <p class="project-info-description" style="margin-top: 1rem;">
-                        To collect the data, we built a multi-source media analysis pipeline using web scrapers and MediaCloud queries. We then used an AI-based filtering tool, Sentence Transformers (all-MiniLM-L12-v2) to filter unrelated articles based on their titles. To analyse the article texts, we relied on a locally hosted large language model (Gemma4, E4B, instruction tuned). The texts were clustered into five distinct narrative frames:<br><br>
+                        The pipeline runs in four stages. Web scrapers and MediaCloud queries collected articles across 77 sources; sentence-transformers (all-MiniLM-L12-v2) filtered out unrelated articles by title embedding similarity. A locally-hosted LLM (Gemma4, 4B, instruction-tuned) then scored each article against structured prompts across five framing dimensions:
+                        <br><br>
                         1. kinetic focus (military hardware and activity)<br>
                         2. humanitarian focus (wellbeing of civilians and disadvantaged groups)<br>
                         3. diplomatic focus (how differing parties interact)<br>
                         4. economic focus (economic impacts of the war)<br>
-                        5. culpability bias (extent to which articles use active language and strong verbs to assign moral blame)
+                        5. culpability bias (use of active language and strong verbs to assign moral blame)
                     </p>
                     <p class="project-info-description" style="margin-top: 1rem;">
-                        Click on the Data and Methods tab in the app for more information.
+                        Aggregate framing scores per outlet were then clustered using BERTopic into five media groups. NetworkX built a similarity graph of outlets — nodes weighted by framing profile, edges by cosine similarity — making structural patterns visible across the media landscape regardless of nominal political affiliation.
+                    </p>
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        Click on the Data and Methods tab in the app for more detail.
                     </p>
                 </div>
                 <div>
                     <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0; margin-bottom: 1rem;">
-                        Stack: Python · spaCy / BERTopic · NetworkX · Streamlit · Altair · Plotly · BeautifulSoup<br><br>
-                        Role: data engineer + designer · NLP · network analysis · data visualisation<br><br>
-                        Columbia University, 2026. Group project.
+                        Stack: Python · sentence-transformers · Gemma4 (local LLM) · BERTopic · NetworkX · Streamlit · Altair · Plotly · BeautifulSoup<br><br>
+                        Role: data pipeline · LLM scoring framework · NLP · network analysis · data visualisation · app design<br><br>
+                        Columbia University QMSS, 2026. Group project with Maximilian Chelminski and Yixiao Liu.
                     </p>
-                    <a href="https://media-framing-iran-2026.streamlit.app/?page=Media+framing" target="_blank" rel="noopener noreferrer" style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; color: #333333; text-decoration: underline; text-underline-offset: 3px;">open live app →</a>
+                    <a href="https://media-framing-iran-2026.streamlit.app/?page=Media+framing" target="_blank" rel="noopener noreferrer" style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; color: #333333; text-decoration: underline; text-underline-offset: 3px; display: block; margin-bottom: 0.5rem;">open live app →</a>
+                    <a href="https://github.com/Data-Visualisation-Project-2026/data-visualisation-project" target="_blank" rel="noopener noreferrer" style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; color: #333333; text-decoration: underline; text-underline-offset: 3px; display: block;">view on GitHub →</a>
                 </div>
             </div>
         </div>
