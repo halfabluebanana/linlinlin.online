@@ -62,7 +62,7 @@
                         Word soup peers into a dreamer's mind making myth. Words drift and grow, fade and combine, collide and crystallise, wandering the expanding curved space in search of meaning as it emerges, dissolves, reforms, and disappears.
                     </p>
                     <p class="project-info-description" style="margin-top: 1rem;">
-                        The piece is driven by a custom NLP data pipeline. Source texts — Italo Calvino's <em>Invisible Cities</em> and Alan Watts — are processed using spaCy to extract and lemmatise ~800 nouns, which are then encoded into 384-dimensional semantic vectors using sentence-transformers (all-MiniLM-L6-v2). Each word is scored across three custom semantic axes — mass, abstractness, and volatility — via vector projection against pole-word clusters, and a fourth dimension — sociability — computed as cosine similarity to the corpus centroid. A cosine-similarity neighbour graph with an auto-tuned tau threshold determines which words are semantically close enough to bond.
+                        The piece is driven by a custom NLP data pipeline. Source texts — Italo Calvino's <em>Invisible Cities</em> and Alan Watts — are processed using spaCy to extract and lemmatise ~800 nouns, which are then encoded into 384-dimensional semantic vectors using sentence-transformers (all-MiniLM-L6-v2). Each word is scored across four semantic axes: mass, abstractness, and volatility via vector projection against pole-word clusters; and sociability via PMI-based co-occurrence. A cosine-similarity neighbour graph with an auto-tuned tau threshold determines which words are semantically close enough to bond.
                     </p>
                     <p class="project-info-description" style="margin-top: 1rem;">
                         These properties govern behaviour in a multi-agent simulation: words drift through a Perlin flow field, attract semantically similar neighbours, crystallise into clusters, and eventually fuse — two words merging into one at the midpoint of their embedding vectors. The simulation projects onto the curved interior surface of the dome.
@@ -77,7 +77,7 @@
                     <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0; margin-bottom: 1rem;">
                         Stack: Python · spaCy · sentence-transformers (all-MiniLM-L6-v2) · numpy · scipy · p5.js<br><br>
                         Role: NLP data pipeline · semantic embedding · multi-agent simulation design<br><br>
-                        Collaboration with Pim Tournaye. B-Dome, Berlin, December 2025.
+                        Collaboration with Pim Tournaye. B-Dome, Berlin, 2026.
                     </p>
                     <a href="https://github.com/PimTournaye/b-dome" target="_blank" rel="noopener noreferrer" style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; color: #333333; text-decoration: underline; text-underline-offset: 3px;">view on GitHub →</a>
                 </div>
