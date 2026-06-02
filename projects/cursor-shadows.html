@@ -3,34 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cursor shadows | linlinlin.online</title>
+    <title>cursor sundial | linlinlin.online</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
+    <style>
+        main.project-page {
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .project-header-video {
+            width: 100%;
+            display: block;
+            margin-bottom: 0;
+            background: #111111;
+        }
+
+        .sundial-video {
+            width: 100%;
+            display: block;
+            background: #111111;
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 <body>
     <header>
+        <a href="/projects.html" class="nav-brand">Adeline Setiawan</a>
         <nav>
             <a href="../projects.html" class="active">projects</a>
-            <a href="../info.html">info</a>
+            <a href="../info.html">about</a>
             <a href="../writings.html">writings</a>
         </nav>
     </header>
 
     <main class="project-page">
+        <div class="project-content">
+            <video
+                src="../media/video/cursor-sundial/cursor-sundial-07.mov"
+                class="project-header-video"
+                autoplay muted loop playsinline>
+            </video>
+        </div>
+
         <div class="project-info-container">
-            <div style="display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3rem; align-items: start;">
+            <div class="project-info-grid">
                 <div>
-                    <h2 class="project-info-title">cursor shadows</h2>
+                    <h2 class="project-info-title">Cursor Sundial</h2>
                     <p class="project-info-description">
-                        Placeholder page. Replace this with the project’s description and a brief note on its interaction and visual language.
+                        Cursor Sundial is an interactive web piece that turns your mouse cursor into a sundial gnomon — casting a geometrically accurate shadow whose angle and length shift in real time according to the sun's actual position at your location. Driven by solar calculation, the piece reintroduces one of the most elemental traces of natural light into a surface that has none: the screen.
                     </p>
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        The page breathes with the day, pitch black at night and fading to white at sunrise, border shadows drifting as hours pass. By anchoring the most mundane of digital gestures to solar time, Cursor Sundial asks what it might mean to bring atmosphere back into the digital surface: to make the screen a place where the outside still moves, where shadow still falls, where the sun still counts.
+                    </p>
+
+                    <video src="../media/video/cursor-sundial/cursor-sundial-01.mov" class="sundial-video" autoplay muted loop playsinline></video>
+                    <video src="../media/video/cursor-sundial/cursor-sundial-02.mov" class="sundial-video" autoplay muted loop playsinline></video>
+                    <video src="../media/video/cursor-sundial/cursor-sundial-03.mov" class="sundial-video" autoplay muted loop playsinline></video>
+                    <video src="../media/video/cursor-sundial/cursor-sundial-04.mov" class="sundial-video" autoplay muted loop playsinline></video>
+                    <video src="../media/video/cursor-sundial/cursor-sundial-05.mov" class="sundial-video" autoplay muted loop playsinline></video>
+                    <video src="../media/video/cursor-sundial/cursor-sundial-06.mov" class="sundial-video" autoplay muted loop playsinline></video>
                 </div>
                 <div>
-                    <p style="font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.7; color: #666666; margin-top: 0;">
-                        Margin notes: iteration history, credits, and any links you want to keep alongside the text.
+                    <p class="project-meta">
+                        Stack: JavaScript · SunCalc · HTML · CSS<br><br>
+                        Role: concept · development · visual design<br><br>
+                        2026. Solo project.
                     </p>
+                    <a href="https://github.com/halfabluebanana/cursor-sundial-parallelogram" target="_blank" rel="noopener noreferrer" class="project-meta-link">view on GitHub →</a>
                 </div>
             </div>
         </div>
@@ -43,4 +85,3 @@
     <script src="../script.js"></script>
 </body>
 </html>
-
