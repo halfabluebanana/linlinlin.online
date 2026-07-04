@@ -1,7 +1,9 @@
 # / → projects is handled in netlify.toml (301 + force)
 /projects/relative-compass  /projects/relative-compass/index.html  200
 /projects  /projects.html  200
-/info  /info.html  200
+/info  /about.html  200
+/about  /about.html  200
+/info.html  /about.html  301
 /work  /writings.html  200
 /writings  /writings.html  200
 /projects/ono-mato-dada/ono-mato-dada.html  /projects/ono-mato-dada.html  301

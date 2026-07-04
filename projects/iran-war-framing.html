@@ -92,7 +92,7 @@
         <a href="/projects.html" class="nav-brand">Adeline Setiawan</a>
         <nav>
             <a href="../projects.html" class="active">projects</a>
-            <a href="../info.html">about</a>
+            <a href="../about.html">about</a>
             <a href="../writings.html">writings</a>
         </nav>
     </header>
@@ -140,7 +140,13 @@
                         5. culpability bias (use of active language and strong verbs to assign moral blame)
                     </p>
                     <p class="project-info-description" style="margin-top: 1rem;">
-                        Aggregate framing scores per outlet were then clustered using BERTopic into five media groups. NetworkX built a similarity graph of outlets — nodes weighted by framing profile, edges by cosine similarity — making structural patterns visible across the media landscape regardless of nominal political affiliation.
+                        Aggregate framing scores per outlet were then clustered using K-means into five media groups. NetworkX built a similarity graph of outlets — nodes weighted by framing profile, edges by cosine similarity — making structural patterns visible across the media landscape regardless of nominal political affiliation.
+                    </p>
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        One pattern held across the whole corpus: economic framing is negatively correlated with every other dimension. When outlets write about markets, they stop assigning blame.
+                    </p>
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        Limitation: most US outlets were capped at 25 articles during extraction, while several non-US outlets have far larger samples (Tehran Times at 957, AP at 283, Reuters at 196). Outlet-level clusters built from smaller samples are noisier, so US outlet cluster assignments should be read with more caution than non-US ones.
                     </p>
                     <p class="project-info-description" style="margin-top: 1rem;">
                         Click on the Data and Methods tab in the app for more detail.

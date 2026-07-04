@@ -344,6 +344,9 @@ main {
 /* Sauna Lore tile */
 #project-sauna-lore .projects-gallery-thumb { background-color: #000000; }
 
+/* NAC tile */
+#project-nac .projects-gallery-thumb { background-color: #1a1a1a; }
+
 /* Iran War Media Framing tile */
 #project-iran-war-framing .projects-gallery-thumb { background-color: #f0ede8; }
 
@@ -417,6 +420,17 @@ main {
 
 .projects-gallery-item:hover .projects-gallery-title {
     color: #666666;
+}
+
+.projects-gallery-category {
+    display: block;
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #999999;
+    margin-top: 0.15rem;
 }
 
 .projects-gallery-item.is-highlighted .projects-gallery-thumb {
@@ -803,11 +817,23 @@ main.project-page .project-info-grid > div:last-child {
         font-size: 16px;
     }
 
-    /* Keep outbound links consistent with surrounding body copy on mobile */
+    /* All links in main match body text size on mobile */
+    main a {
+        font-size: 16px;
+    }
+
     main a[target="_blank"] {
         font-family: inherit !important;
-        font-size: inherit !important;
+        font-size: 16px !important;
         line-height: inherit !important;
+    }
+
+    .project-meta-link {
+        font-size: 16px;
+    }
+
+    .projects-submenu a {
+        font-size: 16px !important;
     }
 
     header {
@@ -820,15 +846,15 @@ main.project-page .project-info-grid > div:last-child {
     }
 
     nav {
-        gap: 2rem;
+        gap: 1rem;
     }
 
     nav a {
-        font-size: 20px;
+        font-size: 14px;
     }
 
     .nav-brand {
-        font-size: 20px;
+        font-size: 14px;
     }
 
     .hero h1 {

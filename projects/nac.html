@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>international perceptions of the arts | linlinlin.online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        main.project-page {
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .project-hero-text {
+            width: 100%;
+            background-color: #1a1a1a;
+            color: #f4f3f2;
+            padding: 6rem 3rem;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-hero-text .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('../media/img/nac/slide28_img03.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.35;
+        }
+
+        .project-hero-text h1 {
+            font-family: 'BDO Grotesk', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            font-weight: 400;
+            line-height: 1.2;
+            color: #f4f3f2;
+            max-width: 800px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-hero-text .hero-sub {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .methodology-snapshot {
+            border-top: 1px solid rgba(68, 68, 68, 0.2);
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+        }
+
+        .methodology-snapshot-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #888888;
+            margin-bottom: 1rem;
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 0;
+        }
+
+        .methodology-key {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #888888;
+            padding: 0.6rem 0;
+            border-top: 1px solid rgba(68, 68, 68, 0.12);
+        }
+
+        .methodology-val {
+            font-family: 'BDO Grotesk', sans-serif;
+            font-size: 12px;
+            color: #444444;
+            padding: 0.6rem 0 0.6rem 1.5rem;
+            border-top: 1px solid rgba(68, 68, 68, 0.12);
+            line-height: 1.6;
+        }
+
+        .research-narrative {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem 0 3rem;
+        }
+
+        .research-section {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 3rem;
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(68, 68, 68, 0.15);
+        }
+
+        .research-section:first-child {
+            border-top: none;
+        }
+
+        .research-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #888888;
+            padding-top: 0.25rem;
+        }
+
+        .research-body p {
+            font-family: 'BDO Grotesk', sans-serif;
+            font-size: 14px;
+            line-height: 1.75;
+            color: #444444;
+            margin-bottom: 1rem;
+        }
+
+        .research-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .confidential-section {
+            border-top: 1px solid rgba(68, 68, 68, 0.15);
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            padding-bottom: 4rem;
+        }
+
+        .confidential-gate {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .confidential-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #888888;
+        }
+
+        .confidential-note {
+            font-family: 'BDO Grotesk', sans-serif;
+            font-size: 12px;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        .confidential-items {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: #888888;
+            line-height: 2;
+        }
+
+        .password-form {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .password-input {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            border: 1px solid rgba(68, 68, 68, 0.3);
+            background: transparent;
+            padding: 0.5rem 0.75rem;
+            color: #444444;
+            outline: none;
+            width: 200px;
+        }
+
+        .password-input:focus {
+            border-color: #444444;
+        }
+
+        .password-btn {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            border: 1px solid rgba(68, 68, 68, 0.3);
+            background: transparent;
+            padding: 0.5rem 1rem;
+            color: #444444;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .password-btn:hover {
+            background: #444444;
+            color: #f4f3f2;
+        }
+
+        .password-error {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: #888888;
+            display: none;
+        }
+
+        .confidential-content {
+            display: none;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(68, 68, 68, 0.12);
+        }
+
+        .confidential-content p {
+            font-family: 'BDO Grotesk', sans-serif;
+            font-size: 12px;
+            color: #444444;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Data visuals strip */
+        .data-visuals {
+            background-color: #f0efee;
+            padding: 3rem;
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 2.5rem 3rem;
+            align-items: start;
+        }
+
+        .data-visual-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .data-visual-item img {
+            width: 100%;
+            display: block;
+            image-rendering: auto;
+        }
+
+        .data-visual-caption {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #888888;
+            line-height: 1.5;
+        }
+
+        /* Bubbles row spans full width */
+        .data-visual-bubbles {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .data-visual-bubbles .data-visual-item {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .project-hero-text {
+                padding: 4rem 1.5rem;
+            }
+
+            .research-narrative {
+                padding: 3rem 1.5rem 0 1.5rem;
+            }
+
+            .research-section {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .methodology-grid {
+                grid-template-columns: 90px 1fr;
+            }
+
+            .data-visuals {
+                grid-template-columns: 1fr;
+                padding: 2rem 1.5rem;
+                gap: 2rem;
+            }
+
+            .data-visual-bubbles {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/projects.html" class="nav-brand">Adeline Setiawan</a>
+        <nav>
+            <a href="../projects.html" class="active">projects</a>
+            <a href="../about.html">about</a>
+            <a href="../writings.html">writings</a>
+        </nav>
+    </header>
+
+    <main class="project-page">
+
+        <div class="project-hero-text">
+            <div class="hero-bg" aria-hidden="true"></div>
+            <h1>How does the world see us? Mapping international perceptions of a national arts culture</h1>
+            <p class="hero-sub">Public sector · Arts &amp; culture · Singapore · 2021–2022</p>
+        </div>
+
+        <div class="project-info-container">
+            <div class="project-info-grid">
+                <div>
+                    <h2 class="project-info-title">international perceptions of the arts</h2>
+                    <p class="project-info-description">
+                        A national arts and culture authority wanted to expand its international reach — but had no reliable picture of how audiences in target markets actually perceived its arts scene. Assumptions had guided strategy for years. This study identified which markets were genuinely reachable, what drove or blocked engagement, and where to invest limited resources for the greatest return. Findings informed a national arts strategy spanning 2023–2027.
+                    </p>
+
+                    <div class="methodology-snapshot">
+                        <p class="methodology-snapshot-label">Methodology at a glance</p>
+                        <div class="methodology-grid">
+                            <span class="methodology-key">Methods</span>
+                            <span class="methodology-val">Expert interviews → quantitative survey → Bayesian modelling</span>
+
+                            <span class="methodology-key">N</span>
+                            <span class="methodology-val">40 experts (11 markets) + 9,000 survey respondents (9 markets)</span>
+
+                            <span class="methodology-key">Rationale</span>
+                            <span class="methodology-val">Qual phase surfaced perception hypotheses; quant phase stress-tested them at scale. Bayesian modelling chosen over standard regression to handle uncertainty in smaller-sample markets while keeping cross-market comparisons statistically defensible.</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p class="project-meta">
+                        Role: lead researcher (team of 4)<br>
+                        User + design research · behavioural + strategy design<br><br>
+                        Sector: arts &amp; culture · public sector<br>
+                        Singapore · 2021–2022
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="research-narrative">
+
+            <div class="research-section">
+                <span class="research-label">The question</span>
+                <div class="research-body">
+                    <p>A national arts and culture authority wanted to expand its international reach — but had no reliable picture of how audiences in target markets actually perceived its arts scene. Assumptions had guided strategy for years.</p>
+                    <p>The authority needed evidence: which markets were genuinely reachable, what drove or blocked engagement, and where to invest limited resources for the greatest return.</p>
+                </div>
+            </div>
+
+            <div class="research-section">
+                <span class="research-label">The approach</span>
+                <div class="research-body">
+                    <p>I led a multidisciplinary team through a two-phase study designed so each phase built directly on the last.</p>
+                    <p>In the first phase, I led 40 qualitative interviews with arts and cultural experts across 11 international markets. The goal wasn't to gather opinions — it was to surface the perception hypotheses that audiences held before encountering the work. These became the architecture for the quantitative instrument.</p>
+                    <p>In the second phase, I designed and ran a quantitative survey of 9,000 respondents across 9 markets, using Bayesian modelling to identify the specific drivers and barriers to likelihood of engagement. Bayesian modelling was chosen over standard regression because we needed to quantify uncertainty in smaller markets while still making cross-market comparisons statistically defensible — standard regression would have either overstated confidence or forced us to pool markets that shouldn't be pooled.</p>
+                </div>
+            </div>
+
+            <div class="research-section">
+                <span class="research-label">What I found</span>
+                <div class="research-body">
+                    <p>Overall likelihood to consume sat at 38% — higher than the authority expected, but unevenly distributed. Southeast Asian and Chinese audiences showed the strongest engagement potential.</p>
+                    <p>Crucially, prior visitation was a stronger predictor of future engagement than any perception variable — meaning arts tourism and international strategy were not separate levers, but the same one.</p>
+                    <p>The causal network analysis revealed that ease of access and online visibility were more powerful drivers than quality perceptions. Audiences who weren't engaging weren't skeptical about quality. They simply hadn't encountered the work.</p>
+                </div>
+            </div>
+
+            <div class="research-section">
+                <span class="research-label">What changed</span>
+                <div class="research-body">
+                    <p>The findings directly shaped a multi-year national arts strategy, influencing which international markets received investment priority, how ecosystem development was sequenced, and where digital discoverability efforts were concentrated. Research moved from insight to policy.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Data visuals -->
+        <div class="data-visuals">
+            <div class="data-visual-item">
+                <img src="../media/img/nac/slide21_img09.png" alt="Arts attendance in home country — bar chart across 9 markets">
+                <p class="data-visual-caption">Attendance in home country — 9 markets</p>
+            </div>
+            <div class="data-visual-item">
+                <img src="../media/img/nac/slide23_img12.png" alt="Arts attendance outside home country — bar chart across 9 markets">
+                <p class="data-visual-caption">Attendance outside home country — 9 markets</p>
+            </div>
+            <div class="data-visual-bubbles">
+                <div class="data-visual-item">
+                    <img src="../media/img/nac/slide18_img13.png" alt="Satisfaction rates — top 3 markets: 90%, 94%, 93%">
+                    <p class="data-visual-caption">Satisfaction — highest 3 markets</p>
+                </div>
+                <div class="data-visual-item">
+                    <img src="../media/img/nac/slide18_img14.png" alt="Satisfaction rates — lower markets: 66%, 66%, 83%">
+                    <p class="data-visual-caption">Satisfaction — remaining markets</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="research-narrative">
+            <div class="confidential-section">
+                <div class="confidential-gate">
+                    <p class="confidential-label">Protected content</p>
+                    <p class="confidential-note">Full case study available on request. Enter password to unlock.</p>
+                    <p class="confidential-items">
+                        — Client and agency details<br>
+                        — Market priority rankings and DVF scoring framework<br>
+                        — Full causal network diagram<br>
+                        — Survey instrument and Bayesian model outputs
+                    </p>
+                    <div class="password-form">
+                        <input type="password" class="password-input" placeholder="enter password" id="nac-password">
+                        <button class="password-btn" onclick="checkPassword()">unlock</button>
+                    </div>
+                    <p class="password-error" id="password-error">incorrect password</p>
+                </div>
+
+                <div class="confidential-content" id="confidential-content">
+                    <p><strong>Client:</strong> National Arts Council (NAC), Singapore<br>
+                    <strong>Agency:</strong> Kantar Public Singapore</p>
+                    <p>Findings informed the Singapore Arts Plan 2.0 (2023–2027).</p>
+                    <p><a href="../media/pdf/NAC Quant Report (2022) [Redacted].pdf" target="_blank">Download the redacted quantitative report →</a></p>
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>adeline setiawan © 2026 | <a href="https://github.com/halfabluebanana" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        function checkPassword() {
+            const input = document.getElementById('nac-password').value;
+            const content = document.getElementById('confidential-content');
+            const error = document.getElementById('password-error');
+            if (input === 'research2026') {
+                content.style.display = 'block';
+                document.querySelector('.confidential-gate').style.display = 'none';
+            } else {
+                error.style.display = 'block';
+            }
+        }
+
+        document.getElementById('nac-password').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') checkPassword();
+        });
+    </script>
+</body>
+</html>
