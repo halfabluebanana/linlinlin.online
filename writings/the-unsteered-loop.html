@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>the unsteered loop | linlinlin.online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <a href="/projects.html" class="nav-brand">Adeline Setiawan</a>
+        <nav>
+            <a href="/projects.html">projects</a>
+            <a href="/about.html">about</a>
+            <a href="/writings.html" class="active">writings</a>
+        </nav>
+    </header>
+
+    <main class="essay-page">
+        <article class="essay">
+            <p class="essay-kicker">draft v0.1 · july 2026</p>
+            <h1 class="essay-title">the unsteered loop</h1>
+            <p class="essay-standfirst">adaptation is the dominant design paradigm of deployed AI, and the loop it creates has nobody steering it. this is the argument behind everything else on this site.</p>
+
+            <p>Nearly everything deployed as AI adapts to its user. Feeds rank for you, assistants remember you, tutors pace themselves to you, companions become whoever keeps you talking. Personalisation isn't a feature of these systems; it is the design paradigm — the thing the last two decades of consumer software converged on and the thing the next decade of AI is being built to do better.</p>
+
+            <p>Every adaptive system creates the same loop. The system adapts to the person. That changes the person's behaviour. The changed behaviour changes the data. The changed data changes the system. Two coupled learning systems, each training the other — and nobody steering. Not the company, which optimises a proxy; not the user, who never sees the loop; not the model, which has no idea it's in one.</p>
+
+            <p>It helps to name the stages. An adaptive system <em>measures</em> behaviour, <em>infers</em> a preference from it, and <em>acts</em> — reranks, regenerates, adjusts its persona. Then the person <em>adapts back</em>. Then individual adaptations <em>aggregate</em> into something community-shaped. Five stages. Industry research lives almost entirely in the first three, because that's where the levers are and that's what the metrics reward. The interesting effects — and almost all of the missing science — live in stages four and five.</p>
+
+            <p>At the individual scale, stage four looks like preference drift and dependence. The platforms know their proxies are off: engagement is not satisfaction, which is why YouTube runs survey-calibrated satisfaction models and Meta rebuilt its ranking around "meaningful social interaction" back in 2018. But the LLM era moves the adaptation surface somewhere new. The signal is no longer what you click; it's what you say, and what the system remembers about you. Adaptation shifts from <em>what you're shown</em> to <em>how you're spoken to</em>. There is very little public research on what sustained exposure to that does to a person. We are running the experiment anyway, at population scale, without a control group.</p>
+
+            <p>At the community scale, stage five looks like the erosion of shared ground. When every member of a community is spoken to differently, the common object they reason about quietly disappears. And communities now have a second problem: some of their participants aren't people. Synthetic accounts post, answer, summarise, moderate. How consensus forms, who gets believed, what a community collectively "knows" — that structure is being rewritten in real time, and almost no one is measuring it longitudinally.</p>
+
+            <p>It is measurable, though. Structure betrays what content hides. In a network analysis of Reddit communities, I found that humans replied to each other reciprocally 42.8% of the time; known GPT-2 bots, essentially never; coordinated influence accounts, 1.4%. You don't need to read a single post to see that something non-human has entered the room — the shape of the conversation changes first. Reciprocity, opinion diversity, convergence speed: these are the vital signs of a community's epistemic health, and they can be tracked over time the way we track any other slow-moving risk.</p>
+
+            <p>Somebody should be doing that tracking. The labs need it, because "does this model design choice degrade the communities it participates in" is a safety question you cannot answer from inside a chat transcript. Regulators need it, because you cannot write standards for effects you have no instruments to detect. Communities deserve it, because they are the ones being rewritten.</p>
+
+            <p>That's the work I'm doing: building instruments for stages four and five. A preprint on reciprocity structure in bot and human networks is in progress; a multi-agent simulation — varying one agent design parameter at a time and watching what it does to community structure — is in build. The loop may not be unmade. It can at least be witnessed.</p>
+
+            <p class="essay-footer-note"><a href="/writings.html">← writings</a></p>
+        </article>
+    </main>
+
+    <footer>
+        <p>adeline setiawan © 2026 | <a href="https://github.com/halfabluebanana" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+        <p class="footer-chain">i study what adaptive systems do to the people they adapt to. currently: columbia qmss · <a href="/projects/reddit-community-network-analysis.html">reciprocity preprint</a> · <a href="/writings/the-unsteered-loop.html">the unsteered loop</a></p>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>

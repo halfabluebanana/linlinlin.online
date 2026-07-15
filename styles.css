@@ -970,3 +970,206 @@ main.project-page .project-info-grid > div:last-child {
         column-count: 1;
     }
 }
+
+/* ============================================================
+   QUESTION-LED PROJECTS PAGE (2026-07 restructure)
+   ============================================================ */
+
+/* Section headers: the question each cluster of work answers */
+.projects-section-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #444444;
+    margin-bottom: 0.25rem;
+}
+
+.projects-section-sub {
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #999999;
+    max-width: 520px;
+    margin-bottom: 0;
+}
+
+/* Galleries sit tighter under their section header than the old lone gallery */
+.projects-section .projects-gallery {
+    margin-top: 1.75rem;
+}
+
+/* One-line caption per tile: what it taught me about the question */
+.projects-gallery-note {
+    display: block;
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.5;
+    color: #888888;
+    margin-top: 0.2rem;
+}
+
+.projects-gallery-item:hover .projects-gallery-note {
+    color: #666666;
+}
+
+/* Current work strip */
+.current-block {
+    border-top: 1px solid rgba(68, 68, 68, 0.2);
+    padding-top: 1.25rem;
+}
+
+.current-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #444444;
+    margin: 0 0 0.4rem 0;
+}
+
+.current-item a {
+    color: #444444;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.current-item a:hover {
+    color: #666666;
+}
+
+/* Footer identity chain (site-wide) */
+.footer-chain {
+    font-size: 12px !important;
+    color: #999999 !important;
+    margin-top: 0.5rem;
+}
+
+.footer-chain a {
+    color: #999999;
+}
+
+/* Adaptive-page disclosure (projects page demo) */
+.adapt-disclosure {
+    margin-top: 1.25rem;
+}
+
+.adapt-toggle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: #444444;
+    background: none;
+    border: none;
+    padding: 0;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.adapt-toggle:hover {
+    color: #666666;
+}
+
+.adapt-panel {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+    color: #666666;
+    border-left: 2px solid rgba(68, 68, 68, 0.25);
+    padding-left: 1rem;
+    margin-top: 0.75rem;
+    max-width: 560px;
+}
+
+.adapt-panel .adapt-reset {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #444444;
+    background: none;
+    border: none;
+    padding: 0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.adapt-panel .adapt-reset:hover {
+    color: #666666;
+}
+
+/* Reorder fade */
+.projects-gallery,
+.projects-section {
+    transition: opacity 0.4s ease;
+}
+
+.adapt-fading {
+    opacity: 0.15;
+}
+
+/* Essay page */
+.essay-page {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.essay {
+    max-width: 640px;
+}
+
+.essay-kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #999999;
+    margin-bottom: 1rem;
+}
+
+.essay-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #444444;
+    margin-bottom: 1rem;
+}
+
+.essay-standfirst {
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #888888;
+    margin-bottom: 2.5rem;
+}
+
+.essay p {
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444444;
+    margin-bottom: 1.4rem;
+}
+
+.essay .essay-footer-note {
+    margin-top: 3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+}
+
+@media (max-width: 768px) {
+    .projects-section-title {
+        font-size: 15px;
+    }
+
+    .current-item {
+        font-size: 12px;
+    }
+
+    .essay-title {
+        font-size: 1.5rem;
+    }
+}

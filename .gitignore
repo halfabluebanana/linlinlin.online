@@ -7,3 +7,4 @@ node_modules/
 
 # GitHub blocks files > 100MB — compress or use Git LFS, then remove this line
 projects/sauna-lore/thumbnail_sauna-lore.mov
+drafts/
