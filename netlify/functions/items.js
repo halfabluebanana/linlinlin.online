@@ -20,11 +20,19 @@ const FIELDS = [
 
 function toItem(record) {
   const f = record.fields;
-  const photo = Array.isArray(f["Photo"]) && f["Photo"][0] ? f["Photo"][0].url : null;
+  const rawPhoto = Array.isArray(f["Photo"]) && f["Photo"][0] ? f["Photo"][0] : null;
+  // Prefer generated thumbnails over the original: iPhone uploads land as
+  // .heic, which Airtable's original-file url serves as-is and most browsers
+  // (non-Safari) can't decode inline. Thumbnails are always re-encoded to a
+  // raster format regardless of source type.
+  const thumbs = rawPhoto && rawPhoto.thumbnails;
+  const photo = rawPhoto ? (thumbs && thumbs.large && thumbs.large.url) || rawPhoto.url : null;
+  const photoLarge = rawPhoto ? (thumbs && thumbs.full && thumbs.full.url) || photo : null;
   return {
     id: f["Item ID"] ?? null,
     name: f["Item Name"] ?? null,
     photo,
+    photoLarge,
     description: f["Description"] ?? null,
     category: f["Category"] ?? null,
     price: f["Price"] ?? null,

@@ -30,9 +30,9 @@
       statusEl.remove();
       document.title = (item.name || 'item') + ' | moving out sale';
 
-      if (item.photo) {
+      if (item.photoLarge || item.photo) {
         const img = document.createElement('img');
-        img.src = item.photo;
+        img.src = item.photoLarge || item.photo;
         img.alt = item.name || 'item photo';
         img.className = 'sale-item-photo';
         detailEl.appendChild(img);

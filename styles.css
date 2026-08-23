@@ -1223,6 +1223,38 @@ main.project-page .project-info-grid > div:last-child {
     margin-top: 2rem;
 }
 
+.sale-filters {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.sale-filter-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #666666;
+    background: none;
+    border: 1px solid rgba(68, 68, 68, 0.25);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    cursor: inherit;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.sale-filter-btn:hover {
+    color: #444444;
+    border-color: rgba(68, 68, 68, 0.5);
+}
+
+.sale-filter-btn.is-active {
+    color: #F4f3f2;
+    background-color: #444444;
+    border-color: #444444;
+}
+
 .sale-grid {
     margin-top: 3rem;
     display: grid;
