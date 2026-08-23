@@ -85,7 +85,8 @@
     const meta = document.createElement('span');
     meta.className = 'sale-card-meta';
     const price = money(item.price);
-    meta.textContent = [item.category, price].filter(Boolean).join(' · ');
+    const qty = item.quantity > 1 ? 'x' + item.quantity : null;
+    meta.textContent = [item.category, price, qty].filter(Boolean).join(' · ');
     a.appendChild(meta);
 
     return a;

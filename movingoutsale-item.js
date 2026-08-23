@@ -109,6 +109,7 @@
       row('price', money(item.price));
       row('category', item.gender ? item.category + ' · ' + item.gender : item.category);
       row('condition', item.condition);
+      row('quantity available', item.quantity > 1 ? String(item.quantity) : null);
       row('description', item.description);
     })
     .catch(() => {

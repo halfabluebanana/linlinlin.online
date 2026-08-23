@@ -16,6 +16,7 @@ const FIELDS = [
   "Public URL",
   "Gender",
   "Status",
+  "Quantity",
 ];
 
 function toPhoto(attachment) {
@@ -43,6 +44,7 @@ function toItem(record) {
     publicUrl: f["Public URL"] ?? null,
     gender: f["Gender"] ?? null,
     status: f["Status"] ?? null,
+    quantity: f["Quantity"] ?? null,
   };
 }
 
