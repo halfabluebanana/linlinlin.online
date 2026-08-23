@@ -1,11 +1,10 @@
-// Read-only proxy to the "Public Listing" Airtable view.
+// Read-only proxy to the Items table.
 // Keeps the Airtable PAT server-side and strips it out of the response;
-// explicitly whitelists fields so buyer info can never leak even if the
-// view's hidden-fields config changes.
+// explicitly whitelists fields so buyer info can never leak regardless of
+// which records or views get queried.
 
 const BASE_ID = "appSbGaMkszJYiyPF";
 const TABLE_ID = "tbl4YoocxyXmYPjlS";
-const VIEW_ID = "viwYWCNk9uoTBAsfR"; // Public Listing
 const FIELDS = [
   "Item Name",
   "Photo",
@@ -16,29 +15,34 @@ const FIELDS = [
   "Item ID",
   "Public URL",
   "Gender",
+  "Status",
 ];
 
-function toItem(record) {
-  const f = record.fields;
-  const rawPhoto = Array.isArray(f["Photo"]) && f["Photo"][0] ? f["Photo"][0] : null;
+function toPhoto(attachment) {
   // Prefer generated thumbnails over the original: iPhone uploads land as
   // .heic, which Airtable's original-file url serves as-is and most browsers
   // (non-Safari) can't decode inline. Thumbnails are always re-encoded to a
   // raster format regardless of source type.
-  const thumbs = rawPhoto && rawPhoto.thumbnails;
-  const photo = rawPhoto ? (thumbs && thumbs.large && thumbs.large.url) || rawPhoto.url : null;
-  const photoLarge = rawPhoto ? (thumbs && thumbs.full && thumbs.full.url) || photo : null;
+  const thumbs = attachment.thumbnails;
+  const thumb = (thumbs && thumbs.large && thumbs.large.url) || attachment.url;
+  const full = (thumbs && thumbs.full && thumbs.full.url) || thumb;
+  return { thumb, full };
+}
+
+function toItem(record) {
+  const f = record.fields;
+  const photos = Array.isArray(f["Photo"]) ? f["Photo"].map(toPhoto) : [];
   return {
     id: f["Item ID"] ?? null,
     name: f["Item Name"] ?? null,
-    photo,
-    photoLarge,
+    photos,
     description: f["Description"] ?? null,
     category: f["Category"] ?? null,
     price: f["Price"] ?? null,
     condition: f["Condition"] ?? null,
     publicUrl: f["Public URL"] ?? null,
     gender: f["Gender"] ?? null,
+    status: f["Status"] ?? null,
   };
 }
 
@@ -51,7 +55,6 @@ exports.handler = async (event) => {
   const id = event.queryStringParameters && event.queryStringParameters.id;
 
   const params = new URLSearchParams();
-  params.set("view", VIEW_ID);
   FIELDS.forEach((f) => params.append("fields[]", f));
   if (id) {
     const numericId = Number(id);

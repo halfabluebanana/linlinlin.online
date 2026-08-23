@@ -1216,6 +1216,18 @@ main.project-page .project-info-grid > div:last-child {
     max-width: 480px;
 }
 
+.sale-intro a {
+    font: inherit;
+    color: #444444;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.sale-intro a:hover {
+    color: #666666;
+}
+
 .sale-status {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 14px;
@@ -1269,7 +1281,12 @@ main.project-page .project-info-grid > div:last-child {
     color: inherit;
 }
 
+.sale-card[hidden] {
+    display: none;
+}
+
 .sale-card-thumb {
+    position: relative;
     aspect-ratio: 1;
     background-color: #e8e6e3;
     overflow: hidden;
@@ -1285,6 +1302,112 @@ main.project-page .project-info-grid > div:last-child {
 
 .sale-card:hover .sale-card-thumb img {
     transform: scale(1.03);
+}
+
+.sale-card-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background-color: rgba(34, 34, 34, 0.65);
+    border: none;
+    border-radius: 50%;
+    width: 1.8rem;
+    height: 1.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.1rem;
+    color: #F4f3f2;
+    line-height: 1;
+    cursor: inherit;
+    opacity: 0;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.sale-card-thumb:hover .sale-card-arrow {
+    opacity: 1;
+}
+
+/* Touch devices have no :hover — arrows must be visible by default or
+   they're undiscoverable, even though they're already tappable. */
+@media (hover: none) {
+    .sale-card-arrow {
+        opacity: 1;
+        width: 2.2rem;
+        height: 2.2rem;
+        font-size: 1.3rem;
+    }
+}
+
+.sale-card-arrow:hover {
+    background-color: rgba(34, 34, 34, 0.85);
+}
+
+.sale-card-prev {
+    left: 0.4rem;
+}
+
+.sale-card-next {
+    right: 0.4rem;
+}
+
+.sale-card-dots {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.35rem;
+    z-index: 2;
+}
+
+.sale-card-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: rgba(244, 243, 242, 0.6);
+    box-shadow: 0 0 0 1px rgba(34, 34, 34, 0.3);
+}
+
+.sale-card-dot.is-active {
+    background-color: #F4f3f2;
+    box-shadow: 0 0 0 1px rgba(34, 34, 34, 0.6);
+}
+
+.sale-card-banner {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.6rem;
+    z-index: 2;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #F4f3f2;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+}
+
+.sale-card-banner--available {
+    background-color: rgba(61, 122, 79, 0.9);
+}
+
+.sale-card-banner--reserved {
+    background-color: rgba(180, 132, 40, 0.9);
+}
+
+.sale-card-banner--sold {
+    background-color: rgba(68, 68, 68, 0.85);
+}
+
+.sale-card.is-unavailable .sale-card-thumb img {
+    filter: grayscale(60%);
+    opacity: 0.7;
+}
+
+.sale-card.is-unavailable .sale-card-title,
+.sale-card.is-unavailable .sale-card-meta {
+    color: #999999;
 }
 
 .sale-card-title {
@@ -1314,12 +1437,70 @@ main.project-page .project-info-grid > div:last-child {
     max-width: 480px;
 }
 
+.sale-carousel {
+    position: relative;
+    max-width: 400px;
+    margin-bottom: 1.5rem;
+}
+
 .sale-item-photo {
     width: 100%;
-    max-width: 400px;
+    aspect-ratio: 1;
+    object-fit: cover;
     display: block;
-    margin-bottom: 1.5rem;
     background-color: #e8e6e3;
+}
+
+.sale-carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background-color: rgba(34, 34, 34, 0.65);
+    border: none;
+    border-radius: 50%;
+    width: 2.4rem;
+    height: 2.4rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.4rem;
+    color: #F4f3f2;
+    line-height: 1;
+    cursor: inherit;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.sale-carousel-arrow:hover {
+    background-color: rgba(34, 34, 34, 0.85);
+}
+
+.sale-carousel-prev {
+    left: 0.6rem;
+}
+
+.sale-carousel-next {
+    right: 0.6rem;
+}
+
+.sale-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+}
+
+.sale-carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(68, 68, 68, 0.4);
+    background: none;
+    cursor: inherit;
+    padding: 0;
+}
+
+.sale-carousel-dot.is-active {
+    background-color: #444444;
+    border-color: #444444;
 }
 
 .sale-item-title {
@@ -1328,6 +1509,30 @@ main.project-page .project-info-grid > div:last-child {
     font-weight: 400;
     color: #444444;
     margin-bottom: 1rem;
+}
+
+.sale-item-banner {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #F4f3f2;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+}
+
+.sale-item-banner--available {
+    background-color: rgba(61, 122, 79, 0.9);
+}
+
+.sale-item-banner--reserved {
+    background-color: rgba(180, 132, 40, 0.9);
+}
+
+.sale-item-banner--sold {
+    background-color: rgba(68, 68, 68, 0.85);
 }
 
 .sale-item-row {

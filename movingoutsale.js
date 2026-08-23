@@ -9,6 +9,12 @@
     return price === 0 ? 'free' : '$' + price;
   }
 
+  function statusBanner(status) {
+    if (status === 'Pending Pickup') return { text: 'reserved', tone: 'reserved' };
+    if (status && status !== 'Available') return { text: 'sold', tone: 'sold' };
+    return { text: 'available', tone: 'available' };
+  }
+
   function card(item) {
     const a = document.createElement('a');
     a.href = '/movingoutsale/' + item.id;
@@ -17,13 +23,58 @@
 
     const thumb = document.createElement('div');
     thumb.className = 'sale-card-thumb';
-    if (item.photo) {
+    const photos = item.photos || [];
+    if (photos.length) {
       const img = document.createElement('img');
-      img.src = item.photo;
+      img.src = photos[0].thumb;
       img.alt = item.name || 'item photo';
       img.loading = 'lazy';
       thumb.appendChild(img);
+
+      if (photos.length > 1) {
+        let index = 0;
+        const dots = document.createElement('div');
+        dots.className = 'sale-card-dots';
+        photos.forEach((_, i) => {
+          const dot = document.createElement('span');
+          dot.className = 'sale-card-dot';
+          if (i === 0) dot.classList.add('is-active');
+          dots.appendChild(dot);
+        });
+
+        function show(i) {
+          index = (i + photos.length) % photos.length;
+          img.src = photos[index].thumb;
+          Array.from(dots.children).forEach((dot, dotIndex) => {
+            dot.classList.toggle('is-active', dotIndex === index);
+          });
+        }
+
+        function stepButton(direction, label) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'sale-card-arrow ' + (direction < 0 ? 'sale-card-prev' : 'sale-card-next');
+          btn.setAttribute('aria-label', label);
+          btn.textContent = direction < 0 ? '‹' : '›';
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            show(index + direction);
+          });
+          return btn;
+        }
+
+        thumb.appendChild(stepButton(-1, 'Previous photo'));
+        thumb.appendChild(stepButton(1, 'Next photo'));
+        thumb.appendChild(dots);
+      }
     }
+    const banner = statusBanner(item.status);
+    const badge = document.createElement('span');
+    badge.className = 'sale-card-banner sale-card-banner--' + banner.tone;
+    badge.textContent = banner.text;
+    thumb.appendChild(badge);
+    if (banner.tone !== 'available') a.classList.add('is-unavailable');
     a.appendChild(thumb);
 
     const title = document.createElement('span');
