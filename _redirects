@@ -1,4 +1,7 @@
 # / → projects is handled in netlify.toml (301 + force)
+/movingoutsale  /movingoutsale.html  200
+/movingoutsale/:id  /movingoutsale-item.html  200
+/api/items  /.netlify/functions/items  200
 /projects/relative-compass  /projects/relative-compass/index.html  200
 /projects  /projects.html  200
 /info  /about.html  200

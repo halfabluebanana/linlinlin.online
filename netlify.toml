@@ -3,6 +3,9 @@
 [build]
   publish = "."
 
+[functions]
+  directory = "netlify/functions"
+
 # Force apex / to projects (301 so it always wins over any default document)
 [[redirects]]
   from = "/"

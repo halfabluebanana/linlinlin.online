@@ -1205,3 +1205,111 @@ main.project-page .project-info-grid > div:last-child {
         font-size: 1.5rem;
     }
 }
+
+/* MOVING OUT SALE */
+
+.sale-intro {
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666666;
+    max-width: 480px;
+}
+
+.sale-status {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: #666666;
+    margin-top: 2rem;
+}
+
+.sale-grid {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.sale-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+}
+
+.sale-card-thumb {
+    aspect-ratio: 1;
+    background-color: #e8e6e3;
+    overflow: hidden;
+    margin-bottom: 0.6rem;
+}
+
+.sale-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.sale-card:hover .sale-card-thumb img {
+    transform: scale(1.03);
+}
+
+.sale-card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: #444444;
+}
+
+.sale-card-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #888888;
+    margin-top: 0.2rem;
+}
+
+.sale-back {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+}
+
+.sale-back a {
+    color: #444444;
+}
+
+.sale-item-detail {
+    margin-top: 2rem;
+    max-width: 480px;
+}
+
+.sale-item-photo {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin-bottom: 1.5rem;
+    background-color: #e8e6e3;
+}
+
+.sale-item-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #444444;
+    margin-bottom: 1rem;
+}
+
+.sale-item-row {
+    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    color: #444444;
+    margin-bottom: 0.5rem;
+}
+
+.sale-item-row strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: #888888;
+}
