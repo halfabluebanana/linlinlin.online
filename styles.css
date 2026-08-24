@@ -1204,9 +1204,19 @@ main.project-page .project-info-grid > div:last-child {
     .essay-title {
         font-size: 1.5rem;
     }
+
+    .sale-intro-row {
+        flex-direction: column;
+    }
 }
 
 /* MOVING OUT SALE */
+
+.sale-intro-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
 
 .sale-intro {
     font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -1226,6 +1236,19 @@ main.project-page .project-info-grid > div:last-child {
 
 .sale-intro a:hover {
     color: #666666;
+}
+
+.sale-whatsapp-qr {
+    display: block;
+    width: 140px;
+    flex-shrink: 0;
+    margin-left: 40px;
+}
+
+.sale-whatsapp-qr img {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
 }
 
 .sale-status {
