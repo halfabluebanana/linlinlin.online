@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>do ai agent societies learn to converse? | linlinlin.online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        main.project-page {
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .project-header-img {
+            width: 100%;
+            display: block;
+            margin-bottom: 0;
+        }
+
+        .figure-stack {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .figure-stack img {
+            width: 100%;
+            display: block;
+        }
+
+        @media (max-width: 700px) {
+            .figure-stack {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/projects.html" class="nav-brand">Adeline Setiawan</a>
+        <nav>
+            <a href="/projects.html" class="active">projects</a>
+            <a href="/about.html">about</a>
+            <a href="/writings.html">writings</a>
+        </nav>
+    </header>
+
+    <main class="project-page">
+        <div class="project-content">
+            <img
+                src="/media/img/moltbook/01_overall_trend.png"
+                class="project-header-img"
+                alt="Hourly reply rate across 164 consecutive hours of an AI agent social platform, with fitted trend">
+        </div>
+
+        <div class="project-info-container">
+            <div class="project-info-grid">
+                <div>
+                    <h2 class="project-info-title">Do AI agent societies learn to converse?</h2>
+
+                    <p class="project-finding">
+                        Two different model specifications each produced a statistically significant trend, pointing in opposite directions. Both died under a standard-error correction for autocorrelation. The reply rate is flat — what looked like signal was the series correlating with itself.
+                    </p>
+
+                    <p class="project-info-description">
+                        Li, Li and Zhou argue that AI agent societies do not socialize: agents show strong individual inertia and minimal adaptive response to the partners they interact with. They measured semantic convergence. I tested the same claim structurally, on a quantity involving no text processing whatsoever — does the conversation nest? The outcome variable is simply whether a comment answers another agent's comment or merely answers a post. Only thread structure, no language.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        The data is a public dump from an AI-agent social platform: 290,251 posts and 1,836,711 comments from 39,700 agents across 4,274 communities. Pulling only the metadata columns rather than the text brought 2GB down to 54MB.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        Two things in the data needed handling before any model was worth fitting. First, there is a collection gap — comments are missing for 13 hours on one day, all 24 on the next, and 4 on a third, while posts across the same span are intact and the surrounding hours carry a median of over 10,000 comments each. That is a scraping failure, not quiet traffic, and interpolating across it would have manufactured a trend. The analysis window is therefore 164 consecutive hours with verified complete coverage, and the notebook asserts that completeness rather than assuming it. Second, hourly volume ranges from 122 to 50,391 comments, so an unweighted hourly rate gives a quiet hour the same vote as a busy one. That is why the mean of hourly rates (0.0690) differs from the pooled rate (0.0635), and why the analysis reports weighted least squares alongside plain OLS rather than picking one.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        The result is a negative one, arrived at twice over. A naive quadratic fit came back significant at p = 0.011. Weighted least squares came back significant at p = 0.0004, in the opposite direction. Durbin–Watson sat between 0.436 and 0.530 across every specification — severe positive autocorrelation. Under Newey–West standard errors, every one of those results dissolves: linear p = 0.385, quadratic p = 0.230, weighted p = 0.130. The implied change across the window is −5.28 percentage points with a confidence interval from −12.12 to +1.56, which comfortably contains zero. Hour-of-day dummies lift R² from 0.013 to 0.158 but are jointly insignificant at p = 0.415.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        The obvious objection is that two opposing trends might be cancelling out, so I split by cohort. Agents who joined early reply at 3.5%, later arrivals at 8.0%, and the difference is real (p = 0.0068) — but the interaction between cohort and time is p = 0.733. Nothing changes inside either group. What changes is who is present. The composition moves; the behaviour does not. This corroborates Li, Li and Zhou through a method that shares nothing with theirs.
+                    </p>
+
+                    <div class="figure-stack">
+                        <img src="/media/img/moltbook/03_cohort.png" alt="Reply rate over time split by agent join cohort — levels differ, slopes do not">
+                        <img src="/media/img/moltbook/05_karma.png" alt="Reply rate by karma quartile — non-monotonic, with the highest quartile lowest">
+                        <img src="/media/img/moltbook/02_diurnal.png" alt="Reply rate by hour of day across the analysis window">
+                        <img src="/media/img/moltbook/04_submolts.png" alt="Distribution of comment volume across communities, dominated by a single general community">
+                    </div>
+
+                    <p class="project-info-description" style="margin-top: 2rem;">
+                        The secondary result is the one I did not expect. Reply rate by karma quartile is non-monotonic — 8.0%, 10.8%, 3.6%, 2.5% — and the highest-karma agents reply least, at roughly a quarter of the second quartile's rate. This is cross-sectional, so causality is not identified: broadcasting may earn karma, or high-karma agents may simply be configured differently. Either way, the agents the platform's own score ranks highest are the ones least engaged in anything resembling conversation.
+                    </p>
+                </div>
+                <div>
+                    <p class="project-meta">
+                        Stack: Python · pandas · statsmodels · Parquet · Newey–West HAC · WLS<br><br>
+                        Role: solo — question design · data validation · model specification · diagnostics<br><br>
+                        Columbia University, 2026. Independent dataset choice.
+                    </p>
+                    <p class="project-meta" style="margin-top: 1.25rem;">
+                        <strong>What I'd do next:</strong> 164 hours is a short window for a behavioural claim — the design answers "did this change over a week" and should not be stretched further. The better version waits for a longer collection and tracks fixed agents over time rather than the platform in aggregate, which would separate composition from behaviour by construction instead of by interaction term.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>adeline setiawan © 2026 | <a href="https://github.com/halfabluebanana" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://www.linkedin.com/in/adelinesetiawan/" target="_blank" rel="noopener noreferrer">LinkedIn</a> | <a href="/media/pdf/Adeline_Setiawan_CV_2026_ATS.pdf" target="_blank" rel="noopener noreferrer">CV</a></p>
+        <p class="footer-chain">seeking product analytics &amp; AI evaluation roles from february 2027 · nyc · <a href="/about.html">about</a></p>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>

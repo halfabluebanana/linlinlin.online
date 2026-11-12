@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>unicef global child hazard dashboard | linlinlin.online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        main.project-page {
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .project-header-img {
+            width: 100%;
+            display: block;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/projects.html" class="nav-brand">Adeline Setiawan</a>
+        <nav>
+            <a href="/projects.html" class="active">projects</a>
+            <a href="/about.html">about</a>
+            <a href="/writings.html">writings</a>
+        </nav>
+    </header>
+
+    <main class="project-page">
+        <div class="project-content">
+            <img
+                src="/media/img/gchd/gchd_screenshot.png"
+                class="project-header-img"
+                alt="The Global Child Hazard Dashboard — climate hazard exposure mapped against child population">
+        </div>
+
+        <div class="project-info-container">
+            <div class="project-info-grid">
+                <div>
+                    <h2 class="project-info-title">UNICEF Global Child Hazard Dashboard</h2>
+
+                    <p class="project-finding">
+                        Every district-level case study in a tool built for policymakers was silently drawing the wrong map — the boundary cache held no district rows at all, so each one fell back to its province or country outline without erroring.
+                    </p>
+
+                    <p class="project-info-description">
+                        The dashboard lets policymakers and UNICEF country offices see how many children sit inside a given climate hazard zone, by overlaying hazard layers on population rasters within an administrative boundary. The answer it gives is only as good as the boundary it computes over, which is where the problem was.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        The second administrative level — districts — was missing from the boundary cache entirely. The district selector returned nothing, code lookups failed, and every district-scoped case study quietly fell back to drawing its parent province or country. Nothing threw an error. A user reading a district case study saw a map, and the map was of the wrong area. The upstream boundary API had been retired and was answering 410, but the public blob exports still served all three levels, so I rebuilt the cache from those: 289 country boundaries, 3,578 provinces, and districts from zero to 41,092, covering all 289 countries, with nothing from the old cache lost.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        Worth separating two things that looked like one bug. The exposure figures at country and province level were never wrong. Exposure sums the population raster directly over whichever boundary is selected, so the coarser levels come from pixels rather than from aggregating districts upward. The missing level was a gap in coverage, not in accuracy — and saying that precisely mattered, because the alternative reading would have put every number the tool had ever produced in doubt.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        I also finished the case-study schema migration: 638 records validating against the new version. Eight of them were hand-authored and could not go through the main migration path, which reads every field from an upstream API keyed on a slug those records do not have — so they needed a separate migration rather than a manual edit, on the principle that a hand-fixed record is a record nobody can re-run. Restoring districts then resolved 24 more location names that had previously had nothing to match against.
+                    </p>
+                </div>
+                <div>
+                    <p class="project-meta">
+                        Stack: Python · Flask · SQLite · GeoJSON · population raster analysis · GDAL<br><br>
+                        Role: boundary data pipeline · schema migration · geospatial debugging<br><br>
+                        UNICEF Office of Innovation, 2026. Open-source contribution, team project.
+                    </p>
+                    <a href="https://github.com/unicef/GCHD" target="_blank" rel="noopener noreferrer" class="project-meta-link">view on GitHub →</a>
+                    <p class="project-meta" style="margin-top: 1.25rem;">
+                        <strong>What I'd do next:</strong> add a startup assertion that every administrative level the case studies reference actually exists in the cache. This failure was silent for as long as it was because nothing in the system had an opinion about what a complete cache looks like.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>adeline setiawan © 2026 | <a href="https://github.com/halfabluebanana" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://www.linkedin.com/in/adelinesetiawan/" target="_blank" rel="noopener noreferrer">LinkedIn</a> | <a href="/media/pdf/Adeline_Setiawan_CV_2026_ATS.pdf" target="_blank" rel="noopener noreferrer">CV</a></p>
+        <p class="footer-chain">seeking product analytics &amp; AI evaluation roles from february 2027 · nyc · <a href="/about.html">about</a></p>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>

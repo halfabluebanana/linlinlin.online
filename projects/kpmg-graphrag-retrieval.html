@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>graphrag retrieval over sec filings | linlinlin.online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        main.project-page {
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .project-header-img {
+            width: 100%;
+            display: block;
+            margin-bottom: 0;
+        }
+
+        .figure-stack {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .figure-stack img {
+            width: 100%;
+            display: block;
+        }
+
+        @media (max-width: 700px) {
+            .figure-stack {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/projects.html" class="nav-brand">Adeline Setiawan</a>
+        <nav>
+            <a href="/projects.html" class="active">projects</a>
+            <a href="/about.html">about</a>
+            <a href="/writings.html">writings</a>
+        </nav>
+    </header>
+
+    <main class="project-page">
+        <div class="project-content">
+            <img
+                src="/media/img/kpmg/2-answer-path.png"
+                class="project-header-img"
+                alt="Knowledge graph answer path — the traversal from question to cited fact across entities in an SEC filing">
+        </div>
+
+        <div class="project-info-container">
+            <div class="project-info-grid">
+                <div>
+                    <h2 class="project-info-title">GraphRAG retrieval over SEC filings</h2>
+
+                    <p class="project-finding">
+                        Structured retrieval runs end to end against a real Microsoft FY2025 10-K — and it was blocked for days by two components that were each individually correct. The failure only existed in the composition, which means no amount of reading either side would have found it.
+                    </p>
+
+                    <p class="project-info-description">
+                        Financial question answering over filings has a verification problem rather than a fluency problem. A language model will happily produce a revenue figure; what an auditor needs is the figure plus the filing, the period, the accession number and the exact fact it came from. This system answers questions over SEC filings through a knowledge graph and a structured fact store, and returns evidence carrying provenance rather than prose carrying a number.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        I own the retrieval layer. A question enters a public retrieval interface, passes contract validation, dispatches to a registered backend, and comes back as validated evidence. Against a DuckDB store rebuilt from the real Microsoft FY2025 10-K, a revenue query returns three fiscal years — 72.9bn, 87.5bn, 106.3bn — each row carrying its period, its filing date and a content-addressed fact ID that traces to the source document.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        The blocker is the part worth telling. The query layer matched the backend interface exactly, so registration was a single line with no adapter needed. But the fact table stored period start, period end and period type, and had no filing-date column at all — while filing date was not on the nullable list in the evidence contract. So every row failed validation, including every correct one. Both halves were defensible in isolation. The fix was to add the column rather than relax the contract, and to look the filing date up from EDGAR metadata rather than let anyone type it, since it is not tagged inside the document. Relaxing the contract would have weakened the envelope for every other retrieval arm to patch one.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        Demoing that fix surfaced a second defect immediately: a reporting-period field was a hardcoded date literal, so a single query spanning three fiscal years produced rows whose envelope contradicted their own metadata. It was visible in the very first real output and invisible in every test. That pair of bugs is why I now treat "ran it against real data once" as a different category of evidence from "the tests pass" — and why I keep asking, of every field in a response envelope, whether it came from the data or was typed by a person.
+                    </p>
+
+                    <div class="figure-stack">
+                        <img src="/media/img/kpmg/1-whole-graph.png" alt="The full toy knowledge graph: entities, filings, facts and their relations">
+                        <img src="/media/img/kpmg/3-hop1-ambiguous.png" alt="An ambiguous single-hop traversal where two paths reach different facts">
+                        <img src="/media/img/kpmg/4-restatement.png" alt="A restatement case — the same metric reported twice across filings with different values">
+                        <img src="/media/img/kpmg/2-answer-path.png" alt="The resolved answer path from question to cited fact">
+                    </div>
+
+                    <p class="project-info-description" style="margin-top: 2rem;">
+                        The toy graph above exists to make retrieval failures arguable before they are expensive. It encodes the two cases that break naive approaches: an ambiguous one-hop traversal where two defensible paths reach different facts, and a restatement where the same metric is reported twice across filings with different values. A retriever that cannot say which one it chose, and why, is not usable for audit work regardless of how well it reads.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        <strong>Status, stated precisely.</strong> Structured retrieval works end to end. The graph arm does not — the Cypher retriever is not written, and that is on my card. Extraction feeds the graph store on a separate path that is not yet joined to retrieval, and no entity resolution exists in the query path. The honest sentence is "structured retrieval works end to end," never "the pipeline works."
+                    </p>
+                </div>
+                <div>
+                    <p class="project-meta">
+                        Stack: Python · DuckDB · Neo4j / Cypher · EDGAR API · pytest (112 passing)<br><br>
+                        Role: retrieval layer — contract design · backend dispatch · evidence validation · provenance envelope<br><br>
+                        Columbia University capstone, sponsored by KPMG, 2026. Team of five; extraction, evaluation and abstention are teammates' work.
+                    </p>
+                    <p class="project-meta" style="margin-top: 1.25rem;">
+                        <strong>What I'd do next:</strong> write the Cypher retriever so the graph arm answers at all, join extraction to the query path, and replace the two remaining hardcoded envelope fields — they are correct for exactly one company and wrong the moment a second filing lands.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>adeline setiawan © 2026 | <a href="https://github.com/halfabluebanana" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://www.linkedin.com/in/adelinesetiawan/" target="_blank" rel="noopener noreferrer">LinkedIn</a> | <a href="/media/pdf/Adeline_Setiawan_CV_2026_ATS.pdf" target="_blank" rel="noopener noreferrer">CV</a></p>
+        <p class="footer-chain">seeking product analytics &amp; AI evaluation roles from february 2027 · nyc · <a href="/about.html">about</a></p>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>

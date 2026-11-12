@@ -21,19 +21,81 @@
 
     <main>
         <section class="content">
-            <p class="projects-intro">I study what adaptive systems do to the people they adapt to. Everything below is sorted by the part of that question it touches — not by medium.</p>
-
-            <!-- CURRENT: the live research program -->
-            <section class="current-block" aria-label="Current work">
-                <h2 class="projects-section-title">current</h2>
-                <p class="current-item"><a href="/projects/reddit-community-network-analysis.html">reciprocity decay: bots, humans, and community epistemic structure</a> — preprint in progress, july 2026</p>
-                <p class="current-item">behavioural signatures of synthetic participation — multi-agent forum simulation varying one design parameter at a time, in build</p>
-                <p class="current-item"><a href="/writings/the-unsteered-loop.html">the unsteered loop</a> — the argument behind all of this, in one essay</p>
+            <!-- POSITIONING: who, what, and whether I'm hireable — before anything else -->
+            <section class="positioning" aria-label="Introduction">
+                <h1 class="positioning-name">Adeline Setiawan</h1>
+                <p class="positioning-statement">
+                    Quantitative researcher finishing an MA in Quantitative Methods of the Social Sciences at Columbia, December 2026. I design experiments and build data pipelines to answer one kind of question: how AI systems actually behave, and what they change about the people using them. Before Columbia I was lead experience designer in the behavioural change and experience design team at Kantar Public Singapore, on mixed-methods studies up to n=9,000 for national government clients.
+                </p>
+                <p class="positioning-status">
+                    Available from 20 February 2027 · product analytics, AI evaluation, behavioural research<br>
+                    NYC-based · US work-authorized from February 2027 on F-1 STEM OPT<br>
+                    Currently writing: <a href="/writings/the-unsteered-loop.html">the unsteered loop</a>
+                </p>
+                <div class="positioning-actions">
+                    <a href="#selected-work" class="btn btn-primary">View selected work</a>
+                    <a href="/media/pdf/Adeline_Setiawan_CV_2026_ATS.pdf" target="_blank" rel="noopener noreferrer" class="btn">Download CV</a>
+                    <a href="mailto:adelinesetiawan@gmail.com" class="btn">Email</a>
+                </div>
             </section>
+
+            <!-- TIER 1: the six pieces that carry the job search.
+                 Deliberately NOT a .projects-section — the adaptive demo below
+                 reorders those, and selected work must not get demoted. -->
+            <section class="projects-section-selected" id="selected-work" aria-label="Selected work">
+                <h2 class="projects-section-title">selected work</h2>
+                <p class="projects-section-sub">six pieces, most recent first — each one opens with what it found</p>
+                <div class="projects-gallery projects-gallery--selected">
+                    <a href="/projects/thesis-convergence-attribution.html" class="projects-gallery-item">
+                        <div class="projects-gallery-thumb"><img src="/media/img/thesis/fig1_human_benchmark.png" alt="convergence attribution in agent networks"><div class="projects-gallery-overlay" aria-hidden="true"></div></div>
+                        <span class="projects-gallery-title">convergence attribution in agent networks</span>
+                        <span class="projects-gallery-category">experiment design · ma thesis</span>
+                        <span class="projects-gallery-note">two of my three hypotheses weren't falsifiable — plain averaging already reproduced 81–85% of the effect. found in simulation, before spending anything on runs</span>
+                        <span class="projects-gallery-meta">2026–27 · solo · columbia</span>
+                    </a>
+                    <a href="/projects/kpmg-graphrag-retrieval.html" class="projects-gallery-item">
+                        <div class="projects-gallery-thumb"><img src="/media/img/kpmg/2-answer-path.png" alt="graphrag retrieval over sec filings"><div class="projects-gallery-overlay" aria-hidden="true"></div></div>
+                        <span class="projects-gallery-title">graphrag retrieval over sec filings</span>
+                        <span class="projects-gallery-category">engineering · retrieval</span>
+                        <span class="projects-gallery-note">structured retrieval running end to end against a real 10-K, with provenance on every row — blocked for days by two components that were each individually correct</span>
+                        <span class="projects-gallery-meta">2026 · retrieval layer · columbia capstone, sponsored by kpmg</span>
+                    </a>
+                    <a href="/projects/moltbook-agent-time-series.html" class="projects-gallery-item">
+                        <div class="projects-gallery-thumb"><img src="/media/img/moltbook/01_overall_trend.png" alt="do ai agent societies learn to converse"><div class="projects-gallery-overlay" aria-hidden="true"></div></div>
+                        <span class="projects-gallery-title">do ai agent societies learn to converse?</span>
+                        <span class="projects-gallery-category">time series · 1.8m comments</span>
+                        <span class="projects-gallery-note">two specifications, two significant trends pointing opposite ways, both dead under newey–west. the reply rate is flat — what moved was who was present</span>
+                        <span class="projects-gallery-meta">2026 · solo · columbia</span>
+                    </a>
+                    <a href="/projects/gchd-child-hazard-dashboard.html" class="projects-gallery-item">
+                        <div class="projects-gallery-thumb"><img src="/media/img/gchd/gchd_screenshot.png" alt="unicef global child hazard dashboard"><div class="projects-gallery-overlay" aria-hidden="true"></div></div>
+                        <span class="projects-gallery-title">unicef global child hazard dashboard</span>
+                        <span class="projects-gallery-category">geospatial · policy tool</span>
+                        <span class="projects-gallery-note">every district-level case study was silently drawing the wrong map — 41,092 district boundaries restored, and the accuracy question separated from the coverage one</span>
+                        <span class="projects-gallery-meta">2026 · data pipeline · unicef office of innovation</span>
+                    </a>
+                    <a href="/projects/reddit-community-network-analysis.html" class="projects-gallery-item">
+                        <div class="projects-gallery-thumb"><img src="/media/img/reddit-sna/network_ira.png" alt="reddit community network analysis"><div class="projects-gallery-overlay" aria-hidden="true"></div></div>
+                        <span class="projects-gallery-title">reddit community network analysis</span>
+                        <span class="projects-gallery-category">network analysis</span>
+                        <span class="projects-gallery-note">can network structure alone tell bots from humans? humans reciprocate 42.8% of the time, covert influence accounts 1.4%, and pure bots exactly zero</span>
+                        <span class="projects-gallery-meta">2026 · solo · columbia</span>
+                    </a>
+                    <a href="/projects/hdb.html" class="projects-gallery-item">
+                        <div class="projects-gallery-thumb"><img src="/media/img/hdb/slide-04.png" alt="hdb handysearch"><div class="projects-gallery-overlay" aria-hidden="true"></div></div>
+                        <span class="projects-gallery-title">hdb handysearch</span>
+                        <span class="projects-gallery-category">mixed methods · national scale</span>
+                        <span class="projects-gallery-note">how homeowners changed their repair behaviour when the service changed (qual n=108, quant n=2,250)</span>
+                        <span class="projects-gallery-meta">2021–23 · lead researcher · kantar public singapore</span>
+                    </a>
+                </div>
+            </section>
+
+            <p class="projects-intro">Everything below is earlier work, sorted by the part of one question it touches — what adaptive systems do to the people they adapt to — rather than by medium.</p>
 
             <!-- SECTION 1: sensing, inference, action -->
             <section class="projects-section" data-section="read" aria-label="Systems that read people">
-                <h2 class="projects-section-title">systems that read people</h2>
+                <h2 class="projects-section-title">systems that read people <span class="projects-section-range">2024–2025</span></h2>
                 <p class="projects-section-sub">what a system can sense about you, and what it does back — the half of the loop industry already builds</p>
                 <div class="projects-gallery">
                     <a id="project-cursor-shadows" href="/projects/cursor-shadows.html" class="projects-gallery-item">
@@ -77,15 +139,9 @@
 
             <!-- SECTION 2: human adaptation -->
             <section class="projects-section" data-section="back" aria-label="What people do back">
-                <h2 class="projects-section-title">what people do back</h2>
+                <h2 class="projects-section-title">what people do back <span class="projects-section-range">2019–2023</span></h2>
                 <p class="projects-section-sub">how people change when the systems around them are redesigned — field research at national scale</p>
                 <div class="projects-gallery">
-                    <a id="project-hdb" href="/projects/hdb.html" class="projects-gallery-item">
-                        <div class="projects-gallery-thumb"><img src="/media/img/hdb/slide-04.png" alt="hdb handysearch"><div class="projects-gallery-overlay" aria-hidden="true"></div></div>
-                        <span class="projects-gallery-title">hdb handysearch</span>
-                        <span class="projects-gallery-category">research</span>
-                        <span class="projects-gallery-note">how homeowners changed their repair behaviour when the service changed (qual n=108, quant n=2,250)</span>
-                    </a>
                     <a id="project-imda" href="/projects/imda.html" class="projects-gallery-item">
                         <div class="projects-gallery-thumb"><img src="/media/img/imda/slide-09.png" alt="imda better data driven businesses"><div class="projects-gallery-overlay" aria-hidden="true"></div></div>
                         <span class="projects-gallery-title">imda — better data driven businesses</span>
@@ -109,15 +165,9 @@
 
             <!-- SECTION 3: collective epistemics -->
             <section class="projects-section" data-section="know" aria-label="What communities come to know">
-                <h2 class="projects-section-title">what communities come to know</h2>
+                <h2 class="projects-section-title">what communities come to know <span class="projects-section-range">2014–2026</span></h2>
                 <p class="projects-section-sub">collective belief, memory, and lore — and what enters the room when some participants aren't human</p>
                 <div class="projects-gallery">
-                    <a id="project-reddit-sna" href="/projects/reddit-community-network-analysis.html" class="projects-gallery-item">
-                        <div class="projects-gallery-thumb"><img src="/media/img/reddit-sna/network_ira.png" alt="reddit community network analysis"><div class="projects-gallery-overlay" aria-hidden="true"></div></div>
-                        <span class="projects-gallery-title">reddit community network analysis</span>
-                        <span class="projects-gallery-category">data</span>
-                        <span class="projects-gallery-note">can network structure alone tell bots from humans? reciprocity as an epistemic signature</span>
-                    </a>
                     <a id="project-iran-war-framing" href="/projects/iran-war-framing.html" class="projects-gallery-item">
                         <div class="projects-gallery-thumb"><img src="/media/img/iran-war-framing/Iran-war-media-framing-newplot.png" alt="iran war media framing"><div class="projects-gallery-overlay" aria-hidden="true"></div></div>
                         <span class="projects-gallery-title">iran war media framing</span>
@@ -165,7 +215,7 @@
 
             <!-- SECTION 4: material practice -->
             <section class="projects-section" data-section="hands" aria-label="Hands">
-                <h2 class="projects-section-title">hands</h2>
+                <h2 class="projects-section-title">hands <span class="projects-section-range">2016–2025</span></h2>
                 <p class="projects-section-sub">material and visual practice — the making that keeps the research honest</p>
                 <div class="projects-gallery">
                     <a id="project-woodworking" href="/projects/woodworking.html" class="projects-gallery-item">
@@ -210,8 +260,8 @@
     </main>
 
     <footer>
-        <p>adeline setiawan © 2026 | <a href="https://github.com/halfabluebanana" target="_blank" rel="noopener noreferrer">GitHub</a></p>
-        <p class="footer-chain">i study what adaptive systems do to the people they adapt to. currently: columbia qmss · <a href="/projects/reddit-community-network-analysis.html">reciprocity preprint</a> · <a href="/writings/the-unsteered-loop.html">the unsteered loop</a></p>
+        <p>adeline setiawan © 2026 | <a href="https://github.com/halfabluebanana" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://www.linkedin.com/in/adelinesetiawan/" target="_blank" rel="noopener noreferrer">LinkedIn</a> | <a href="/media/pdf/Adeline_Setiawan_CV_2026_ATS.pdf" target="_blank" rel="noopener noreferrer">CV</a></p>
+        <p class="footer-chain">seeking product analytics &amp; AI evaluation roles from february 2027 · nyc · <a href="/about.html">about</a></p>
         <div id="adapt-disclosure" class="adapt-disclosure" hidden>
             <p><button id="adapt-toggle" class="adapt-toggle" type="button">this page has been adapting to you — see what it inferred ↓</button></p>
             <div id="adapt-panel" class="adapt-panel" hidden></div>

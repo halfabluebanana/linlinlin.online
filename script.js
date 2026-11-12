@@ -123,7 +123,15 @@ function passwordProtect(url) {
     const originalOrder = sections.map(s => s.dataset.section);
     const sectionNames = {};
     sections.forEach(s => {
-        sectionNames[s.dataset.section] = s.querySelector('.projects-section-title').textContent.trim();
+        // The title now carries a year range in a child span. The disclosure
+        // panel wants the section name on its own, so read the title's own
+        // text nodes and leave the range out.
+        const title = s.querySelector('.projects-section-title');
+        sectionNames[s.dataset.section] = Array.from(title.childNodes)
+            .filter(n => n.nodeType === Node.TEXT_NODE)
+            .map(n => n.textContent)
+            .join('')
+            .trim();
     });
 
     let dwell = {};

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>convergence attribution in agent networks | linlinlin.online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=BDO+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        main.project-page {
+            padding: 0;
+            max-width: 100%;
+        }
+
+        .project-header-img {
+            width: 100%;
+            display: block;
+            margin-bottom: 0;
+        }
+
+        .figure-stack {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .figure-stack img {
+            width: 100%;
+            display: block;
+        }
+
+        @media (max-width: 700px) {
+            .figure-stack {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/projects.html" class="nav-brand">Adeline Setiawan</a>
+        <nav>
+            <a href="/projects.html" class="active">projects</a>
+            <a href="/about.html">about</a>
+            <a href="/writings.html">writings</a>
+        </nav>
+    </header>
+
+    <main class="project-page">
+        <div class="project-content">
+            <img
+                src="/media/img/thesis/fig1_human_benchmark.png"
+                class="project-header-img"
+                alt="Human estimate dispersion across six factual quantities, plotted on a common log scale against the expected agent floor">
+        </div>
+
+        <div class="project-info-container">
+            <div class="project-info-grid">
+                <div>
+                    <h2 class="project-info-title">Convergence attribution in agent networks</h2>
+
+                    <p class="project-finding">
+                        I simulated my own experiment before running it, and found that two of my three hypotheses were not falsifiable: plain arithmetic averaging, with no social process at all, already reproduced 81–85% of the effect I was planning to interpret as evidence of social influence.
+                    </p>
+
+                    <p class="project-info-description">
+                        When a group of LLM agents converges on the same answer, how much of that convergence passed between them, and how much is shared disposition they inherited from a common base model? The literature on multi-agent systems reports consensus, coordination and diversity collapse — but every one of those measurements is the sum of a baseline and a transmitted term, and interprets only the second. Agents built from one model with one prompt start correlated. They would produce similar answers having never exchanged a message. No published study in the area runs a disconnected baseline, so nobody has separated the two.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        The design separates them experimentally. Agents answer numeric estimation questions over three rounds of revision under four communication conditions: <em>severed</em> (channel cut — the floor), <em>connected</em> (mutual visibility), <em>sham</em> (real messages replayed from independent severed runs, with nobody responding), and <em>contrarian</em> (messages drawn from the tail of that same severed corpus). A second factor varies network wiring among connected agents. The quantity of interest is the difference between connected and severed — roughly 18,000 agent turns across arms, wirings, rounds, seeds and items.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        Before buying any inference, I built a generative model of the measurement itself: DeGroot updating on log estimates, the weakest possible account of "an agent reads its peers and revises." Pure arithmetic, no social process of any kind, intended as a null to beat. It beat the hypotheses instead. At every dispersion floor I simulated, the sham arm reproduced 81–85% of the connected arm's dispersion reduction, and the contrarian arm compressed dispersion about as much as sham did. "Sham converges nearly as much as connected" turned out to be a prediction that averaging satisfies on its own. Had I run the experiment as written, I would have confirmed it and published the mechanics of taking a mean.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        Two fixes, both adopted. The averaging-implied value is now pre-registered as the null, with each cell's prediction computed from its own round-zero dispersion, so the test is the excess over arithmetic rather than the excess over nothing. And the contrarian test moved off dispersion onto the group mean, which separates the arms decisively where dispersion cannot — at the mid floor, contrarian shifts the group mean by 0.353 log units against −0.002 for sham. The signature of pushing against a prior is a centre that moves, not a spread that narrows.
+                    </p>
+
+                    <div class="figure-stack">
+                        <img src="/media/img/thesis/fig2_outcome_variable.png" alt="The outcome variable under a pure-averaging null across four communication arms">
+                        <img src="/media/img/thesis/fig3_power.png" alt="Power curve: minimum detectable effect against number of seeds, flattening near ten seeds">
+                    </div>
+
+                    <p class="project-info-description" style="margin-top: 2rem;">
+                        The human benchmark above is Lorenz, Rauhut, Schweitzer &amp; Helbing (2011), 144 participants estimating six factual quantities about Switzerland. Fitting a lognormal from the reported geometric and arithmetic means leaves the median as a held-out check on the assumption. Two things fall out. Human dispersion is enormous — σ_log averages 1.95, so a one-standard-deviation estimate is a factor of seven off centre — and all six items are biased low, by a factor of 1.56 on average. This is not a wisdom-of-crowds setting; the crowd is wrong in a consistent direction.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        That first number is also the project's main vulnerability, and I would rather state it than bury it. Agents at fixed temperature from a single model will disperse far less than humans do. If the severed floor sits near zero there is no headroom, nothing to detect, and the design fails for a measurement reason rather than a substantive one. Measuring where that floor actually lands is the next step and the gate on everything networked.
+                    </p>
+
+                    <p class="project-info-description" style="margin-top: 1rem;">
+                        <strong>Status.</strong> Design, pre-analysis and simulation complete. No agent has been run yet — Stage 1 needs API access and is the prerequisite for every networked condition. A near-zero transmitted component would be the strongest available result, not a failure: it would say that apparent collective behaviour in these systems is model monoculture.
+                    </p>
+                </div>
+                <div>
+                    <p class="project-meta">
+                        Stack: Python · NumPy · pandas · statsmodels · matplotlib · structured LLM outputs<br><br>
+                        Role: solo — research design · estimand choice · simulation · power analysis · pre-registration<br><br>
+                        MA thesis, Columbia University, 2026–27. Adviser: Greg Eirich.
+                    </p>
+                    <p class="project-meta" style="margin-top: 1.25rem;">
+                        <strong>What I'd do next:</strong> run the severed arm to measure the real dispersion floor, screen items on realised dispersion rather than on whether the model knows the answer, redraw the human-versus-agent comparison with the measured floor on it, then commit the pre-registration before anything networked runs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>adeline setiawan © 2026 | <a href="https://github.com/halfabluebanana" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://www.linkedin.com/in/adelinesetiawan/" target="_blank" rel="noopener noreferrer">LinkedIn</a> | <a href="/media/pdf/Adeline_Setiawan_CV_2026_ATS.pdf" target="_blank" rel="noopener noreferrer">CV</a></p>
+        <p class="footer-chain">seeking product analytics &amp; AI evaluation roles from february 2027 · nyc · <a href="/about.html">about</a></p>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
