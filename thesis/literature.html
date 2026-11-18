@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Literature — Convergence Attribution</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+<nav class="pages">
+  <a href="index.html">Simulation &amp; figures</a>
+  <a href="literature.html" class="on">Literature</a>
+  <a href="definitions.html">Definitions</a>
+  <a href="/projects/thesis-convergence-attribution.html">Written version</a>
+  <a href="https://github.com/halfabluebanana/thesis-convergence">Code</a>
+</nav>
+
+<p class="eyebrow">QMSS master's thesis · literature</p>
+<h1>Four literatures, and the gap between them</h1>
+<p class="sub">What is established, what is contested, and what is left.</p>
+
+<div class="warnbar">
+  The gap has narrowed twice during this review and is stated here at its current,
+  defensible width. An earlier version of this project claimed no published study runs a
+  disconnected baseline. That is no longer true, and the claim has been corrected rather
+  than defended.
+</div>
+
+<!-- ---------------------------------------------- 1 -->
+<section style="border-top:0;padding-top:0;margin-top:34px">
+  <h2>1 · Identification</h2>
+  <p class="lede">Why peer effects cannot be recovered from observational network data,
+    and why that stops being true in an agent system.</p>
+
+  <div class="strand">
+    <div class="ref"><div class="cite">Manski (1993), <em>Review of Economic Studies</em> 60:3</div>
+      <div class="why">The reflection problem. Observed similarity within a group bundles
+        endogenous effects (you respond to peers' behaviour), contextual effects (you
+        respond to their characteristics) and correlated effects (you share traits or an
+        environment). Not separately identified. The thesis is this problem with the
+        correlated term made directly observable: the base model is the shared trait, and
+        severing the channel measures it.</div></div>
+
+    <div class="ref"><div class="cite">Shalizi &amp; Thomas (2011), <em>Sociological Methods &amp; Research</em></div>
+      <div class="why">Homophily and contagion are <em>generically</em> confounded — an
+        impossibility result, not a data limitation. Latent traits drive both tie
+        formation and outcome, so diffusion estimates are unidentified without strong
+        assumptions.</div></div>
+
+    <div class="ref"><div class="cite">Aral, Muchnik &amp; Sundararajan (2009), <em>PNAS</em> 106:51</div>
+      <div class="why">What separating the two actually costs in real network data: a
+        large matched-sample apparatus. The contrast that shows why an experimental
+        version is worth building.</div></div>
+
+    <div class="ref"><div class="cite">Cohen-Cole &amp; Fletcher (2008), <em>BMJ</em> 337</div>
+      <div class="why">The cautionary case — the same methods find "contagion" in acne,
+        height and headaches. Cite when arguing why a measured baseline matters.</div></div>
+
+    <div class="ref"><div class="cite">Kleinberg &amp; Raghavan (2021), <em>PNAS</em> 118:22</div>
+      <div class="why">Algorithmic monoculture. The substantive reading of the
+        baseline-homogeneity term: correlated outcomes from a shared model. If most
+        apparent collective behaviour is disposition rather than interaction, that is a
+        monoculture finding with direct consequences for systems deploying many instances
+        of one model.</div></div>
+  </div>
+</section>
+
+<!-- ---------------------------------------------- 2 -->
+<section>
+  <h2>2 · Agent systems as a setting</h2>
+  <p class="lede">Why the confound is escapable here and nowhere else.</p>
+  <div class="strand">
+    <div class="ref"><div class="cite">Chang et al. (ICWSM 2025) · Papachristou &amp; Yuan (<em>PNAS Nexus</em> 2025)</div>
+      <div class="why">Both ask whether LLM agent networks reproduce human network
+        structure. The design lever they establish is the one this thesis uses: wiring is
+        assignable. Set which agent can talk to whom, and they remain unconnected unless
+        wired.</div></div>
+    <p class="note" style="margin-top:18px">
+      The move: in human data, ties and traits co-vary and cannot be pulled apart. In an
+      agent population the model is held fixed and the channel is a switch, so what is
+      unidentified observationally becomes an experimental contrast.
+    </p>
+  </div>
+</section>
+
+<!-- ---------------------------------------------- 3 -->
+<section>
+  <h2>3 · The nearest prior <span class="pill warn">this is the contested one</span></h2>
+  <p class="lede">Where the gap actually sits, after correction.</p>
+
+  <div class="strand">
+    <div class="ref"><div class="cite">Kong, Lai, Piao &amp; Evans (2026), arXiv:2605.17193</div>
+      <div class="why">Multi-LLM systems exhibit robust semantic collapse: systematic
+        convergence in semantic representation despite apparent lexical variation, across
+        10 models and 200–1,000 rounds, with thirteen interventions failing to restore
+        diversity. Critically, their population-scaling condition includes <b>N = 1</b> —
+        a single agent with peers removed — and the same trajectory shape appears, which
+        they read as evidence that multi-agent interaction "may not be a necessary
+        condition" for the stabilisation.
+        <br><br>
+        <b>That is this thesis's headline finding, already observed.</b> What it is not:
+        an estimand. It appears as a side-result of an intervention sweep, with no
+        decomposition, no interval on a difference, and no yoked control. Their N = 1 also
+        changed the system prompt to remove peer references, confounding the prompt with
+        the channel — the severed arm here holds the prompt byte-identical so the
+        difference is attributable.
+        <br><br>
+        It also runs <em>against</em> H4. They find semantic convergence underneath
+        lexical variety; H4 predicts lexical convergence ahead of substantive agreement.
+        The measures differ — theirs is cumulative vocabulary over time, H4's is
+        cross-agent dispersion at a round — but the clash has to be addressed directly
+        rather than cited in passing.</div></div>
+
+    <div class="ref"><div class="cite">Chen et al., Findings of ACL (2026)</div>
+      <div class="why">Diversity collapse in multi-agent LLM systems. An appendix ablation
+        attributes collapse to interaction topology rather than identity labels, and
+        alignment is described as a global semantic regulariser producing a floor that
+        structural interventions do not fully breach — that floor is the
+        baseline-homogeneity term, observed but not measured as such. Their Nominal Group
+        Technique condition preserves agent independence, but as a <em>mitigation</em> for
+        collapse, not a baseline for attribution.</div></div>
+
+    <div class="ref"><div class="cite">Zhou, Wang &amp; Yang, NeurIPS (2025) — GUARDIAN</div>
+      <div class="why">Models collaboration as a discrete-time temporal attributed graph
+        and detects anomalous nodes and edges. Baselines are no-defence systems (LLM
+        Debate, DyLAN) and hallucination detectors — no disconnected condition anywhere.
+        Propagation is assumed, which is the gap. Also a methods comparator for temporal
+        graph statistics on agent logs.</div></div>
+
+    <div class="ref"><div class="cite">Li, Li &amp; Zhou (2026), arXiv:2602.14299</div>
+      <div class="why">Argues agent societies do not socialise — strong individual inertia
+        and minimal adaptive response to interaction partners — measured semantically. The
+        Moltbook analysis in this project corroborates it structurally, by a method
+        sharing nothing with theirs: 93.6% of 1.84 million comments never answer another
+        agent.</div></div>
+
+    <p class="note" style="margin-top:20px">
+      <b>The gap, stated narrowly.</b> A disconnected condition has been observed, but
+      never used with a yoked control to decompose convergence into a transmitted and a
+      baseline term. What remains unoccupied is the decomposition and the sham/contrarian
+      arms that separate echo from influence — not the condition itself.
+    </p>
+  </div>
+</section>
+
+<!-- ---------------------------------------------- 4 -->
+<section>
+  <h2>4 · The human version already exists</h2>
+  <p class="lede">What makes this legible as social science rather than an evaluation
+    exercise.</p>
+
+  <div class="strand">
+    <div class="ref"><div class="cite">Lorenz, Rauhut, Schweitzer &amp; Helbing (2011), <em>PNAS</em> 108:22</div>
+      <div class="why">144 participants estimating six factual quantities under no,
+        aggregated or full social information. Social influence sharply narrowed the range
+        of estimates without improving accuracy, while raising confidence — convergence
+        carrying no information. Supplies the item set, the human dispersion benchmark
+        (σ_log ≈ 1.95) and H4 in human form.</div></div>
+
+    <div class="ref"><div class="cite">Becker, Brackbill &amp; Centola (2017), <em>PNAS</em> 114:26</div>
+      <div class="why">Varied network structure in the same paradigm: decentralised
+        networks improved group estimates where centralised ones did not. H5 already
+        demonstrated on people, and the source of the three-round count.</div></div>
+
+    <div class="ref"><div class="cite">Moussaïd et al. (2013) · Almaatouq et al. (2020)</div>
+      <div class="why">A third item set, and the treatment of structure as endogenous —
+        the limitations citation, since this design imposes topology rather than letting
+        it form.</div></div>
+
+    <div class="ref"><div class="cite">Centola &amp; Macy (2007) · Watts &amp; Strogatz (1998)</div>
+      <div class="why">Simple versus complex contagion, and the density-matched,
+        clustering-varied wiring contrast that operationalises it. The prediction H5 rests
+        on: the wiring that spreads a mistake fastest is worst at correcting it.</div></div>
+  </div>
+</section>
+
+<!-- ---------------------------------------------- 5 -->
+<section>
+  <h2>5 · The motivating case</h2>
+  <div class="strand">
+    <div class="ref"><div class="cite">OpenAI–Hugging Face incident (May–July 2026)</div>
+      <div class="why">Roughly 1,200 agents exchanged more than 70,000 messages through a
+        channel improvised out of Artifactory; around 700 took part in the attack. OpenAI's
+        account is that the models had learned collaborative heuristics in training — the
+        disposition explanation. METR and Redwood had six supervised days covering 26 June
+        to 13 July, so the May-onward message-board period was never independently
+        examined. Asymmetric Security, across six months and 55 organisations, concluded
+        it could not settle the question without transcripts OpenAI controls.
+        <br><br>
+        A thousand instances of one model behaving alike, and nobody can say how much was
+        transmitted. <b>The thesis does not study the incident.</b> It builds the
+        measurement the investigators did not have. One uncontrolled case under
+        deliberately reduced safeguards belongs in the introduction as motivation, never
+        as evidence.</div></div>
+  </div>
+</section>
+
+<!-- ---------------------------------------------- methods -->
+<section>
+  <h2>Methods citations</h2>
+  <p class="lede">The ones each analytic choice rests on, rather than related work.</p>
+  <div class="strand">
+    <div class="ref"><div class="cite">DeGroot (1974)</div><div class="why">Averaging as the weakest possible account of revision. The null to beat.</div></div>
+    <div class="ref"><div class="cite">Crutchfield (1955)</div><div class="why">The booth apparatus — the sham arm done to people. Church's 1964 critique is the objection to answer.</div></div>
+    <div class="ref"><div class="cite">Lakens (2017)</div><div class="why">Equivalence testing. Load-bearing: a near-zero transmitted component cannot be claimed from a failed rejection.</div></div>
+    <div class="ref"><div class="cite">Newey &amp; West (1987)</div><div class="why">Autocorrelation-robust standard errors, used in the Moltbook analysis.</div></div>
+    <div class="ref"><div class="cite">Benjamini &amp; Hochberg (1995)</div><div class="why">False discovery rate across the convergence-measure family.</div></div>
+    <div class="ref"><div class="cite">Grimm et al. (2006, updated 2010)</div><div class="why">ODD protocol for documenting the simulator.</div></div>
+    <div class="ref"><div class="cite">Schaeffer, Miranda &amp; Koyejo (2023)</div><div class="why">Emergent abilities as a measurement artefact — guards against claiming a threshold effect that is an artefact of a discontinuous metric.</div></div>
+  </div>
+</section>
+
+<p class="note" style="margin-top:60px;border-top:1px solid var(--stroke);padding-top:20px">
+  Nothing on these pages is a result. No agent has been run.
+</p>
+
+</div>
+</body>
+</html>

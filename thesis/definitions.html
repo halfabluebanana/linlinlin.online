@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Definitions — Convergence Attribution</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+<nav class="pages">
+  <a href="index.html">Simulation &amp; figures</a>
+  <a href="literature.html">Literature</a>
+  <a href="definitions.html" class="on">Definitions</a>
+  <a href="/projects/thesis-convergence-attribution.html">Written version</a>
+  <a href="https://github.com/halfabluebanana/thesis-convergence">Code</a>
+</nav>
+
+<p class="eyebrow">QMSS master's thesis · reference</p>
+<h1>Definitions</h1>
+<p class="sub">Every term the design relies on, in plain English.</p>
+
+<!-- ------------------------------------------------ the design -->
+<section style="border-top:0;padding-top:0;margin-top:34px">
+  <h2>The design</h2>
+  <p class="lede">What the experiment is made of.</p>
+  <dl class="defs">
+
+    <div><dt>Estimand</dt><dd>
+      The quantity you want to know, written down as a specific number before you run
+      anything. Distinct from the <em>estimate</em> (the number you get) and the
+      <em>estimator</em> (the recipe for computing it). Naming it in advance is what
+      stops you fishing.
+      <div class="who">Here: <b>connected − severed</b>, the difference in convergence
+      between agents who can see each other and agents who cannot.</div>
+    </dd></div>
+
+    <div><dt>Convergence<span class="sym">C = σ(round 0) − σ(round 3)</span></dt><dd>
+      How much the spread of answers shrank over the three rounds of revision. Measured
+      as a reduction in dispersion, so it has a defined value at every round and gives a
+      trajectory rather than a single endpoint.
+    </dd></div>
+
+    <div><dt>Baseline homogeneity</dt><dd>
+      The agreement that is there before anyone speaks. Twenty-four copies of one model,
+      given one prompt, produce similar answers having never exchanged a message. This is
+      the term the literature measures and attributes to interaction.
+    </dd></div>
+
+    <div><dt>Transmitted convergence</dt><dd>
+      The agreement that interaction actually added. Observed convergence is the sum of
+      the two, and no published study separates them.
+    </dd></div>
+
+    <div><dt>Severed arm</dt><dd>
+      Agents cannot see each other at all. They still revise three times, alone. This
+      measures the floor — how much they converge purely from being the same model with
+      the same prompt. The prompt is held byte-identical to the connected arm so that only
+      the channel differs.
+    </dd></div>
+
+    <div><dt>Connected arm</dt><dd>
+      Agents see the peers they are wired to. Floor plus whatever talking adds.
+    </dd></div>
+
+    <div><dt>Sham arm</dt><dd>
+      Agents are shown real model-written messages harvested from <em>independent severed
+      runs</em>. The text is genuine; nobody is responding to them. They get the experience
+      of being talked to with no conversation happening.
+      <div class="who">From sham surgery — make the incision, do nothing else. The
+      social-science ancestor is Crutchfield's 1955 booth experiment, where participants
+      believed they were seeing others' answers that the experimenter had invented.</div>
+    </dd></div>
+
+    <div><dt>Contrarian arm</dt><dd>
+      The same mechanism as sham, but messages are drawn from the unusual tail of the
+      severed corpus — positions that cut against what the model normally says. The
+      directional test: can influence push against a prior, or only amplify it?
+    </dd></div>
+
+    <div><dt>Yoked control</dt><dd>
+      A control that receives exactly the same inputs as the treated subject — same
+      content, same order — with the causal link cut. Any difference is about the link,
+      not the stimulus.
+      <div class="who">From animal learning, where pairs were yoked so one animal
+      controlled a shock and the other received identical shocks it could not control.
+      Harvesting sham and contrarian from the same corpus makes them style-matched by
+      construction: the only difference is where in the distribution the message sits.</div>
+    </dd></div>
+
+    <div><dt>Echo test</dt><dd>
+      The sham comparison. If agents fed messages nobody is responding to converge nearly
+      as much as agents in real conversation, then most of what the field calls influence
+      is a model hearing its own distribution returned to it.
+    </dd></div>
+
+    <div><dt>Sham ratio</dt><dd>
+      Sham's convergence as a percentage of connected's. 85% means the fake conversation
+      did 85% of the work of the real one. Under pure averaging it runs 62–95% depending
+      on assumptions — which is why the original H2 was not a falsifiable test.
+    </dd></div>
+
+    <div><dt>Wiring</dt><dd>
+      Among connected agents, who can see whom. Four levels: severed, sparse-random,
+      clustered, dense. The contrast that matters is sparse-random against clustered at
+      <em>matched density</em> — same number of connections, different redundancy.
+    </dd></div>
+
+    <div><dt>Log signature</dt><dd>
+      An observable pattern in the interaction transcript that reveals which process
+      produced it, without needing to know the arm. The experiment can decompose
+      convergence only because the channel is controlled; deployed systems leave only a
+      transcript. Four candidates: adoption-curve shape, lead–lag consistency,
+      peer-referencing rate, independence ratio.
+    </dd></div>
+
+  </dl>
+</section>
+
+<!-- ------------------------------------------------ parameters -->
+<section>
+  <h2>Parameters</h2>
+  <p class="lede">
+    Three of these are things the agents do and you can only measure. One is a decision
+    you make. That distinction is what makes the sensitivity analysis actionable.
+  </p>
+  <dl class="defs">
+
+    <div><dt>Dispersion floor<span class="sym">σ₀</span></dt><dd>
+      How spread out the answers are before anyone sees anyone, measured on logs. Humans
+      in Lorenz et al. sat at about 1.95; agents at a fixed temperature will be far
+      tighter. Called the floor because it is the convergence you get for free. If it is
+      near zero there is nothing left for interaction to explain, and the design fails for
+      a measurement reason rather than a substantive one.
+      <div class="who">Set by: the agents. Nudged by item choice and temperature, then
+      measured.</div>
+    </dd></div>
+
+    <div><dt>Updating weight<span class="sym">w</span></dt><dd>
+      How far an agent moves toward what it was shown. w = 0 means it ignores peers
+      entirely; w = 1 means it abandons its own answer. A property of how the model
+      behaves.
+      <div class="who">Set by: the agents. Only observable once they can see each other,
+      so estimating it needs a small connected pilot.</div>
+    </dd></div>
+
+    <div><dt>Decoding noise<span class="sym">ε</span></dt><dd>
+      Ask the same agent the same question twice and the answer differs, because
+      generation is stochastic. Driven largely by temperature.
+      <div class="who">Set by: the agents, via temperature.</div>
+    </dd></div>
+
+    <div><dt>Messages shown<span class="sym">K</span></dt><dd>
+      How many harvested messages each agent is fed in the sham and contrarian arms. The
+      feed is the mean of K draws, so its variance is σ₀²/K — averaging more messages
+      makes the target tighter and squeezes agents together for reasons unrelated to
+      influence. At K = 1 the sham ratio falls to 15%; at K = 8 it is 79%.
+      <div class="who">Set by: <b>you</b>. A design choice, which is why it gets
+      pre-registered rather than left at its default.</div>
+    </dd></div>
+
+    <div><dt>Group size and rounds<span class="sym">g = 24, R = 3</span></dt><dd>
+      g = 24 keeps the clustered-versus-random clustering gap wide; at g = 12 the contrast
+      collapses. R = 3 matches Becker et al.'s round count so the human benchmark stays
+      comparable — but the published multi-agent work runs 200 to 1,000 rounds, so three
+      rounds measures the opening of the trajectory, not where it settles.
+    </dd></div>
+
+  </dl>
+</section>
+
+<!-- ------------------------------------------------ statistics -->
+<section>
+  <h2>Statistics and method</h2>
+  <dl class="defs">
+
+    <div><dt>σ<sub>log</sub></dt><dd>
+      The standard deviation of log estimates across agents, computed per round. Logs
+      because estimates of real quantities span orders of magnitude and being 10× too high
+      should count the same as 10× too low. On raw estimates the sample mean is not a
+      measure of the crowd, it is a measure of its most extreme member — on one item the
+      arithmetic mean sits 22× above the geometric mean.
+    </dd></div>
+
+    <div><dt>DeGroot updating</dt><dd>
+      Each round, replace your opinion with a weighted average of the opinions you can
+      see, including your own. No persuasion, no reading, just arithmetic. The standard
+      weakest-possible model of social learning (DeGroot, 1974).
+      <div class="who">Used here as a <b>null to beat, not a prediction</b>. If a
+      hypothesis is satisfied by a system that does nothing but average, the hypothesis
+      was not testing a social process.</div>
+    </dd></div>
+
+    <div><dt>A null to beat</dt><dd>
+      A prediction is something you hope to confirm; a null is something you hope to
+      exceed. Three are in play: the shuffled-condition permutation null, the
+      averaging-implied null from DeGroot updating, and the recursive self-conditioning
+      floor the severed arm measures. They fail differently — one asks whether the labels
+      matter, one whether arithmetic explains it, one whether a peer was needed at all.
+    </dd></div>
+
+    <div><dt>Equivalence testing<span class="sym">TOST</span></dt><dd>
+      A non-significant result does not mean no effect; it is also what low power looks
+      like. Two one-sided tests let you pre-specify the smallest effect you would care
+      about and show the true effect is reliably smaller than that bound — positively
+      demonstrating negligibility rather than failing to find something.
+      <div class="who">Lakens (2017). Load-bearing here: "the transmitted component is
+      near zero" is the headline claim and cannot be made without it.</div>
+    </dd></div>
+
+    <div><dt>Autocorrelation-robust errors</dt><dd>
+      Ordinary regression assumes independent observations. In a time series they are not
+      — hour 50 resembles hour 49 — so standard errors come out too small and noise looks
+      like signal. Newey–West recomputes them allowing nearby observations to correlate.
+      <div class="who">Newey &amp; West (1987). In the Moltbook analysis two
+      specifications looked significant and both died under it.</div>
+    </dd></div>
+
+    <div><dt>False discovery rate</dt><dd>
+      Run twenty tests at p &lt; 0.05 and expect one false positive by chance. Benjamini–
+      Hochberg controls the share of your significant results that are false, rather than
+      the chance of any false positive at all — less brutal than Bonferroni. One
+      pre-registered confirmatory measure, three exploratory.
+      <div class="who">Benjamini &amp; Hochberg (1995).</div>
+    </dd></div>
+
+    <div><dt>ODD protocol</dt><dd>
+      Overview, Design concepts, Details — a fixed documentation structure for
+      agent-based models, so two simulations can be compared on substance rather than
+      write-up. Covers entities, state variables, scheduling, stochasticity,
+      initialisation and submodels.
+      <div class="who">Grimm et al. (2006), updated 2010.</div>
+    </dd></div>
+
+    <div><dt>Simple vs complex contagion</dt><dd>
+      Simple contagion needs one exposure and travels on sparse, far-reaching ties.
+      Complex contagion needs several independent exposures and travels on clustered,
+      redundant ones. The prediction: a false claim spreads as simple contagion, while
+      revising a claim an agent has already committed to requires reinforcement and
+      behaves as complex contagion — so the same structural property has opposite signs
+      for error and repair.
+      <div class="who">Centola &amp; Macy (2007).</div>
+    </dd></div>
+
+    <div><dt>The reflection problem</dt><dd>
+      Observed similarity within a group confounds three things: your behaviour responding
+      to peers' behaviour, your behaviour responding to peers' characteristics, and you
+      and your peers behaving alike because you share traits or an environment. In
+      observational data these are not separately identified.
+      <div class="who">Manski (1993). Shalizi &amp; Thomas (2011) prove the homophily–
+      contagion version is <em>generically</em> confounded — a structural result, not a
+      data problem. In agent systems ties and traits are independently assignable, which
+      is what makes the confound a toggle.</div>
+    </dd></div>
+
+  </dl>
+</section>
+
+<p class="note" style="margin-top:60px;border-top:1px solid var(--stroke);padding-top:20px">
+  Nothing on these pages is a result. No agent has been run.
+</p>
+
+</div>
+</body>
+</html>
