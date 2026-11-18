@@ -63,11 +63,11 @@
                     <h2 class="project-info-title">Convergence attribution in agent networks</h2>
 
                     <p class="project-finding">
-                        I simulated my own experiment before running it, and found that two of my three hypotheses were not falsifiable: plain arithmetic averaging, with no social process at all, already reproduced 81–85% of the effect I was planning to interpret as evidence of social influence.
+                        I simulated my own experiment before running it, and found that two of my three hypotheses were not falsifiable: plain arithmetic averaging, with no social process at all, already reproduced most of the effect I was planning to interpret as evidence of social influence — 62–95% of it, depending on assumptions I had not measured.
                     </p>
 
                     <p class="project-info-description">
-                        When a group of LLM agents converges on the same answer, how much of that convergence passed between them, and how much is shared disposition they inherited from a common base model? The literature on multi-agent systems reports consensus, coordination and diversity collapse — but every one of those measurements is the sum of a baseline and a transmitted term, and interprets only the second. Agents built from one model with one prompt start correlated. They would produce similar answers having never exchanged a message. No published study in the area runs a disconnected baseline, so nobody has separated the two.
+                        When a group of LLM agents converges on the same answer, how much of that convergence passed between them, and how much is shared disposition they inherited from a common base model? The literature on multi-agent systems reports consensus, coordination and diversity collapse — but every one of those measurements is the sum of a baseline and a transmitted term, and interprets only the second. Agents built from one model with one prompt start correlated. They would produce similar answers having never exchanged a message. A disconnected condition has been observed — Kong, Lai, Piao &amp; Evans (2026) report the same convergence under single-agent recursive self-conditioning, with no exchange between agents at all — but as a side-result of an intervention sweep, never as a measurement baseline with a yoked control. Nobody has separated the two.
                     </p>
 
                     <p class="project-info-description" style="margin-top: 1rem;">
@@ -75,7 +75,7 @@
                     </p>
 
                     <p class="project-info-description" style="margin-top: 1rem;">
-                        Before buying any inference, I built a generative model of the measurement itself: DeGroot updating on log estimates, the weakest possible account of "an agent reads its peers and revises." Pure arithmetic, no social process of any kind, intended as a null to beat. It beat the hypotheses instead. At every dispersion floor I simulated, the sham arm reproduced 81–85% of the connected arm's dispersion reduction, and the contrarian arm compressed dispersion about as much as sham did. "Sham converges nearly as much as connected" turned out to be a prediction that averaging satisfies on its own. Had I run the experiment as written, I would have confirmed it and published the mechanics of taking a mean.
+                        Before buying any inference, I built a generative model of the measurement itself: DeGroot updating on log estimates, the weakest possible account of "an agent reads its peers and revises." Pure arithmetic, no social process of any kind, intended as a null to beat. It beat the hypotheses instead. At every dispersion floor I simulated, the sham arm reproduced most of the connected arm's dispersion reduction — 81–85% at the updating weight I had assumed, and 62–95% once peer review prompted me to sweep that assumption — and the contrarian arm compressed dispersion about as much as sham did. "Sham converges nearly as much as connected" turned out to be a prediction that averaging satisfies on its own. Had I run the experiment as written, I would have confirmed it and published the mechanics of taking a mean.
                     </p>
 
                     <p class="project-info-description" style="margin-top: 1rem;">
@@ -96,7 +96,7 @@
                     </p>
 
                     <p class="project-info-description" style="margin-top: 1rem;">
-                        <strong>Status.</strong> Design, pre-analysis and simulation complete. No agent has been run yet — Stage 1 needs API access and is the prerequisite for every networked condition. A near-zero transmitted component would be the strongest available result, not a failure: it would say that apparent collective behaviour in these systems is model monoculture.
+                        <strong>Status.</strong> Design, pre-analysis and simulation complete. There is a <a href="/thesis/">working viewer</a> with the live simulation, the hypotheses and every figure. No agent has been run yet — Stage 1 needs API access and is the prerequisite for every networked condition. A near-zero transmitted component would be the strongest available result, not a failure: it would say that apparent collective behaviour in these systems is model monoculture.
                     </p>
                 </div>
                 <div>
