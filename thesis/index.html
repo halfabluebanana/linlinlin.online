@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convergence Attribution — working viewer</title>
+<style>
+  :root{
+    --bg:#000; --ink:#EAE9EA; --muted:#A6A6A6; --bright:#fff;
+    --stroke:#3a3a3a; --plate:#F4EFEC; --band:#141414;
+    --severed:#7FB3D5; --connected:#E4B363; --sham:#6FBF9B; --contrarian:#D98C8C;
+    --serif:Georgia,'Times New Roman',serif;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    --sans:Calibri,-apple-system,'Helvetica Neue',sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+       font-size:15px;line-height:1.5}
+  .wrap{max-width:1180px;margin:0 auto;padding:48px 32px 96px}
+  .eyebrow{font-family:var(--mono);font-size:11px;color:var(--muted);
+           letter-spacing:.08em;text-transform:uppercase;margin:0 0 8px}
+  h1{font-family:var(--serif);font-weight:400;font-size:46px;color:var(--bright);
+     margin:0 0 10px;line-height:1.08}
+  h2{font-family:var(--serif);font-weight:400;font-size:30px;color:var(--bright);
+     margin:0 0 6px}
+  h3{font-family:var(--serif);font-weight:400;font-size:19px;color:var(--bright);
+     margin:0 0 6px}
+  .sub{font-family:var(--serif);font-size:21px;color:var(--muted);margin:0 0 26px}
+  section{margin:64px 0 0;padding-top:30px;border-top:1px solid var(--stroke)}
+  .lede{color:var(--muted);max-width:76ch;margin:0 0 24px}
+  .note{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.6}
+  .card{border:1px solid var(--stroke);border-radius:8px;padding:18px 20px;background:#050505}
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.g2,.g4{grid-template-columns:1fr}}
+
+  /* hypotheses */
+  .hyp{display:grid;grid-template-columns:62px 1fr;gap:18px;align-items:start;
+       border:1px solid var(--stroke);border-radius:8px;padding:18px 20px;
+       background:#050505;margin-bottom:14px}
+  .htag{font-family:var(--serif);font-size:26px;color:var(--bright)}
+  .hrow{display:grid;grid-template-columns:110px 1fr;gap:10px;margin-top:10px}
+  .hlab{font-family:var(--mono);font-size:10.5px;color:var(--muted);
+        text-transform:uppercase;letter-spacing:.06em;padding-top:2px}
+  .pill{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 8px;
+        border-radius:999px;border:1px solid var(--stroke);color:var(--muted);
+        margin-left:10px;vertical-align:middle}
+  .pill.rev{border-color:#8a6d3b;color:#E4B363}
+  .pill.ok{border-color:#3f6f52;color:#6FBF9B}
+  .pill.warn{border-color:#7a4a4a;color:#D98C8C}
+
+  /* sim */
+  .simwrap{display:grid;grid-template-columns:300px 1fr;gap:22px;align-items:start}
+  @media(max-width:900px){.simwrap{grid-template-columns:1fr}}
+  .controls label{display:block;font-family:var(--mono);font-size:11px;
+                  color:var(--muted);margin:16px 0 5px;text-transform:uppercase;
+                  letter-spacing:.05em}
+  .controls .val{color:var(--bright);float:right;text-transform:none}
+  input[type=range]{width:100%;accent-color:#E4B363}
+  .segs{display:flex;flex-wrap:wrap;gap:6px}
+  .segs button{font-family:var(--mono);font-size:11px;padding:6px 10px;
+               background:transparent;color:var(--muted);border:1px solid var(--stroke);
+               border-radius:5px;cursor:pointer}
+  .segs button.on{color:#000;background:var(--bright);border-color:var(--bright)}
+  .run{margin-top:22px;display:flex;gap:8px}
+  .run button{flex:1;font-family:var(--mono);font-size:12px;padding:10px;
+              background:var(--bright);color:#000;border:0;border-radius:6px;cursor:pointer}
+  .run button.ghost{background:transparent;color:var(--ink);border:1px solid var(--stroke)}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+  .stat{border:1px solid var(--stroke);border-radius:7px;padding:10px 12px}
+  .stat .k{font-family:var(--mono);font-size:9.5px;color:var(--muted);
+           text-transform:uppercase;letter-spacing:.05em}
+  .stat .v{font-family:var(--serif);font-size:21px;color:var(--bright);margin-top:3px}
+  svg{display:block;width:100%;height:auto}
+
+  figure{margin:0 0 26px}
+  figure img{width:100%;border-radius:8px;background:var(--plate);padding:10px;display:block}
+  figure img.dark{background:#000;border:1px solid var(--stroke)}
+  figcaption{margin-top:10px;color:var(--muted);font-size:13.5px;max-width:92ch}
+  figcaption b{color:var(--ink);font-weight:600}
+  .warnbar{border:1px solid #7a4a4a;border-radius:8px;padding:12px 16px;
+           background:#140808;color:#E8B4B4;font-family:var(--mono);font-size:12px;
+           margin:22px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="eyebrow">QMSS master's thesis · working viewer · not results</p>
+<h1>Convergence Attribution in Agent Networks</h1>
+<p class="sub">Everything simulated or measured so far, in one place.</p>
+
+<div class="warnbar">
+  No agent has been run. Every number here is either a human benchmark from published
+  tables, an observational measurement from Moltbook, or a simulation of the measurement
+  itself. Nothing on this page is a result of the experiment.
+</div>
+
+<!-- ============================================ LIVE SIM -->
+<section>
+  <p class="eyebrow">Live simulation</p>
+  <h2>Watch the agents converge</h2>
+  <p class="lede">
+    Twenty-four agents answer the same numeric question, then revise three times.
+    The only thing that changes between arms is what each agent is shown. This runs the
+    same DeGroot updating rule as <span class="note">analysis/02_design_descriptives.py</span>
+    — mechanical averaging, no social process of any kind. It is the null the real
+    experiment has to beat.
+  </p>
+
+  <div class="simwrap">
+    <div class="controls card">
+      <label>Arm</label>
+      <div class="segs" id="armSeg"></div>
+
+      <label>Wiring <span class="val" id="wireVal"></span></label>
+      <div class="segs" id="wireSeg"></div>
+
+      <label>Updating weight w <span class="val" id="wVal">0.25</span></label>
+      <input type="range" id="w" min="0" max="0.6" step="0.05" value="0.25">
+
+      <label>Starting spread σ₀ <span class="val" id="s0Val">0.35</span></label>
+      <input type="range" id="s0" min="0.05" max="1.2" step="0.05" value="0.35">
+
+      <label>Decoding noise ε <span class="val" id="epsVal">0.05</span></label>
+      <input type="range" id="eps" min="0" max="0.25" step="0.005" value="0.05">
+
+      <label>Messages shown K <span class="val" id="kVal">4</span></label>
+      <input type="range" id="k" min="1" max="8" step="1" value="4">
+
+      <div class="run">
+        <button id="step">Next round</button>
+        <button id="reset" class="ghost">Reset</button>
+      </div>
+      <p class="note" style="margin-top:14px">
+        K only affects the sham and contrarian arms — it is how many harvested
+        messages each agent is fed.
+      </p>
+    </div>
+
+    <div>
+      <div class="grid g2">
+        <div class="card">
+          <h3>Who can see whom</h3>
+          <svg id="net" viewBox="0 0 320 320"></svg>
+          <p class="note" id="netNote"></p>
+        </div>
+        <div class="card">
+          <h3>Where each agent stands</h3>
+          <svg id="dots" viewBox="0 0 320 320"></svg>
+          <p class="note">Each dot is one agent's answer, in log units from the
+            starting centre. Watch the column tighten — that tightening is
+            convergence.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h3>Dispersion across rounds</h3>
+        <svg id="traj" viewBox="0 0 640 200"></svg>
+        <p class="note">σ<sub>log</sub>, the spread across agents, measured after each
+          round. Convergence C = σ(round 0) − σ(round 3).</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="k">Round</div><div class="v" id="stRound">0</div></div>
+        <div class="stat"><div class="k">σ log now</div><div class="v" id="stSig">—</div></div>
+        <div class="stat"><div class="k">Convergence C</div><div class="v" id="stC">—</div></div>
+        <div class="stat"><div class="k">Mean shift</div><div class="v" id="stShift">—</div></div>
+      </div>
+      <p class="note" style="margin-top:12px">
+        Mean shift is the one that separates contrarian from sham. Run the contrarian
+        arm and watch it move while the spread behaves almost exactly like sham.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ HYPOTHESES -->
+<section>
+  <p class="eyebrow">Hypotheses</p>
+  <h2>Five predictions, each with a null that can win</h2>
+  <p class="lede">
+    A null here is not a formality. It is the result you get if nothing interesting is
+    happening, and the finding only counts if it beats that line.
+  </p>
+  <div id="hyps"></div>
+
+  <div class="card" style="margin-top:22px">
+    <h3>And the detection half <span class="pill">exploratory</span></h3>
+    <p style="color:var(--muted);margin:8px 0 14px">
+      The experiment decomposes convergence because the channel is controlled. Deployed
+      systems leave only a transcript. Four candidate signatures, each scored on whether
+      it separates the arms better than simply counting matching answers.
+    </p>
+    <div class="grid g4">
+      <div><h3 style="font-size:15px">Adoption curve</h3><p class="note">Smooth and fast reads as simple contagion, S-shaped as complex. Shared disposition should give neither.</p></div>
+      <div><h3 style="font-size:15px">Lead and lag</h3><p class="note">Transmission leaves an ordering that follows the wiring. A shared prior does not.</p></div>
+      <div><h3 style="font-size:15px">Peer referencing</h3><p class="note">How often an agent justifies itself by citing the others. The Hugging Face line, verbatim.</p></div>
+      <div><h3 style="font-size:15px">Independence ratio</h3><p class="note">Twenty agents agreeing after reading the same two is not twenty sources.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ MOLTBOOK -->
+<section>
+  <p class="eyebrow">The observational case</p>
+  <h2>Why the field data cannot settle it</h2>
+  <p class="lede">
+    164 hours of real agent behaviour: 1.84 million comments from 39,700 agents on
+    Moltbook, 2–8 February 2026. The grey line is the measured hourly reply rate.
+    The coloured line is a simulated population where <em>I set</em> how much of the
+    behaviour is transmitted. Drag the slider and watch what happens to the fit.
+  </p>
+
+  <div class="card">
+    <svg id="molt" viewBox="0 0 980 260"></svg>
+    <label style="display:block;font-family:var(--mono);font-size:11px;color:var(--muted);
+                  margin:18px 0 6px;text-transform:uppercase;letter-spacing:.05em">
+      Transmitted share of the behaviour
+      <span class="val" id="tsVal" style="float:right;color:var(--bright);text-transform:none">50%</span>
+    </label>
+    <input type="range" id="ts" min="0" max="100" step="5" value="50">
+    <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat"><div class="k">Observed pooled rate</div><div class="v">0.0635</div></div>
+      <div class="stat"><div class="k">Simulated pooled rate</div><div class="v" id="mSimRate">—</div></div>
+      <div class="stat"><div class="k">Mean abs. difference</div><div class="v" id="mGap">—</div></div>
+    </div>
+    <p class="note" style="margin-top:14px">
+      The transmitted share moves from 0% to 100% and the aggregate barely flinches.
+      That is the point. The hourly series is driven by the population's mean propensity,
+      and the same mean can be produced by agents copying each other, by agents that were
+      always going to behave alike, or by any mix of the two. The observable is invariant
+      to the quantity this thesis wants to measure.
+    </p>
+  </div>
+
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card">
+      <h3>What this does establish</h3>
+      <p class="note" style="margin-top:8px">
+        That the phenomenon is real and at scale, that the channel in deployed systems is
+        thin — 93.6% of comments never answer another agent — and that the reply rate is
+        genuinely flat: two specifications looked significant and both died under
+        Newey-West, so the apparent trend was autocorrelation read as signal.
+      </p>
+    </div>
+    <div class="card">
+      <h3>What it cannot establish <span class="pill warn">scope</span></h3>
+      <p class="note" style="margin-top:8px">
+        Anything about transmission in the experiment. Moltbook is a heterogeneous
+        population of user-configured agents posting socially; the experiment is 24
+        instances of one model estimating quantities. Different models, task, population
+        and outcome. This panel is the motivation for cutting the channel, never evidence
+        about what happens when you do.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ FIGURES -->
+<section>
+  <p class="eyebrow">What has actually been measured</p>
+  <h2>The figures, and what each one settled</h2>
+
+  <figure>
+    <img src="figures/fig4_wiring.png" class="dark" alt="four wiring conditions">
+    <figcaption><b>Wiring.</b> Same 24 agents, same layout; only who-sees-whom changes.
+      Sparse-random and clustered carry the identical 48 edges, so exposure is matched —
+      what differs is redundancy. Pick one agent: 0 links among its four neighbours under
+      sparse-random, 3 under clustered. That contrast is what simple- versus
+      complex-contagion predicts on.
+      <span class="note">analysis/03_wiring_diagram.py</span></figcaption>
+  </figure>
+
+  <figure>
+    <img src="figures/fig1_human_benchmark.png" alt="human benchmark">
+    <figcaption><b>The human benchmark.</b> Six items reconstructed from Lorenz et al.
+      (2011) Table 1. Fitted from two reported aggregates — geometric and arithmetic mean
+      give μ and σ — with the median held out to test the lognormal assumption. Human
+      dispersion averages 1.95 log units and every item is biased low. The shaded band on
+      the right is where the agent floor is <em>expected</em> to land, and it is a guess
+      until Stage 1 runs. <span class="note">analysis/01_human_benchmark.py</span></figcaption>
+  </figure>
+
+  <figure>
+    <img src="figures/fig2_outcome_variable.png" alt="outcome variable">
+    <figcaption><b>The outcome variable under the null.</b> Why the analysis is on logs,
+      and what the four arms do when nothing but averaging is happening. The sham arm
+      tracking connected is the result that killed the original H2.
+      <span class="note">analysis/02_design_descriptives.py</span></figcaption>
+  </figure>
+
+  <figure>
+    <img src="figures/fig3_power.png" alt="power">
+    <figcaption><b>Power.</b> Five seeds detect the simulated effect at every floor
+      tested, and the curve flattens around ten. Power is not the binding constraint —
+      where the floor sits is.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="figures/fig5_sensitivity.png" alt="sensitivity">
+    <figcaption><b>Sensitivity of the null to its own assumptions.</b> Run after peer
+      review flagged that w and ε were fixed and unmeasured. The conclusion survives both:
+      sham reproduces 62–95% of connected across the whole grid, so the direction never
+      flips, but the headline "81–85%" was an artefact of w = 0.25. It does <em>not</em>
+      survive K — at K = 1 the ratio falls to 15%. K is a knob the design sets, so it gets
+      pre-registered rather than left at its default.
+      <span class="note">analysis/04_sensitivity.py</span></figcaption>
+  </figure>
+
+  <figure>
+    <img src="figures/moltbook_trend.png" alt="moltbook reply rate">
+    <figcaption><b>The observational case.</b> 1.84 million comments from 39,700 agents on
+      Moltbook, 2–8 February 2026. 93.6% of comments sit at depth zero — agents broadcast
+      rather than reply. The pooled reply rate is 0.063 and flat: two specifications looked
+      significant and both died under Newey-West, so the apparent trend was autocorrelation
+      read as signal. This is the case Manski says cannot be identified, and the argument
+      for running an experiment instead.</figcaption>
+  </figure>
+</section>
+
+<p class="note" style="margin-top:60px;border-top:1px solid var(--stroke);padding-top:20px">
+  Rebuild the figures: <span style="color:var(--ink)">python3 analysis/0{1,2,3,4}_*.py</span>
+  from thesis-convergence/ · viewer served from Masters Thesis/viewer/
+</p>
+
+</div>
+
+<script>
+// ---------------------------------------------------------------- hypotheses
+const HYPS = [
+  { tag:"H1", title:"Transmission exists",
+    pill:null,
+    claim:"Agents who can see each other end up more alike than agents who cannot.",
+    expect:"connected − severed > 0, the headline estimand.",
+    nul:"The difference is zero: all observed convergence is baseline homogeneity, i.e. model monoculture.",
+    note:"A near-zero result is the strongest available finding, but it cannot be claimed from a failed rejection — it needs a pre-registered smallest effect of interest and an equivalence test." },
+  { tag:"H2", title:"Influence is largely echo",
+    pill:["rev","revised 26 Oct"],
+    claim:"Agents fed messages from a separate run converge nearly as much as agents in real conversation.",
+    expect:"Sham converges in excess of what mechanical averaging alone predicts.",
+    nul:"No excess over the averaging-implied value, computed from each cell's own round-0 dispersion.",
+    note:"The original version was satisfied by arithmetic alone — pure averaging reproduces 62–95% of connected's reduction. Confirming it would have confirmed nothing." },
+  { tag:"H3", title:"Influence is confirmatory, not persuasive",
+    pill:["ok","robust"],
+    claim:"Agents move toward messages matching the model's usual position, but barely budge toward ones that cut against it.",
+    expect:"Contrarian messages shift the group mean; sham messages do not.",
+    nul:"Mean shift is zero in both arms.",
+    note:"Moved off dispersion onto the mean, because dispersion cannot separate the two arms. The gap grows monotonically from 0.09 to 0.54 log units across every updating weight tested." },
+  { tag:"H4", title:"Words move before conclusions",
+    pill:["warn","contested"],
+    claim:"Agents start sounding alike before they start thinking alike.",
+    expect:"Lexical dispersion falls faster than answer dispersion.",
+    nul:"The two measures move together, so surface agreement tracks substance.",
+    note:"Kong, Lai, Piao & Evans (2026) report the opposite dissociation — semantic convergence underneath lexical variety. Their lexical measure is cumulative vocabulary over time; this one is cross-agent dispersion at a round. Different constructs, but the clash has to be addressed head-on." },
+  { tag:"H5", title:"Structure matters",
+    pill:null,
+    claim:"Tight clusters change positions more; a wrong answer travels faster through a loose group.",
+    expect:"Clustered and sparse-random wiring differ at matched density.",
+    nul:"Only density matters; redundancy of exposure does nothing.",
+    note:"The density-matched contrast is the whole point — same 48 edges, different redundancy. Without matching, any difference is just more exposure." },
+];
+document.getElementById("hyps").innerHTML = HYPS.map(h => `
+  <div class="hyp">
+    <div class="htag">${h.tag}</div>
+    <div>
+      <h3>${h.title}${h.pill?`<span class="pill ${h.pill[0]}">${h.pill[1]}</span>`:""}</h3>
+      <div style="color:var(--muted)">${h.claim}</div>
+      <div class="hrow"><div class="hlab">Expect</div><div>${h.expect}</div></div>
+      <div class="hrow"><div class="hlab">The null</div><div style="color:var(--muted)">${h.nul}</div></div>
+      <div class="hrow"><div class="hlab">Note</div><div class="note">${h.note}</div></div>
+    </div>
+  </div>`).join("");
+
+// ---------------------------------------------------------------- simulation
+const G = 24, R = 3;
+const ARMS = ["severed","connected","sham","contrarian"];
+const WIRES = ["severed","sparse random","clustered","dense"];
+const COL = {severed:"#7FB3D5",connected:"#E4B363",sham:"#6FBF9B",contrarian:"#D98C8C"};
+
+let seed = 12345;
+function rand(){ seed = (seed*1664525 + 1013904223) >>> 0; return seed/4294967296; }
+function gauss(){ let u=0,v=0; while(!u)u=rand(); while(!v)v=rand();
+  return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+function normInv(p){ // Acklam approximation, enough for a demo
+  const a=[-39.69683028665376,220.9460984245205,-275.9285104469687,138.3577518672690,-30.66479806614716,2.506628277459239];
+  const b=[-54.47609879822406,161.5858368580409,-155.6989798598866,66.80131188771972,-13.28068155288572];
+  const c=[-0.007784894002430293,-0.3223964580411365,-2.400758277161838,-2.549732539343734,4.374664141464968,2.938163982698783];
+  const d=[0.007784695709041462,0.3224671290700398,2.445134137142996,3.754408661907416];
+  const pl=0.02425;
+  if(p<pl){const q=Math.sqrt(-2*Math.log(p));return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);}
+  if(p<=1-pl){const q=p-0.5,r=q*q;return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);}
+  const q=Math.sqrt(-2*Math.log(1-p));return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+}
+function sd(a){const m=a.reduce((s,x)=>s+x,0)/a.length;
+  return Math.sqrt(a.reduce((s,x)=>s+(x-m)**2,0)/(a.length-1));}
+function mean(a){return a.reduce((s,x)=>s+x,0)/a.length;}
+
+function neighbours(wire){
+  const nb = Array.from({length:G},()=>[]);
+  if(wire==="severed") return nb;
+  if(wire==="dense"){ for(let i=0;i<G;i++) for(let j=0;j<G;j++) if(i!==j) nb[i].push(j); return nb; }
+  if(wire==="clustered"){ for(let i=0;i<G;i++) for(const d of [1,2,G-1,G-2]) nb[i].push((i+d)%G); return nb; }
+  // sparse random, 4-regular-ish: fixed ring of chords from a deterministic shuffle
+  const perm=[...Array(G).keys()]; let s2=99;
+  const rnd=()=>{s2=(s2*1103515245+12345)>>>0; return s2/4294967296;};
+  for(let i=G-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[perm[i],perm[j]]=[perm[j],perm[i]];}
+  for(let i=0;i<G;i++){ const a=perm[i],b=perm[(i+1)%G],c=perm[(i+7)%G];
+    nb[a].push(b); nb[b].push(a); nb[a].push(c); nb[c].push(a); }
+  return nb.map(l=>[...new Set(l)]);
+}
+
+const S = {arm:"connected", wire:"dense", x:[], feed:null, round:0, hist:[], start:0};
+const P = ()=>({w:+w.value, s0:+s0.value, eps:+eps.value, k:+k.value});
+
+function reset(){
+  seed = 12345;
+  const p = P();
+  S.x = Array.from({length:G},()=>gauss()*p.s0);
+  S.start = mean(S.x);
+  S.round = 0; S.hist = [sd(S.x)];
+  if(S.arm==="sham"){
+    S.feed = Array.from({length:G},()=>mean(Array.from({length:p.k},()=>gauss()*p.s0)));
+  } else if(S.arm==="contrarian"){
+    S.feed = Array.from({length:G},()=>mean(Array.from({length:p.k},
+      ()=>normInv(0.90+rand()*0.10)*p.s0)));
+  } else S.feed = null;
+  draw();
+}
+function step(){
+  if(S.round>=R) return;
+  const p = P(), nb = neighbours(S.wire);
+  const next = S.x.map((xi,i)=>{
+    let shown, pull;
+    if(S.arm==="severed"){ shown=xi; pull=0; }
+    else if(S.arm==="connected"){
+      const peers = nb[i];
+      if(!peers.length){ shown=xi; pull=0; }
+      else { shown = mean(peers.map(j=>S.x[j])); pull=p.w; }
+    } else { shown=S.feed[i]; pull=p.w; }
+    return (1-pull)*xi + pull*shown + gauss()*p.eps;
+  });
+  S.x = next; S.round++; S.hist.push(sd(S.x));
+  draw();
+}
+
+function draw(){
+  const nb = neighbours(S.arm==="severed" ? "severed" : S.wire);
+  const cx=160, cy=150, rad=110;
+  const pos = Array.from({length:G},(_,i)=>{
+    const a = 2*Math.PI*i/G - Math.PI/2;
+    return [cx+rad*Math.cos(a), cy+rad*Math.sin(a)];
+  });
+  let edges="", seen=new Set();
+  nb.forEach((list,i)=>list.forEach(j=>{
+    const key = i<j?`${i}-${j}`:`${j}-${i}`;
+    if(seen.has(key)) return; seen.add(key);
+    edges += `<line x1="${pos[i][0]}" y1="${pos[i][1]}" x2="${pos[j][0]}" y2="${pos[j][1]}"
+              stroke="#4a4a4a" stroke-width="0.7"/>`;
+  }));
+  const col = COL[S.arm];
+  const nodes = pos.map((p0,i)=>
+    `<circle cx="${p0[0]}" cy="${p0[1]}" r="5.5" fill="${col}" stroke="#000" stroke-width="1.2"/>`).join("");
+  document.getElementById("net").innerHTML =
+    `<rect width="320" height="320" fill="none"/>${edges}${nodes}
+     <text x="160" y="296" fill="#A6A6A6" font-family="monospace" font-size="10"
+      text-anchor="middle">${seen.size} edge${seen.size===1?"":"s"} · ${S.arm}</text>`;
+  document.getElementById("netNote").textContent =
+    S.arm==="severed" ? "Channel cut. Agents still revise, but alone — this is the floor."
+    : (S.arm==="connected" ? "Agents see the peers they are wired to."
+      : "Injected messages come from stored severed runs; the wiring is inert here.");
+
+  // dots
+  const p = P(), lim = Math.max(p.s0*2.4, 0.4);
+  const y = v => 290 - ((v+lim)/(2*lim))*260;
+  const dots = S.x.map((v,i)=>{
+    const jx = 60 + (i%12)*17 + (i>=12?8:0);
+    return `<circle cx="${jx}" cy="${y(v)}" r="4.5" fill="${col}" opacity="0.92"/>`;
+  }).join("");
+  let axis="";
+  for(const t of [-lim,-lim/2,0,lim/2,lim]){
+    axis += `<line x1="46" y1="${y(t)}" x2="300" y2="${y(t)}" stroke="#222" stroke-width="1"/>
+             <text x="42" y="${y(t)+3.5}" fill="#777" font-size="9" font-family="monospace"
+              text-anchor="end">${t.toFixed(2)}</text>`;
+  }
+  document.getElementById("dots").innerHTML = axis + dots +
+    `<text x="173" y="16" fill="#A6A6A6" font-size="10" font-family="monospace"
+      text-anchor="middle">round ${S.round} · σ = ${sd(S.x).toFixed(3)}</text>`;
+
+  // trajectory
+  const maxS = Math.max(...S.hist, 0.01)*1.15;
+  const tx = r => 52 + (r/R)*(600-52), ty = v => 170 - (v/maxS)*145;
+  let path = S.hist.map((v,r)=>`${r?"L":"M"}${tx(r)},${ty(v)}`).join(" ");
+  let pts = S.hist.map((v,r)=>`<circle cx="${tx(r)}" cy="${ty(v)}" r="4" fill="${col}"/>`).join("");
+  let ticks="";
+  for(let r=0;r<=R;r++) ticks += `<text x="${tx(r)}" y="190" fill="#777" font-size="10"
+    font-family="monospace" text-anchor="middle">${r}</text>`;
+  document.getElementById("traj").innerHTML =
+    `<line x1="52" y1="170" x2="600" y2="170" stroke="#333"/>
+     <line x1="52" y1="25" x2="52" y2="170" stroke="#333"/>
+     <text x="46" y="29" fill="#777" font-size="9" font-family="monospace" text-anchor="end">${maxS.toFixed(2)}</text>
+     <text x="46" y="173" fill="#777" font-size="9" font-family="monospace" text-anchor="end">0</text>
+     ${ticks}<path d="${path}" fill="none" stroke="${col}" stroke-width="2"/>${pts}`;
+
+  document.getElementById("stRound").textContent = S.round;
+  document.getElementById("stSig").textContent = sd(S.x).toFixed(3);
+  document.getElementById("stC").textContent = (S.hist[0]-S.hist[S.hist.length-1]).toFixed(3);
+  document.getElementById("stShift").textContent = (mean(S.x)-S.start).toFixed(3);
+}
+
+function segs(el, items, cur, onpick){
+  el.innerHTML = items.map(i=>`<button data-v="${i}" class="${i===cur?"on":""}">${i}</button>`).join("");
+  el.querySelectorAll("button").forEach(b=>b.onclick=()=>{ onpick(b.dataset.v);
+    el.querySelectorAll("button").forEach(x=>x.classList.toggle("on", x===b)); });
+}
+segs(document.getElementById("armSeg"), ARMS, S.arm, v=>{S.arm=v; reset();});
+segs(document.getElementById("wireSeg"), WIRES, S.wire, v=>{S.wire=v; reset();});
+for(const id of ["w","s0","eps","k"]){
+  const el=document.getElementById(id);
+  el.oninput=()=>{document.getElementById(id+"Val").textContent=el.value; reset();};
+}
+document.getElementById("step").onclick = step;
+document.getElementById("reset").onclick = reset;
+document.getElementById("wireVal").textContent = "";
+reset();
+
+// ---------------------------------------------------------------- moltbook
+let MOLT = [];
+fetch("moltbook_hourly.json").then(r=>r.json()).then(d=>{ MOLT=d; drawMolt(); });
+
+function drawMolt(){
+  if(!MOLT.length) return;
+  const s = +document.getElementById("ts").value/100;
+  document.getElementById("tsVal").textContent = Math.round(s*100)+"%";
+
+  // A population whose MEAN propensity is pinned to the observed pooled rate, but
+  // whose composition splits between "copied from peers" and "shared disposition".
+  // Both routes land on the same mean, which is exactly why the aggregate is blind
+  // to the split.
+  const TARGET = 0.0635;
+  let s2 = 777;
+  const rnd = ()=>{ s2=(s2*1103515245+12345)>>>0; return s2/4294967296; };
+  const sim = MOLT.map(pt=>{
+    // transmitted component: pulled toward a slowly drifting community level
+    const drift = TARGET*(1 + 0.18*Math.sin(MOLT.indexOf(pt)/19));
+    // dispositional component: fixed propensity, no reference to anyone else
+    const disp  = TARGET;
+    const p = s*drift + (1-s)*disp;
+    // binomial sampling at the hour's real comment volume
+    const n = Math.max(pt.n, 1);
+    let hits = 0, draws = Math.min(n, 4000), scale = n/draws;
+    for(let i=0;i<draws;i++) if(rnd() < p) hits++;
+    return (hits*scale)/n;
+  });
+
+  const W=980, H=260, L=54, Rr=14, T=18, B=34;
+  const xs = i => L + (i/(MOLT.length-1))*(W-L-Rr);
+  const maxY = 0.24, ys = v => H-B - (v/maxY)*(H-B-T);
+  const line = a => a.map((v,i)=>`${i?"L":"M"}${xs(i).toFixed(1)},${ys(v).toFixed(1)}`).join(" ");
+
+  let grid="";
+  for(const t of [0,0.05,0.10,0.15,0.20]){
+    grid += `<line x1="${L}" y1="${ys(t)}" x2="${W-Rr}" y2="${ys(t)}" stroke="#222"/>
+             <text x="${L-8}" y="${ys(t)+3.5}" fill="#777" font-size="9"
+               font-family="monospace" text-anchor="end">${t.toFixed(2)}</text>`;
+  }
+  let days="";
+  MOLT.forEach((pt,i)=>{ if(pt.t.endsWith("T00"))
+    days += `<line x1="${xs(i)}" y1="${T}" x2="${xs(i)}" y2="${H-B}" stroke="#1c1c1c"/>
+             <text x="${xs(i)}" y="${H-B+16}" fill="#666" font-size="9"
+               font-family="monospace" text-anchor="middle">${pt.t.slice(8,10)} Feb</text>`; });
+
+  const simRate = sim.reduce((a,b)=>a+b,0)/sim.length;
+  const gap = sim.reduce((a,v,i)=>a+Math.abs(v-MOLT[i].rate),0)/sim.length;
+  document.getElementById("mSimRate").textContent = simRate.toFixed(4);
+  document.getElementById("mGap").textContent = gap.toFixed(4);
+
+  document.getElementById("molt").innerHTML = grid + days +
+    `<line x1="${L}" y1="${ys(TARGET)}" x2="${W-Rr}" y2="${ys(TARGET)}"
+       stroke="#666" stroke-dasharray="4 4"/>
+     <text x="${W-Rr}" y="${ys(TARGET)-6}" fill="#888" font-size="9"
+       font-family="monospace" text-anchor="end">pooled 0.063</text>
+     <path d="${line(MOLT.map(p=>p.rate))}" fill="none" stroke="#6a6a6a" stroke-width="1.3"/>
+     <path d="${line(sim)}" fill="none" stroke="#E4B363" stroke-width="1.8" opacity="0.95"/>
+     <text x="${L}" y="${T-4}" fill="#A6A6A6" font-size="10" font-family="monospace">
+       grey: measured Moltbook · gold: simulated at ${Math.round(s*100)}% transmitted</text>`;
+}
+document.getElementById("ts").oninput = drawMolt;
+</script>
+</body>
+</html>
