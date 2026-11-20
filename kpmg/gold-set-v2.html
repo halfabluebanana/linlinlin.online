@@ -30,9 +30,11 @@ tr:hover{background:#fff8e5}
 .hops{font-family:ui-monospace,Menlo,monospace;font-size:12px;text-align:center;color:#333}
 .note{font-size:11.5px;color:#777;max-width:36ch;display:block;margin-top:3px}
 .path{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:#999;display:block;margin-top:3px}
+.pages{margin:8px 0 2px;display:flex;flex-wrap:wrap;gap:6px}.pages .p{font-size:11px;padding:3px 9px;border-radius:5px;text-decoration:none;border:1px solid #d8d8d8;color:#0a3d91;background:#fff}.pages .p:hover{background:#f0f5ff}.pages .here{color:#555;background:#eceff4;border-color:#dcdcdc;font-weight:600}
 </style>
 <header>
 <h1>Gold Set &mdash; 155 evaluation questions, and which arm answers each</h1>
+<nav class=pages><span class="p here" title="which arm answers each question">Gold Set</span><a class=p href="retrieval-state-2026-11-20.html" title="what each arm does today">Retrieval state</a><a class=p href="retrieval-diagram-2026-11-20.html" title="the flow, and where it stops">How retrieval works</a><a class=p href="corpus-2026-11-20.html" title="what is loaded in each arm">Corpus</a></nav>
 <div class=sub>KPMG &times; Columbia QMSS. Ten companies, Data database snapshot 2026-11-03. Generated from <code>benchmark_v2_2.jsonl</code> and GraphRAG&rsquo;s <code>hops</code> derivation; those files are the source of truth, not this page. Green = expected answer, orange = the correct response is a refusal or a rejected premise.<br><strong>Today:</strong> 60 answered, 24 found, not first, 57 not found, 14 not a retrieval test. <strong>Ontology:</strong> 32 graph answers it, 4 graph answers half, 100 structured arm, 9 blocked, 10 no path expected. <em>hops</em> counts edges on the GraphRAG ontology (Company &rarr; Filing &rarr; Section &rarr; Claim). A question answered from XBRL facts has no hop count, because the graph holds no facts.</div>
 <input id=f placeholder="filter text..." size=26>
 <select id=r><option value="">all routes</option><option value="metadata">metadata<option value="refusal">refusal<option value="text">text<option value="xbrl">xbrl<option value="xbrl+text">xbrl+text</select>

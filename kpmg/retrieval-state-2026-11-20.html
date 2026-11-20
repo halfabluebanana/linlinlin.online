@@ -1,0 +1,1607 @@
+<!doctype html><html lang=en><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noindex,nofollow">
+<title>Retrieval state &mdash; 20 November 2026</title>
+<style>
+body{font:15px/1.55 -apple-system,BlinkMacSystemFont,sans-serif;margin:0;background:#fafafa;color:#1a1a1a}
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid #ddd;padding:14px 20px;z-index:10}
+h1{font-size:17px;margin:0 0 4px}
+.sub{font-size:12px;color:#666;margin-bottom:10px;max-width:92ch}
+.sub a{color:#0a3d91}
+input,select{font:14px/1 inherit;padding:6px 9px;border:1px solid #ccc;border-radius:6px;margin-right:6px}
+#count{color:#666;font-size:13px;margin-left:4px}
+table{border-collapse:collapse;width:100%}
+td,th{border-bottom:1px solid #e4e4e4;padding:10px 12px;vertical-align:top;text-align:left}
+th{background:#f2f2f2;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#555;position:sticky;top:118px}
+tr:hover{background:#fff8e5}
+.qid{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#777;white-space:nowrap}
+.q{max-width:40ch}
+.tag{display:inline-block;background:#eceff4;border-radius:4px;padding:1px 6px;font-size:11px;margin:1px 2px 1px 0;white-space:nowrap}
+.tag.f{background:#ddeaff;color:#0a3d91;font-family:ui-monospace,Menlo,monospace;font-size:10.5px}
+.sup{display:inline-block;border-radius:4px;padding:1px 7px;font-size:11px;white-space:nowrap}
+.sup.ok{background:#dcf5e7;color:#0a7a46}
+.sup.part{background:#fdf0d5;color:#8a5a00}
+.sup.blocked{background:#ffe3e3;color:#9b1c1c}
+.sup.na{background:#f4f4f4;color:#999}
+.n{font-family:ui-monospace,Menlo,monospace;font-size:12px;text-align:center;color:#333}
+.note{font-size:11.5px;color:#777;max-width:38ch;display:block;margin-top:3px}
+.was{font-size:11px;color:#999;display:block;margin-top:3px}
+.pages{margin:8px 0 2px;display:flex;flex-wrap:wrap;gap:6px}.pages .p{font-size:11px;padding:3px 9px;border-radius:5px;text-decoration:none;border:1px solid #d8d8d8;color:#0a3d91;background:#fff}.pages .p:hover{background:#f0f5ff}.pages .here{color:#555;background:#eceff4;border-color:#dcdcdc;font-weight:600}
+</style>
+<header>
+<h1>Retrieval state &mdash; what each arm does when the question is asked, 20 November 2026</h1>
+<nav class=pages><a class=p href="gold-set-v2.html" title="which arm answers each question">Gold Set</a><span class="p here" title="what each arm does today">Retrieval state</span><a class=p href="retrieval-diagram-2026-11-20.html" title="the flow, and where it stops">How retrieval works</a><a class=p href="corpus-2026-11-20.html" title="what is loaded in each arm">Corpus</a></nav>
+<div class=sub>KPMG &times; Columbia QMSS. All 155 Gold Set v2.2 questions put through both GraphRAG arms with the gold filters, against the live graph and the 20-filing fact store. <strong>This is not an accuracy score.</strong> It records only whether the call returned evidence, returned nothing, or raised &mdash; the <a href="gold-set-v2.html">Gold Set page</a> is where right-answer lives.<br><strong>Today:</strong> 291 returned evidence, 19 returned nothing, 0 raised, across 310 calls (155 questions &times; 2 arms). <strong>140</strong> of those calls errored in a round 1 run and no longer do. Measured at <code>main 3ca2aab + PR #101</code>. A state moves; the date in the filename is deliberate.</div>
+<input id=f placeholder="filter text..." size=26>
+<select id=s><option value="">all states</option><option value="rows">evidence returned<option value="empty">nothing returned<option value="error">raised</select>
+<select id=c><option value="">all</option><option value="changed">changed since round 1</option></select>
+<span id=count></span></header>
+<table><thead><tr><th>qid<th>question<th>filters<th>graph arm<th>structured arm<th>what changed</tr></thead><tbody>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-001
+<td class=q>What was Microsoft’s total revenue for the three months ended March 31, 2026? State the amount in USD millions.
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>6 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-002
+<td class=q>What was Microsoft’s GAAP net income for the three months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>5 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-003
+<td class=q>What was Microsoft’s net cash from operations for the nine months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="empty|rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-004
+<td class=q>Name Microsoft’s reportable segments in this filing.
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>narrow filter: the index is asked for candidates before the filter is applied, so the rows exist and are not reached (#94)</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="empty|rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-005
+<td class=q>Which reportable segment includes LinkedIn?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>6 of 8 asked for</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>narrow filter: the index is asked for candidates before the filter is applied, so the rows exist and are not reached (#94)</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-006
+<td class=q>Which reportable segment includes Azure and other cloud services?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-007
+<td class=q>Which reportable segment includes Xbox hardware and Xbox content and services?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>3 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-008
+<td class=q>What categories make up Microsoft Cloud revenue as defined in the filing?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-009
+<td class=q>What does revenue allocated to remaining performance obligations include?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-010
+<td class=q>Which investment-related items are excluded from the adjusted net income and adjusted diluted EPS measures?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-011
+<td class=q>What accounting method does Microsoft use for its OpenAI investment, and what method is used to calculate its equity-method income or loss?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-012
+<td class=q>How does Microsoft define cash equivalents in its investment policy?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>5 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-013
+<td class=q>Calculate Microsoft’s year-over-year total revenue growth for the three months ended March 31, 2026. Use the displayed amounts and round the percentag
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>3 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-014
+<td class=q>For the nine months ended March 31 in 2026 and 2025, calculate operating cash flow less cash additions to property and equipment. Use that specific de
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-015
+<td class=q>Compare quarterly operating margins for Productivity and Business Processes and Intelligent Cloud for the three months ended March 31, 2026. Calculate
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-016
+<td class=q>How much did total cash, cash equivalents, and short-term investments change from June 30, 2025 to March 31, 2026? Use USD millions and calculate the 
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>2 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-017
+<td class=q>For the quarter ended March 31, 2026, contrast the reported revenue trends in Intelligent Cloud and More Personal Computing, including their principal
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-018
+<td class=q>How did Microsoft’s reported quarterly gross-margin-percentage trends differ between Productivity and Business Processes and Intelligent Cloud?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-019
+<td class=q>Compare Microsoft’s explanations for More Personal Computing revenue in the three-month and nine-month periods ended March 31, 2026.
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-020
+<td class=q>Contrast the main drivers of Microsoft’s higher effective tax rate in the three-month and nine-month periods ended March 31, 2026.
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-021
+<td class=q>Compare the directions of the OpenAI investment effects on current-year quarterly versus nine-month net income and diluted EPS.
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-022
+<td class=q>Contrast the stated drivers of nine-month operating cash flow and investing cash outflow changes versus the prior year.
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-023
+<td class=q>Reconcile Microsoft’s change in cash and cash equivalents for the nine months ended March 31, 2026 using operating, financing, investing, and foreign-
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-024
+<td class=q>Reconcile the three segments’ year-over-year quarterly revenue changes to Microsoft’s total change for the three months ended March 31, 2026. Calculat
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="empty|rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-025
+<td class=q>Derive Microsoft’s revenue for the first six months of fiscal 2026 and fiscal 2025 from the nine-month and third-quarter columns. Calculate the year-o
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>narrow filter: the index is asked for candidates before the filter is applied, so the rows exist and are not reached (#94)</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-026
+<td class=q>Explain why More Personal Computing’s quarterly operating income increased even though its revenue decreased. Connect the consolidated revenue narrati
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-027
+<td class=q>Explain how Microsoft’s quarterly gross margin in dollars could increase while its gross margin percentage decreased. Use the income statement and man
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-028
+<td class=q>Why should Microsoft Cloud revenue not be added to the reportable segments’ revenues when constructing total company revenue? Identify the relevant co
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-029
+<td class=q>Connect the OpenAI recapitalization accounting with the nine-month GAAP versus adjusted net-income comparison. Why does excluding OpenAI effects reduc
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>GSv0-MSFT-030
+<td class=q>Explain why commercial remaining performance obligations and balance-sheet unearned revenue should not be treated as interchangeable measures or added
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-001
+<td class=q>What was Microsoft&#x27;s operating income for the three months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>7 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-002
+<td class=q>What was Microsoft&#x27;s operating income for the nine months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-003
+<td class=q>What was Microsoft&#x27;s GAAP net income for the nine months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-004
+<td class=q>What were Microsoft&#x27;s diluted earnings per share for the three months ended March 31, 2026?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-005
+<td class=q>What was Microsoft&#x27;s gross margin in dollars for the three months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>7 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-006
+<td class=q>How much did Microsoft spend on research and development in the three months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>7 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-007
+<td class=q>How much cash did Microsoft spend on additions to property and equipment in the three months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-008
+<td class=q>What were Microsoft&#x27;s total assets as of March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-009
+<td class=q>What was Microsoft&#x27;s balance of cash and cash equivalents (excluding short-term investments) as of March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-010
+<td class=q>What was Microsoft&#x27;s total stockholders&#x27; equity as of March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>6 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-011
+<td class=q>What was Microsoft&#x27;s long-term debt (the non-current portion shown on the balance sheet) as of March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>3 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-012
+<td class=q>What was Microsoft&#x27;s current unearned revenue as of March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>7 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-013
+<td class=q>What was Microsoft&#x27;s net cash flow from investing activities for the nine months ended March 31, 2026? Give the amount with its sign in USD millions.
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-014
+<td class=q>How much cash did Microsoft spend repurchasing common stock in the nine months ended March 31, 2026, according to the cash flow statement?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-015
+<td class=q>What dividend per share did Microsoft declare for the three months ended March 31, 2026?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>7 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-016
+<td class=q>What effective tax rate did Microsoft report for the nine months ended March 31, 2026?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-017
+<td class=q>What was Intelligent Cloud segment revenue for the three months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>7 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-018
+<td class=q>What was operating income of the Productivity and Business Processes segment for the three months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-019
+<td class=q>What was More Personal Computing segment revenue for the three months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-020
+<td class=q>How much revenue did Microsoft&#x27;s Gaming products and services generate in the three months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>7 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-021
+<td class=q>What was LinkedIn revenue for the nine months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-022
+<td class=q>What was revenue from Server products and cloud services for the three months ended March 31, 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-023
+<td class=q>How much of Microsoft&#x27;s revenue for the three months ended March 31, 2026 came from the United States, in USD millions?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>6 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-024
+<td class=q>Which of Microsoft&#x27;s three reportable segments earned the most operating income in the three months ended March 31, 2026, and how much?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-025
+<td class=q>How did More Personal Computing revenue for the nine months ended March 31, 2026 compare with the same period a year earlier? Give the change in USD m
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-026
+<td class=q>What was Microsoft&#x27;s operating margin (operating income divided by total revenue) for the three months ended March 31, 2026? Round to two decimals.
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-027
+<td class=q>By how many percentage points did Microsoft&#x27;s quarterly operating margin change from the three months ended March 31, 2025 to the three months ended M
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-028
+<td class=q>Calculate Microsoft&#x27;s gross margin percentage for the three months ended March 31, 2026 and 2025, and the change in percentage points.
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-029
+<td class=q>By what percentage did Microsoft&#x27;s net income grow year over year in the three months ended March 31, 2026? Round to two decimals.
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>3 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-030
+<td class=q>What was Microsoft&#x27;s year-over-year total revenue growth for the nine months ended March 31, 2026? Round to two decimals.
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>6 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-031
+<td class=q>What share of its quarterly revenue did Microsoft spend on cash additions to property and equipment in the three months ended March 31, 2026? Round to
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-032
+<td class=q>Compute Microsoft&#x27;s effective tax rate for the three months ended March 31, 2026 from the income statement (provision for income taxes divided by inco
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-033
+<td class=q>What was the Intelligent Cloud segment&#x27;s operating margin for the nine months ended March 31, 2026? Round to two decimals.
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-034
+<td class=q>What was Microsoft&#x27;s current ratio (total current assets divided by total current liabilities) as of March 31, 2026? Round to two decimals.
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>2 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-035
+<td class=q>How much cash did Microsoft return to shareholders through dividends paid and share repurchases in the nine months ended March 31, 2026, according to 
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-036
+<td class=q>Microsoft Cloud revenue is disclosed in the filing&#x27;s text. What share of total revenue did it represent in the three months ended March 31, 2026? Roun
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>7 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-037
+<td class=q>Microsoft does not file a 10-Q for its fourth fiscal quarter. Using the FY2026 10-K and the Q3 FY2026 10-Q, derive Microsoft&#x27;s revenue for the three m
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=[&quot;FY&quot;, &quot;Q3&quot;]</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>1 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-038
+<td class=q>Microsoft does not file a 10-Q for its fourth fiscal quarter. Using the FY2026 10-K and the Q3 FY2026 10-Q, derive Microsoft&#x27;s operating income for th
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=[&quot;FY&quot;, &quot;Q3&quot;]</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>1 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-039
+<td class=q>Microsoft does not file a 10-Q for its fourth fiscal quarter. Using the FY2026 10-K and the Q3 FY2026 10-Q, derive Microsoft&#x27;s net income for the thre
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=[&quot;FY&quot;, &quot;Q3&quot;]</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>1 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-040
+<td class=q>Do the three segments&#x27; operating incomes for the three months ended March 31, 2026 add up to Microsoft&#x27;s consolidated operating income? Show the sum i
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-041
+<td class=q>Reconstruct Microsoft&#x27;s operating income for the three months ended March 31, 2026 from gross margin and the three operating expense lines. Show the c
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>5 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-042
+<td class=q>Microsoft reports adjusted net income that excludes OpenAI investment effects. Using GAAP net income and the after-tax OpenAI adjustment, what was adj
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-043
+<td class=q>More Personal Computing revenue fell year over year in the three months ended March 31, 2026, yet its operating income rose. Quantify both changes and
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-044
+<td class=q>By what percentage did Azure and other cloud services revenue grow in the three months ended March 31, 2026?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-045
+<td class=q>What was Microsoft Cloud revenue for the three months ended March 31, 2026, and how fast did it grow?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>7 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-046
+<td class=q>What was Microsoft&#x27;s commercial remaining performance obligation, and by how much did it increase?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-047
+<td class=q>Approximately what percentage of OpenAI does Microsoft own, and how does it account for the investment?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>5 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-048
+<td class=q>Why was Microsoft&#x27;s effective tax rate lower than the U.S. federal statutory rate in the periods ended March 31, 2026?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-049
+<td class=q>What drove the increase in Microsoft&#x27;s sales and marketing expenses in the three months ended March 31, 2026, and by how much did they rise?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-050
+<td class=q>What was Apple&#x27;s total net sales (revenue) for its fiscal Q2 2026 (quarter ended March 28, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;AAPL&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q2&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>3 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-061
+<td class=q>What was Azure&#x27;s revenue in dollars for the three months ended March 31, 2026?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>7 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-062
+<td class=q>What was Microsoft&#x27;s share price at the close on March 31, 2026?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>5 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-063
+<td class=q>What revenue will Microsoft report for the quarter ending June 30, 2027?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>6 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="empty" data-changed="">
+<td class=qid>EV1-064
+<td class=q>What was Tesla&#x27;s total revenue for the quarter ended March 31, 2026?
+<td><span class="tag f">ticker=&quot;TSLA&quot;</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>the filer is not in the corpus, so nothing is the right answer</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>the filer is not in the corpus, so nothing is the right answer</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-065
+<td class=q>What was Microsoft&#x27;s revenue for the three months ended September 30, 2026?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>2 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-066
+<td class=q>How many employees did Microsoft have on March 31, 2026?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>5 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>1 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-067
+<td class=q>Should I buy Microsoft stock based on this quarter&#x27;s results?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>7 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-068
+<td class=q>Why did Microsoft&#x27;s total revenue decline in the three months ended March 31, 2026?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>6 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-069
+<td class=q>How large was Microsoft&#x27;s net loss for the nine months ended March 31, 2026?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV1-070
+<td class=q>What was the operating income of Microsoft&#x27;s &#x27;Microsoft Cloud&#x27; reportable segment for the three months ended March 31, 2026?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>6 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-001
+<td class=q>What was Apple&#x27;s total revenue for fiscal year 2025 (ended September 27, 2025), in USD millions?
+<td><span class="tag f">ticker=&quot;AAPL&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2025</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-002
+<td class=q>What was Apple&#x27;s net income for fiscal year 2025 (ended September 27, 2025), in USD millions?
+<td><span class="tag f">ticker=&quot;AAPL&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2025</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-003
+<td class=q>What was Apple&#x27;s net income for the three months ended June 27, 2026 (fiscal 2026 Q3), in USD millions?
+<td><span class="tag f">ticker=&quot;AAPL&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>3 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-004
+<td class=q>What was Apple&#x27;s revenue for the three months ended June 27, 2026 (fiscal 2026 Q3), in USD millions?
+<td><span class="tag f">ticker=&quot;AAPL&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-005
+<td class=q>What was Casey&#x27;s total revenue for fiscal year 2026 (ended April 30, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;CASY&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>2 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-006
+<td class=q>What was Casey&#x27;s net income for fiscal year 2026 (ended April 30, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;CASY&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-007
+<td class=q>What was Casey&#x27;s net income for the three months ended July 31, 2026 (fiscal 2027 Q1), in USD millions?
+<td><span class="tag f">ticker=&quot;CASY&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2027</span><span class="tag f">fiscal_period=&quot;Q1&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>6 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-008
+<td class=q>What was Casey&#x27;s revenue for the three months ended July 31, 2026 (fiscal 2027 Q1), in USD millions?
+<td><span class="tag f">ticker=&quot;CASY&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2027</span><span class="tag f">fiscal_period=&quot;Q1&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>6 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>2 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-009
+<td class=q>What was McKesson&#x27;s total revenue for fiscal year 2026 (ended March 31, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;MCK&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-010
+<td class=q>What was McKesson&#x27;s net income excluding noncontrolling interests for fiscal year 2026 (ended March 31, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;MCK&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-011
+<td class=q>What was McKesson&#x27;s net income excluding noncontrolling interests for the three months ended June 30, 2026 (fiscal 2027 Q1), in USD millions?
+<td><span class="tag f">ticker=&quot;MCK&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2027</span><span class="tag f">fiscal_period=&quot;Q1&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-012
+<td class=q>What was McKesson&#x27;s revenue for the three months ended June 30, 2026 (fiscal 2027 Q1), in USD millions?
+<td><span class="tag f">ticker=&quot;MCK&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2027</span><span class="tag f">fiscal_period=&quot;Q1&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-013
+<td class=q>What was Medtronic&#x27;s total revenue for fiscal year 2026 (ended April 24, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;MDT&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-014
+<td class=q>What was Medtronic&#x27;s net income excluding noncontrolling interests for fiscal year 2026 (ended April 24, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;MDT&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-015
+<td class=q>What was Medtronic&#x27;s net income excluding noncontrolling interests for the three months ended July 31, 2026 (fiscal 2027 Q1), in USD millions?
+<td><span class="tag f">ticker=&quot;MDT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2027</span><span class="tag f">fiscal_period=&quot;Q1&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-016
+<td class=q>What was Medtronic&#x27;s revenue for the three months ended July 31, 2026 (fiscal 2027 Q1), in USD millions?
+<td><span class="tag f">ticker=&quot;MDT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2027</span><span class="tag f">fiscal_period=&quot;Q1&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-017
+<td class=q>What was Micron&#x27;s total revenue for fiscal year 2026 (ended September 3, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;MU&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-018
+<td class=q>What was Micron&#x27;s net income for fiscal year 2026 (ended September 3, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;MU&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>2 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="empty|rows" data-changed="changed">
+<td class=qid>EV2-019
+<td class=q>What was Micron&#x27;s net income for the three months ended May 28, 2026 (fiscal 2026 Q3), in USD millions?
+<td><span class="tag f">ticker=&quot;MU&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>narrow filter: the index is asked for candidates before the filter is applied, so the rows exist and are not reached (#94)</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="empty|rows" data-changed="changed">
+<td class=qid>EV2-020
+<td class=q>What was Micron&#x27;s revenue for the three months ended May 28, 2026 (fiscal 2026 Q3), in USD millions?
+<td><span class="tag f">ticker=&quot;MU&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>narrow filter: the index is asked for candidates before the filter is applied, so the rows exist and are not reached (#94)</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-021
+<td class=q>What was Nike&#x27;s total revenue for fiscal year 2026 (ended May 31, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;NKE&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-022
+<td class=q>What was Nike&#x27;s net income for fiscal year 2026 (ended May 31, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;NKE&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>3 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-023
+<td class=q>What was Nike&#x27;s net income for the three months ended August 31, 2026 (fiscal 2027 Q1), in USD millions?
+<td><span class="tag f">ticker=&quot;NKE&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2027</span><span class="tag f">fiscal_period=&quot;Q1&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-024
+<td class=q>What was NetApp&#x27;s total revenue for fiscal year 2026 (ended April 24, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;NTAP&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>7 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-025
+<td class=q>What was NetApp&#x27;s net income for fiscal year 2026 (ended April 24, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;NTAP&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>6 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="empty" data-changed="changed">
+<td class=qid>EV2-026
+<td class=q>What was NetApp&#x27;s net income for the three months ended July 31, 2026 (fiscal 2027 Q1), in USD millions?
+<td><span class="tag f">ticker=&quot;NTAP&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2027</span><span class="tag f">fiscal_period=&quot;Q1&quot;</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>narrow filter: the index is asked for candidates before the filter is applied, so the rows exist and are not reached (#94)</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>narrow filter: the index is asked for candidates before the filter is applied, so the rows exist and are not reached (#94)</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-027
+<td class=q>What was Parker-Hannifin&#x27;s total revenue for fiscal year 2026 (ended June 30, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;PH&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>2 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-028
+<td class=q>What was Parker-Hannifin&#x27;s net income for fiscal year 2026 (ended June 30, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;PH&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>2 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="empty|rows" data-changed="changed">
+<td class=qid>EV2-029
+<td class=q>What was Parker-Hannifin&#x27;s net income for the three months ended March 31, 2026 (fiscal 2026 Q3), in USD millions?
+<td><span class="tag f">ticker=&quot;PH&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>narrow filter: the index is asked for candidates before the filter is applied, so the rows exist and are not reached (#94)</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="empty|rows" data-changed="changed">
+<td class=qid>EV2-030
+<td class=q>What was Parker-Hannifin&#x27;s revenue for the three months ended March 31, 2026 (fiscal 2026 Q3), in USD millions?
+<td><span class="tag f">ticker=&quot;PH&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;Q3&quot;</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>narrow filter: the index is asked for candidates before the filter is applied, so the rows exist and are not reached (#94)</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-031
+<td class=q>What was Take-Two&#x27;s total revenue for fiscal year 2026 (ended March 31, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;TTWO&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-032
+<td class=q>What was Take-Two&#x27;s net income (loss) for fiscal year 2026 (ended March 31, 2026), in USD millions?
+<td><span class="tag f">ticker=&quot;TTWO&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-033
+<td class=q>What was Take-Two&#x27;s net income (loss) for the three months ended June 30, 2026 (fiscal 2027 Q1), in USD millions?
+<td><span class="tag f">ticker=&quot;TTWO&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2027</span><span class="tag f">fiscal_period=&quot;Q1&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-034
+<td class=q>What was Take-Two&#x27;s revenue for the three months ended June 30, 2026 (fiscal 2027 Q1), in USD millions?
+<td><span class="tag f">ticker=&quot;TTWO&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2027</span><span class="tag f">fiscal_period=&quot;Q1&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="">
+<td class=qid>EV2-035
+<td class=q>Nike&#x27;s most recent 10-Q covers the quarter ended August 31, 2026. Which fiscal year and quarter is that in Nike&#x27;s own reporting calendar?
+<td><span class="tag f">ticker=&quot;NKE&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>5 of 8 asked for</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="rows" data-changed="">
+<td class=qid>EV2-036
+<td class=q>Medtronic&#x27;s most recent 10-Q covers the quarter ended July 31, 2026. Which fiscal year and quarter is that in Medtronic&#x27;s own reporting calendar?
+<td><span class="tag f">ticker=&quot;MDT&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>3 of 8 asked for</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="empty|rows" data-changed="">
+<td class=qid>EV2-037
+<td class=q>Micron&#x27;s most recent 10-Q covers the quarter ended May 28, 2026. Which fiscal year and quarter is that in Micron&#x27;s own reporting calendar?
+<td><span class="tag f">ticker=&quot;MU&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>5 of 8 asked for</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>no claim matched the query inside the filter</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="empty|rows" data-changed="changed">
+<td class=qid>EV2-038
+<td class=q>By what percentage did Micron&#x27;s revenue grow in fiscal 2026 compared with fiscal 2025? Give two decimals.
+<td><span class="tag f">ticker=&quot;MU&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>narrow filter: the index is asked for candidates before the filter is applied, so the rows exist and are not reached (#94)</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-039
+<td class=q>By how much did Take-Two&#x27;s net loss narrow from fiscal 2025 to fiscal 2026, in USD millions?
+<td><span class="tag f">ticker=&quot;TTWO&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-040
+<td class=q>Among the ten companies in the corpus (Apple, Casey&#x27;s, McKesson, Medtronic, Microsoft, Micron, Nike, NetApp, Parker-Hannifin, Take-Two), which reporte
+<td><span class="tag f">ticker=[&quot;AAPL&quot;, &quot;CASY&quot;, &quot;MCK&quot;, &quot;MDT&quot;, &quot;MSFT&quot;, &quot;MU&quot;, &quot;NKE&quot;, &quot;NTAP&quot;, &quot;PH&quot;, &quot;TTWO&quot;]</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>structured: failed: list filter cast to VARCHAR[] &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-041
+<td class=q>Which of the ten companies in the corpus (Apple, Casey&#x27;s, McKesson, Medtronic, Microsoft, Micron, Nike, NetApp, Parker-Hannifin, Take-Two) reported a 
+<td><span class="tag f">ticker=[&quot;AAPL&quot;, &quot;CASY&quot;, &quot;MCK&quot;, &quot;MDT&quot;, &quot;MSFT&quot;, &quot;MU&quot;, &quot;NKE&quot;, &quot;NTAP&quot;, &quot;PH&quot;, &quot;TTWO&quot;]</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>structured: failed: list filter cast to VARCHAR[] &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-042
+<td class=q>Rank the ten companies in the corpus (Apple, Casey&#x27;s, McKesson, Medtronic, Microsoft, Micron, Nike, NetApp, Parker-Hannifin, Take-Two) by net margin (
+<td><span class="tag f">ticker=[&quot;AAPL&quot;, &quot;CASY&quot;, &quot;MCK&quot;, &quot;MDT&quot;, &quot;MSFT&quot;, &quot;MU&quot;, &quot;NKE&quot;, &quot;NTAP&quot;, &quot;PH&quot;, &quot;TTWO&quot;]</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>structured: failed: list filter cast to VARCHAR[] &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-043
+<td class=q>Which of the ten companies in the corpus (Apple, Casey&#x27;s, McKesson, Medtronic, Microsoft, Micron, Nike, NetApp, Parker-Hannifin, Take-Two) had the fas
+<td><span class="tag f">ticker=[&quot;AAPL&quot;, &quot;CASY&quot;, &quot;MCK&quot;, &quot;MDT&quot;, &quot;MSFT&quot;, &quot;MU&quot;, &quot;NKE&quot;, &quot;NTAP&quot;, &quot;PH&quot;, &quot;TTWO&quot;]</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>structured: failed: list filter cast to VARCHAR[] &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-044
+<td class=q>Which of the ten companies in the corpus (Apple, Casey&#x27;s, McKesson, Medtronic, Microsoft, Micron, Nike, NetApp, Parker-Hannifin, Take-Two) have a fisc
+<td><span class="tag f">ticker=[&quot;AAPL&quot;, &quot;CASY&quot;, &quot;MCK&quot;, &quot;MDT&quot;, &quot;MSFT&quot;, &quot;MU&quot;, &quot;NKE&quot;, &quot;NTAP&quot;, &quot;PH&quot;, &quot;TTWO&quot;]</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>structured: failed: list filter cast to VARCHAR[] &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-045
+<td class=q>Micron reports no separate fourth-quarter figure. Using its fiscal 2026 annual report and its nine-month figure, what was Micron&#x27;s revenue for the fou
+<td><span class="tag f">ticker=&quot;MU&quot;</span><span class="tag f">form=[&quot;10-K&quot;, &quot;10-Q&quot;]</span><span class="tag f">fiscal_year=2026</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span><span class=was>structured: failed: list filter cast to VARCHAR[] &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="">
+<td class=qid>EV2-046
+<td class=q>What was Casey&#x27;s net income for the quarter ended October 31, 2026?
+<td><span class="tag f">ticker=&quot;CASY&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="empty|rows" data-changed="">
+<td class=qid>EV2-047
+<td class=q>What was Parker-Hannifin&#x27;s revenue for the quarter ended September 30, 2026?
+<td><span class="tag f">ticker=&quot;PH&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>no claim matched the query inside the filter</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-048
+<td class=q>Why was Take-Two profitable in fiscal 2026?
+<td><span class="tag f">ticker=&quot;TTWO&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>3 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV2-049
+<td class=q>Why did Nike&#x27;s revenue fall in fiscal 2026?
+<td><span class="tag f">ticker=&quot;NKE&quot;</span><span class="tag f">form=&quot;10-K&quot;</span><span class="tag f">fiscal_year=2026</span><span class="tag f">fiscal_period=&quot;FY&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="empty" data-changed="changed">
+<td class=qid>EV2-050
+<td class=q>What was Micron&#x27;s revenue for the first quarter of fiscal 2027?
+<td><span class="tag f">ticker=&quot;MU&quot;</span><span class="tag f">form=&quot;10-Q&quot;</span><span class="tag f">fiscal_year=2027</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>no claim matched the query inside the filter</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>no claim matched the query inside the filter</span>
+<td><span class=was>graph: refused: fiscal_year not supported &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="">
+<td class=qid>EV1R-001
+<td class=q>In its fiscal year 2026 annual report, which subsidiaries does Microsoft list in Exhibit 21, and how many of them are incorporated outside the United 
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="rows" data-changed="">
+<td class=qid>EV1R-002
+<td class=q>Did Microsoft change its reportable segments between fiscal year 2025 and fiscal year 2026, and did it rename any of its revenue categories?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>1 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="rows" data-changed="">
+<td class=qid>EV1R-003
+<td class=q>How did Microsoft&#x27;s net gains or losses from its investments in OpenAI change between the nine months ended March 31, 2025 and the nine months ended M
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="empty|rows" data-changed="">
+<td class=qid>EV1R-004
+<td class=q>Is LinkedIn Ireland Unlimited Company a subsidiary of Activision Blizzard, Inc.?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>no claim matched the query inside the filter</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="rows" data-changed="">
+<td class=qid>EV1R-005
+<td class=q>Since Microsoft acquired OpenAI, which of Microsoft&#x27;s segments reports OpenAI&#x27;s revenue?
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="rows" data-changed="">
+<td class=qid>EV1R-006
+<td class=q>Microsoft acquired Activision Blizzard in October 2023. Which reportable segment includes the product category that Activision&#x27;s games fall under, and
+<td><span class="tag f">ticker=&quot;MSFT&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="rows" data-changed="">
+<td class=qid>EV3-001
+<td class=q>In the Exhibit 21 of its fiscal 2026 annual report, how many subsidiaries does Micron list, and how many of them are organized outside the United Stat
+<td><span class="tag f">ticker=&quot;MU&quot;</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>5 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV3-002
+<td class=q>Which countries outside the United States appear in both Apple&#x27;s and Micron&#x27;s Exhibit 21 subsidiary lists (Apple fiscal 2025, Micron fiscal 2026)?
+<td><span class="tag f">ticker=[&quot;AAPL&quot;, &quot;MU&quot;]</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>5 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>structured: failed: list filter cast to VARCHAR[] &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV3-003
+<td class=q>Apple, Casey&#x27;s and Micron each list an insurance company among their subsidiaries. Name each one and where it is organized.
+<td><span class="tag f">ticker=[&quot;AAPL&quot;, &quot;CASY&quot;, &quot;MU&quot;]</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>structured: failed: list filter cast to VARCHAR[] &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="">
+<td class=qid>EV3-004
+<td class=q>In which state are most of the subsidiaries in Casey&#x27;s Exhibit 21 organized, and how many of the listed subsidiaries is that?
+<td><span class="tag f">ticker=&quot;CASY&quot;</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="empty|rows" data-changed="">
+<td class=qid>EV3-005
+<td class=q>Which NetApp subsidiaries organized in Israel are listed in its fiscal 2026 Exhibit 21?
+<td><span class="tag f">ticker=&quot;NTAP&quot;</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>no claim matched the query inside the filter</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV3-006
+<td class=q>Is Braeburn Capital, Inc. a subsidiary of Micron?
+<td><span class="tag f">ticker=[&quot;MU&quot;, &quot;AAPL&quot;]</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class=was>structured: failed: list filter cast to VARCHAR[] &rarr; fixed</span>
+</tr>
+<tr data-state="rows" data-changed="changed">
+<td class=qid>EV3-007
+<td class=q>Which Micron business owns Spotinst Ltd.?
+<td><span class="tag f">ticker=[&quot;NTAP&quot;, &quot;MU&quot;]</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>3 of 8 asked for</span>
+<td><span class=was>graph: failed: database connection dropped &rarr; fixed</span><span class=was>structured: failed: list filter cast to VARCHAR[] &rarr; fixed</span>
+</tr>
+<tr data-state="empty|rows" data-changed="">
+<td class=qid>EV3-008
+<td class=q>NetApp&#x27;s 10-Q for the quarter ended July 31, 2026: which fiscal year and quarter does NetApp itself say it covers, and does the filing&#x27;s cover-page me
+<td><span class="tag f">ticker=&quot;NTAP&quot;</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>2 of 8 asked for</span>
+<td><span class="sup part">nothing returned</span>
+<span class=note>no claim matched the query inside the filter</span>
+<td><span class="sup na">no change</span>
+</tr>
+<tr data-state="rows" data-changed="">
+<td class=qid>EV3-009
+<td class=q>How many weeks are in NetApp&#x27;s first quarter of fiscal 2027, and why does that matter when comparing it with the first quarter of fiscal 2026?
+<td><span class="tag f">ticker=&quot;NTAP&quot;</span><span class="tag f">form=&quot;10-K&quot;</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>4 of 8 asked for</span>
+<td><span class="sup ok">evidence returned</span>
+<span class=note>8 of 8 asked for</span>
+<td><span class="sup na">no change</span>
+</tr>
+</tbody></table>
+<script>
+const f=document.getElementById('f'),s=document.getElementById('s'),
+      c=document.getElementById('c'),count=document.getElementById('count'),
+      rows=[...document.querySelectorAll('tbody tr')];
+function apply(){
+  const t=f.value.toLowerCase(),st=s.value,ch=c.value;
+  let n=0;
+  for(const r of rows){
+    const ok=(!t||r.textContent.toLowerCase().includes(t))
+      &&(!st||r.dataset.state.includes(st))
+      &&(!ch||r.dataset.changed===ch);
+    r.hidden=!ok; if(ok)n++;
+  }
+  count.textContent=n+' of '+rows.length+' questions';
+}
+[f,s,c].forEach(e=>e.addEventListener('input',apply));apply();
+</script></html>
