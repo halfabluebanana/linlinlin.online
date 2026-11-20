@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name=robots content="noindex,nofollow">
+<title>Metadata labelling - one pager (2026-11-19)</title>
+<style>
+  :root { --ink:#1a1a1a; --grey:#6b7280; --rule:#e4e4e4; --rust:#a33a2a; }
+  body { max-width: 54rem; margin: 3rem auto 6rem; padding: 0 1.5rem;
+         font: 16px/1.65 -apple-system, "Helvetica Neue", Helvetica, sans-serif;
+         color: var(--ink); }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 .4rem; }
+  h2 { font-size: 1.3rem; margin: 2.6rem 0 .8rem; padding-top: 1.2rem;
+        border-top: 1px solid var(--rule); }
+  h3 { font-size: 1.05rem; margin: 1.8rem 0 .5rem; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .86rem; }
+  th, td { text-align: left; vertical-align: top; padding: .45rem .6rem;
+            border-bottom: 1px solid var(--rule); }
+  th { background: #f7f8fa; font-weight: 600; }
+  code { font: .85em Menlo, monospace; background: #f4f4f5;
+          padding: .1em .35em; border-radius: 3px; }
+  pre code { display: block; padding: .8rem; overflow-x: auto; background: #f7f8fa; }
+  blockquote { margin: 1rem 0; padding: .3rem 0 .3rem 1rem;
+                border-left: 3px solid var(--rule); color: var(--grey); }
+  .mermaid { margin: 1.4rem 0; text-align: center; background: none; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2.4rem 0; }
+  a { color: var(--rust); }
+.omitted{color:#6b7280;font-size:.9em}.correction{border-left:3px solid #a33a2a;background:#fdf3f1;padding:.6rem .9rem;margin:.8rem 0;font-size:.93em;color:#7a2d20}.pages{margin:8px 0 2px;display:flex;flex-wrap:wrap;gap:6px}.pages .p{font-size:11px;padding:3px 9px;border-radius:5px;text-decoration:none;border:1px solid #d8d8d8;color:#0a3d91;background:#fff}.pages .p:hover{background:#f0f5ff}.pages .here{color:#555;background:#eceff4;border-color:#dcdcdc;font-weight:600}
+</style>
+<body>
+<h1>Metadata labelling — one pager\1
+<nav class=pages><a class=p href="gold-set-v2.html" title="which arm answers each question">Gold Set</a><a class=p href="retrieval-state-2026-11-20.html" title="what each arm does today">Retrieval state</a><a class=p href="retrieval-diagram-2026-11-20.html" title="the flow, and where it stops">How retrieval works</a><a class=p href="corpus-2026-11-20.html" title="what is loaded in each arm">Corpus</a><a class=p href="question-bank-2026-11-20.html" title="what the 58 questions actually ask for">Question bank</a><span class="p here" title="where an LLM would and would not help">Metadata labelling</span></nav>
+<p class=omitted><em>Speaker notes omitted from this copy.</em></p>
+<p><strong>Deck:</strong> <code>~/Desktop/KPMG_LLM-metadata-onepager_v1.pptx</code> — 5 slides
+<strong>For:</strong> KPMG, two argued slides + three appendix slides, 4–5 minutes
+<strong>Scope:</strong> what to label, decided from the question bank. Not a labelling run.
+<strong>Source:</strong> <code>Data Practicum - Business Use Cases</code>, 18 Nov — 3 personas × 4 use cases, <strong>58 candidate questions</strong>
+<strong>Built by:</strong> <code>tools/build_metadata_onepager.py</code>, counts computed from <code>tools/question_bank_slots.py</code>
+<strong>Previous:</strong> [[KPMG update - four slides (2026-11-05)]]</p>
+<blockquote>
+<p>The client's ask is "use an LLM for metadata labelling". That is a <em>how</em>. This
+settles <em>what</em>, and the answer turns out to be much smaller than the ask implies:
+one field, not every field.</p>
+</blockquote>
+<p><strong>The spine.</strong> Layer 1 of <code>schema-ids-operations.md</code> has said since 14 October that a
+node ships only if it names the question it answers. This is that rule applied to
+fields instead of nodes. The bank is what makes it answerable — and it did not produce
+a new taxonomy. It produced two gaps and three scope problems.</p>
+<hr />
+<h2>Slide — 58 questions, 9 slots, and we already have 7 of them</h2>
+<table>
+<thead>
+<tr>
+<th>slot</th>
+<th>questions</th>
+<th>filter key we already have</th>
+<th>where the value comes from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>filer</code></td>
+<td>51</td>
+<td><code>ticker</code> · <code>cik</code></td>
+<td>EDGAR metadata</td>
+</tr>
+<tr>
+<td><code>concept</code></td>
+<td>34</td>
+<td><code>concept</code></td>
+<td>the filer's own XBRL tag</td>
+</tr>
+<tr>
+<td><code>section</code></td>
+<td>31</td>
+<td><code>section</code></td>
+<td>Data's <code>section_key</code></td>
+</tr>
+<tr>
+<td><code>period</code></td>
+<td>20</td>
+<td><code>fiscal_year</code> · <code>fiscal_period</code></td>
+<td>derived from the filing, #89</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>13</td>
+<td><code>form</code></td>
+<td>EDGAR metadata</td>
+</tr>
+<tr>
+<td><strong><code>risk_theme</code></strong></td>
+<td><strong>10</strong></td>
+<td><strong>— none —</strong></td>
+<td><strong>the LLM — the only one</strong></td>
+</tr>
+<tr>
+<td><strong><code>peer</code></strong></td>
+<td><strong>7</strong></td>
+<td><strong>— none —</strong></td>
+<td>SIC code, not loaded</td>
+</tr>
+<tr>
+<td><code>is_table</code></td>
+<td>7</td>
+<td><code>is_table</code></td>
+<td>Data's <code>table_cells</code></td>
+</tr>
+<tr>
+<td><code>segment</code></td>
+<td>3</td>
+<td><code>segment</code></td>
+<td>XBRL dimension</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Three findings, in the order they matter.</strong></p>
+<ol>
+<li><strong>Only one slot is a labelling job.</strong> <code>risk_theme</code> is the single row with no filter
+   key <em>and</em> no deterministic source. The other eight come from EDGAR metadata, an XBRL
+   tag, Data's <code>section_key</code>, or a derivation we already run. The model's scope is one
+   field across ten questions, not every field across every chunk.</li>
+<li><strong>Two gaps behind it, both nameable.</strong> <code>peer</code> — 7 questions need a second filer, and
+   <code>PEER_OF</code> is in the edge diagram, sourced from SIC, and not loaded. <code>fiscal_period</code> —
+   every other filter takes a list; this one does not, which blocks the 2 questions
+   wanting two quarters of the same fiscal year (S2.2, S4.3).</li>
+<p class=correction><strong>Correction, 20 November 2026.</strong> No longer true. <code>fiscal_period</code> accepts a list as of PR #101, which is open and <em>not yet merged</em>; S2.2 and S4.3 become expressible when it lands. The gap was real when this was written against <code>3ca2aab</code> &mdash; it surfaced as three gold questions raising on both arms, found by running the set rather than reading it.</p>
+<li><strong>9 of 58 are not answerable from filings at all.</strong> Which of the 58 are real analyst
+   questions and which are illustrative is a scope decision, and it is KPMG's.</li>
+</ol>
+<p><strong>⚠️ The dependency.</strong> None of it pays until <strong>#94</strong> is fixed — the graph arm narrows
+after the full-text limit, so a filtered call returns nothing at the <code>top_k</code> Eval runs.</p>
+<hr />
+<h2>✅ Kelly's list — read, and it settles two of three</h2>
+<p><strong>Source: PR #80, <code>kelly/filings-2021-2026</code>, merged.</strong> <code>extraction_pipeline/config/filings.yaml</code>
+— every 10-K and 10-Q in Data's database on 2026-11-16 whose <code>validation_status</code> is
+<code>passed</code>. <strong>233 filings, 10 filers, 59 10-Ks and 174 10-Qs, period ends 2020-11-30 to
+2026-09-30.</strong></p>
+<table>
+<thead>
+<tr>
+<th>filer</th>
+<th>10-K</th>
+<th>10-Q</th>
+<th>fiscal year end</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AAPL</td>
+<td>5</td>
+<td>18</td>
+<td>September</td>
+</tr>
+<tr>
+<td>CASY</td>
+<td>6</td>
+<td>17</td>
+<td>April</td>
+</tr>
+<tr>
+<td>MCK</td>
+<td>6</td>
+<td>17</td>
+<td>March</td>
+</tr>
+<tr>
+<td>MDT</td>
+<td>6</td>
+<td>17</td>
+<td>April</td>
+</tr>
+<tr>
+<td>MSFT</td>
+<td>6</td>
+<td>18</td>
+<td>June</td>
+</tr>
+<tr>
+<td>MU</td>
+<td>6</td>
+<td>18</td>
+<td>August / September</td>
+</tr>
+<tr>
+<td>NKE</td>
+<td>6</td>
+<td>18</td>
+<td>May</td>
+</tr>
+<tr>
+<td>NTAP</td>
+<td>6</td>
+<td>17</td>
+<td>April</td>
+</tr>
+<tr>
+<td>PH</td>
+<td>6</td>
+<td>17</td>
+<td>June</td>
+</tr>
+<tr>
+<td>TTWO</td>
+<td>6</td>
+<td>17</td>
+<td>March</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Settled 1 — the year-over-year blocker is gone.</strong> Every filer has five or six 10-Ks.
+P3.1, P3.4 and the eval question <strong>M06</strong> are all answerable against this corpus. My
+earlier "one 10-K per filer" was true of the <strong>November run output</strong>, not of the corpus
+Kelly has configured — the config is ahead of the extraction. <strong>So this is a "run the
+pipeline wider" task, not a "go get more filings" task</strong>, which is a much cheaper ask.</p>
+<p><strong>Settled 2 — the fiscal label trap does not bite.</strong> The 19 Nov handover flagged it:
+<em>"a filer whose year ends in January or February may name it after the year it began.
+None in this corpus does. First thing to check at 233 filings."</em> <strong>Checked. Still none</strong> —
+the earliest year end is March. MCK and TTWO at 31 March are the nearest miss, and both
+are US filers that label by the year the period ends, which is what the rule assumes.</p>
+<p>⚠️ <strong>Still open — SIC.</strong> Not in <code>filings.yaml</code>. It is the one remaining check, and it
+decides whether loading <code>PEER_OF</code> buys the 7 peer questions anything. One EDGAR call per
+filer: <code>submissions/CIK##########.json</code> carries <code>sic</code> and <code>sicDescription</code>.</p>
+<p>⚠️ <strong>Industry mix is unchanged.</strong> Same ten filers, more years. So the theme-library
+coverage concern stands exactly as written — no bank, no insurer, no energy, no REIT, and
+no credit, commodity or catastrophe theme to go with them.</p>
+<p>⚠️ <strong>Re-measure the grain finding before quoting it.</strong> Everything in the section below
+was measured on <strong>one year</strong> of filings. With 59 10-Ks over six years, a filer may well
+have introduced a cybersecurity heading after the SEC's 2023 disclosure rules — which
+would narrow the gap for free. <strong>Run the extraction wider, then re-run the counts.</strong></p>
+<hr />
+<h2>The original reasoning, kept for the argument</h2>
+<p><strong>Three things depend on the list, and none of them is an engineering decision.</strong></p>
+<p><strong>1 · The theme enum has to hold identity across industries, not just companies.</strong> That
+is the whole argument of decision 2.4 and the reason <code>risk_theme</code> exists as a node rather
+than a section code. The current 10 filers — AAPL, CASY, MCK, MDT, MSFT, MU, NKE, NTAP,
+PH, TTWO — are tech-heavy plus a convenience chain, a drug distributor, a device maker, a
+footwear brand and an industrial. <strong>No bank, no insurer, no energy, no REIT.</strong> Those four
+carry whole risk categories that do not exist in this corpus: credit and capital
+adequacy, commodity price exposure, catastrophe risk, tenancy concentration. An enum
+drafted against today's 10 and then run over 233 filings with financials in them sends
+the new material to <code>unknown</code>, and the one field we did label stops working.</p>
+<p><strong>2 · <code>peer</code> is decided entirely by the list.</strong> <code>PEER_OF</code> comes from SIC, so the 7 peer
+questions are answerable only if the corpus holds ≥2 filers per SIC group. <strong>Unverified,
+but worth checking first:</strong> I believe the current 10 overlap at 4-digit SIC in exactly
+one pair — MSFT and TTWO, both 7372 prepackaged software — and that <strong>Apple and Microsoft,
+the pair the bank actually asks about in P3.3, sit in different codes</strong> (3571 vs 7372).
+If that holds, "compare Apple and Microsoft's regulatory risks" yields no peer edge
+however well everything else works. One EDGAR call per filer settles it —
+<code>submissions/CIK##########.json</code> carries <code>sic</code> and <code>sicDescription</code>.</p>
+<p><strong>3 · The fiscal label rule has a limit the list can trip.</strong> Already flagged in the
+19 Nov handover: a filer whose year ends in January or February may name it after the
+year it <em>began</em>, and none in this corpus does. <strong>Retailers are exactly the filers that
+do this</strong> — late-January year ends are the norm. If Kelly's list adds retailers, the
+label rule mislabels a year, silently.</p>
+<p><strong>Sequencing — do not block on it.</strong> The <em>design</em> of the labelling job does not change:
+closed enum, explicit <code>unknown</code>, hand-labelled gold set, per-field agreement. What
+changes is the enum's contents and how the gold set is stratified. So ask Kelly for the
+list now, draft the theme list against the <strong>industry mix</strong> rather than the ten names,
+and sample the gold set stratified by industry rather than at random.</p>
+<p><strong>Also worth asking Kelly:</strong> is the list final, and was it chosen for coverage or for
+convenience? A list picked for clean XBRL and large caps will skew the risk vocabulary
+toward exactly the disclosures that are easiest to extract.</p>
+<hr />
+<h2>Appendix — slides 3, 4, 5</h2>
+<p>One slide per persona, every question as a template with the slots it carries and its
+flags. The questions the corpus cannot reach are the only thing picked out in colour,
+because they are the only rows KPMG has to rule in or out. Built from the same tagging,
+so the tally on slide 1 can be checked rather than taken on trust.</p>
+<hr />
+<h2>Does it still make sense to put an LLM on this?</h2>
+<p><strong>Yes — on one field.</strong> Not because LLM labelling is a bad instinct, but because this
+corpus is unusually well structured. SEC filings are machine-tagged by law, so most of
+what you would normally pay a model to infer is already asserted by the filer:</p>
+<table>
+<thead>
+<tr>
+<th>slot</th>
+<th>why no model is needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>filer</code>, <code>form</code></td>
+<td>EDGAR metadata</td>
+</tr>
+<tr>
+<td><code>concept</code></td>
+<td>the filer's own XBRL tag</td>
+</tr>
+<tr>
+<td><code>section</code>, Item level</td>
+<td>Data's <code>section_types</code> — 25 codes in 7 topics</td>
+</tr>
+<tr>
+<td><code>section</code>, note level</td>
+<td><strong>inline XBRL.</strong> <code>section-vocabulary.md</code>: note boundaries are "in the markup, not in the formatting" — a parser, not a model</td>
+</tr>
+<tr>
+<td><code>period</code></td>
+<td>derived from each filer's own filings, #89</td>
+</tr>
+<tr>
+<td><code>is_table</code></td>
+<td>Data's <code>table_cells</code></td>
+</tr>
+<tr>
+<td><code>segment</code></td>
+<td>XBRL dimension</td>
+</tr>
+<tr>
+<td><code>peer</code></td>
+<td>SIC code in EDGAR metadata</td>
+</tr>
+</tbody>
+</table>
+<p><code>risk_theme</code> is the only slot with nothing to derive it from. <strong>But the mechanism already
+built is not model labelling either</strong> — see the theme section below.</p>
+<p><strong>What to say to the client, in one line.</strong> Agreeing with the ask, and scoping it:
+<em>"Yes — and on this corpus that means extending a ten-theme map that already exists, with
+a person approving each new entry. The other eight slots are already asserted by the filer
+or by Data, and labelling them with a model would replace exact values with approximate
+ones in the keys we filter on."</em></p>
+<p><strong>The one thing that would change the answer.</strong> If Data's note-boundary parser does not
+land, note-level <code>section</code> loses its deterministic source and becomes a second candidate
+for labelling. That is a fallback, not the plan — worth asking where that parser stands.</p>
+<hr />
+<h2>Risk themes — what exists, and what I'd actually do</h2>
+<p><strong>Do not draft a new list. One is built and running.</strong>
+<code>extraction_pipeline/src/risk_factors.py</code> works in three levels:</p>
+<table>
+<thead>
+<tr>
+<th>level</th>
+<th>what it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>risk_category</code></td>
+<td>a heading the filing writes itself — "Business Risks" — keyed to a position in the source, so it is unique to one filing</td>
+</tr>
+<tr>
+<td><code>risk_theme</code></td>
+<td>an entry in <code>config/risk_themes.csv</code>, shared across every company and filing</td>
+</tr>
+<tr>
+<td><code>risk_lead_sentence</code></td>
+<td>the sentence that opens a risk. <strong>This is the only thing the LLM does here</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The ten themes, in the order Kelly defined them. Definitions are hers, trimmed to one
+line; headings and filers are measured from <code>risk_theme_map.csv</code>.</p>
+<table>
+<thead>
+<tr>
+<th><code>risk_id</code></th>
+<th>what it covers</th>
+<th>headings</th>
+<th>filers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>business_operations</code></td>
+<td>day-to-day running: operations, supply chain, suppliers and partners, people, systems, products</td>
+<td>9</td>
+<td><strong>10</strong></td>
+</tr>
+<tr>
+<td><code>macro_industry</code></td>
+<td>economic conditions, demand, prices, inflation, interest and exchange rates, industry conditions</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td><code>strategy_competition</code></td>
+<td>competitors, competitive position, business-model change, new products, growth strategy</td>
+<td>6</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>legal_regulatory</code></td>
+<td>laws, regulation, government action, compliance, litigation, tax, the legal structure</td>
+<td>10</td>
+<td>9</td>
+</tr>
+<tr>
+<td><code>intellectual_property</code></td>
+<td>protecting its own IP, and claims that it infringes others'</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>cybersecurity_privacy</code></td>
+<td>security breaches, cyberattacks, data protection, privacy, platform abuse</td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td><code>financial_capital</code></td>
+<td>liquidity, debt, capital markets, investments, the company's stock and financial condition</td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr>
+<td><code>international_operations</code></td>
+<td>operating across countries: geopolitics, trade, tariffs and local rules abroad</td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td><code>corporate_transactions</code></td>
+<td>acquisitions, divestitures, separations and other strategic transactions</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>general</code></td>
+<td>what the filing itself calls general: catastrophic events, stock volatility</td>
+<td>2</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>A quarter of the map is a judgement call, and it says so.</strong> 10 of the 41 mapped
+headings carry a note explaining the choice, and <strong>6 map to two themes at once</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>filer</th>
+<th>heading</th>
+<th>the note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MU, NTAP, TTWO</td>
+<td>"…Business and Industry" ×3</td>
+<td>names both business and industry</td>
+</tr>
+<tr>
+<td>MSFT</td>
+<td>"Risks relating to the evolution of our business"</td>
+<td>AI and new businesses; could also be <code>business_operations</code></td>
+</tr>
+<tr>
+<td>NTAP</td>
+<td>"Customers and Sales", "Products and Services"</td>
+<td>could also be <code>business_operations</code></td>
+</tr>
+<tr>
+<td>MDT</td>
+<td>"Jurisdiction of Incorporation"</td>
+<td>Irish incorporation: legal and tax; could also be <code>financial_capital</code></td>
+</tr>
+<tr>
+<td>MU</td>
+<td>"Intellectual Property and Litigation"</td>
+<td>litigation is legal</td>
+</tr>
+<tr>
+<td>TTWO</td>
+<td>"financial and economic condition"</td>
+<td>economic condition is macro</td>
+</tr>
+<tr>
+<td>PH</td>
+<td>"Strategic Transactions Risks"</td>
+<td>acquisitions are both</td>
+</tr>
+</tbody>
+</table>
+<p>That is honest bookkeeping, and it is also the finding: <strong><code>business_operations</code> is the
+catch-all</strong> — its definition names seven different things — and its boundary with
+<code>macro_industry</code> and <code>strategy_competition</code> is genuinely soft. Which is the grain problem
+arriving from the other direction: the themes are not badly drawn, they are coarse by
+design, and two exist for one filer each.</p>
+<p><strong>Author: Kelly (Wenyu Zhou), 4 Nov 2026</strong>, commit <code>9205ac2</code> — <em>"Connect Item 1A Claims
+to coarse risk themes (fixes #53)"</em>. Same person as the corpus list, which makes both
+questions one conversation.</p>
+<p><code>config/risk_theme_map.csv</code> joins category text to theme ids — <strong>41 mapped heading texts
+plus 6 deliberately marked not-a-theme</strong> (index tables, page footers, "Summary of Risk
+Factors"). A heading missing from the map takes no theme rather than guessing one.</p>
+<h3>The three checks, run against the real output</h3>
+<p>Measured on <code>runs/2026-11_20filings_label-v2/output/risk_categories.csv</code> — 78 category
+rows, 12 filings, 10 filers.</p>
+<p><strong>1 · The map is complete. This is not the bottleneck.</strong> 72 mapped, 6 not-a-theme,
+<strong>0 unmapped</strong>. So "have a model propose map entries for unseen headings" solves a
+problem that does not exist yet. It would only become the job at a much larger corpus
+with new industries in it.</p>
+<p><strong>2 · The binding constraint is grain, and it is severe.</strong></p>
+<table>
+<thead>
+<tr>
+<th>theme</th>
+<th>headings</th>
+<th>filers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>legal_regulatory</code></td>
+<td>10</td>
+<td>9</td>
+</tr>
+<tr>
+<td><code>business_operations</code></td>
+<td>9</td>
+<td><strong>10</strong></td>
+</tr>
+<tr>
+<td><code>macro_industry</code></td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td><code>strategy_competition</code></td>
+<td>6</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>financial_capital</code></td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr>
+<td><code>intellectual_property</code></td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>corporate_transactions</code></td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>general</code></td>
+<td>2</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong><code>cybersecurity_privacy</code></strong></td>
+<td><strong>1</strong></td>
+<td><strong>1 — Microsoft only</strong></td>
+</tr>
+<tr>
+<td><strong><code>international_operations</code></strong></td>
+<td><strong>1</strong></td>
+<td><strong>1 — Nike only</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>P3.2 — "what cybersecurity risks did Microsoft disclose?" — is answerable for exactly
+one filer in ten, and it happens to be the one the question names.</strong> That is an accident,
+not coverage. Every other filer folds cyber into <code>business_operations</code> or
+<code>legal_regulatory</code>. Same for P1.2 and P3.5 on supply chain: <strong>no filer writes a
+supply-chain heading at all</strong>, so the category level cannot reach it either.</p>
+<p><strong>This changes the recommendation. What "from the sentences" means, concretely.</strong></p>
+<p>Today a sentence gets its theme <strong>by position</strong>: <code>risk_factors.py</code> assigns every Item 1A
+sentence the theme of the heading above it. So a sentence about a Taiwanese supplier, a
+sentence about a factory fire and a sentence about hiring all come back as
+<code>business_operations</code>, because that is what the heading said.</p>
+<p>The proposal is one extra label on that same row: <strong>ask the model which of the ten themes
+the sentence is actually about, independently of the heading above it.</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>field</td>
+<td>one — <code>risk_theme</code>, as a second column beside the inherited one</td>
+</tr>
+<tr>
+<td>vocabulary</td>
+<td>the ten themes that already exist, plus <code>unknown</code></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>one sentence</td>
+</tr>
+<tr>
+<td>where</td>
+<td><strong>Item 1A only</strong></td>
+</tr>
+<tr>
+<td>how many</td>
+<td><strong>5,130 sentences</strong> in the 20-filing run, 5,106 of them under a mapped heading</td>
+</tr>
+</tbody>
+</table>
+<p>That is the whole job. Not every chunk, not every field — one enum over five thousand
+sentences in one section. <strong>Keep the inherited theme</strong>; the model's label goes beside it,
+so nothing that works today breaks and the two can be compared.</p>
+<p><strong>Why it fixes the question.</strong> Apple's cyber sentences sit under a heading mapped to
+<code>business_operations</code>. A sentence-level label puts them under <code>cybersecurity_privacy</code>,
+and <em>"what cyber risks did Apple disclose"</em> starts working for all ten filers instead of
+one.</p>
+<p><strong>How to measure it — and the trap.</strong> The obvious score is agreement with the inherited
+theme, and that is wrong, because disagreeing with broad headings <em>is the point</em>. Split
+it:</p>
+<ul>
+<li><strong>Where the heading is specific</strong> — Microsoft's cyber heading, Nike's international
+  heading — the inherited theme is trustworthy. <strong>Agreement there is the real score.</strong></li>
+<li><strong>Where the heading is broad</strong> — all nine <code>business_operations</code> headings — measure how
+  much mass moves and to where, then spot-check a sample by hand. Movement is expected;
+  the question is whether it is sensible.</li>
+</ul>
+<p>Either way <strong>no new hand-labelling is needed to start</strong>, which is usually what kills this
+kind of work before it begins.</p>
+<p><strong>3 · Salience exists, is unused — and the corpus cannot run it yet.</strong></p>
+<p><em>Salience</em> here means one thing only: <strong>how much space a filer gave a risk.</strong> <code>n_units</code>
+is the number of Item 1A sentences sitting under a category heading. It is populated on
+all 78 rows — min 0, median 39, max 546. That is the only measure of "attention" a filing
+makes available, because a filing has no other way of emphasising something than by
+writing more about it and putting it earlier.</p>
+<p><strong>How I would use it.</strong> P3.4 asks which risks got more attention than last year. Compare
+a theme's share of Item 1A between a filer's two consecutive 10-Ks:</p>
+<ol>
+<li>Aggregate <code>n_units</code> from heading level to <strong>theme</strong> level — headings get renamed year
+   to year, themes do not. This is exactly what the shared library is for.</li>
+<li>Use <strong>share of Item 1A, not raw count.</strong> Item 1A length moves a lot year to year, so a
+   raw count rises when the whole section grows and means nothing.</li>
+<li>Require a <strong>minimum absolute move</strong> as well as a share move, so a theme going from 2
+   sentences to 4 does not report as "doubled".</li>
+<li>Report the raw numbers next to the verdict, so a reader can see what drove it.</li>
+</ol>
+<p><strong>Agree the definition with Eval before anyone scores it.</strong> "More attention" could mean
+share up, raw count up, moved earlier in the document, or newly present. Those give
+different answers on the same filing. <code>risk_categories.csv</code> supports share, raw and newly
+present today; "moved earlier" needs <code>section_order</code>, which exists.</p>
+<p><strong>What it does not measure.</strong> Space is not severity. A filer that reorganises its
+headings shifts every count without changing a word of substance. State that limit
+whenever the number is shown.</p>
+<p>⚠️ <strong>Blocked on the corpus, not on the code.</strong> The run holds <strong>one 10-K per filer</strong> —
+AAPL, CASY, MCK, MDT, MSFT, MU, NKE, NTAP, PH, TTWO, one annual filing each. A
+year-over-year comparison needs two. So <strong>P3.1</strong> ("how did risks change from 2024 to
+2025"), <strong>P3.4</strong> ("more attention than the previous year") and the eval question <strong>M06</strong>
+("which risk factors appear in FY2023 that were absent in FY2021") cannot be run on this
+corpus at all — regardless of schema.</p>
+<p>That is the third demand in a row that turns out to be corpus composition rather than
+engineering: <strong>peer</strong> needs two filers in one SIC group, <strong>risk change</strong> needs two years
+per filer, <strong>theme grain</strong> needs filers who write specific headings. All three go back to
+Kelly's list.</p>
+<h3>Is this an ontology change? Mostly no.</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New node type</td>
+<td><strong>No.</strong> <code>RiskFactor</code> already exists, decision 2.4. Same ten <code>risk_id</code>s</td>
+</tr>
+<tr>
+<td>New edge type</td>
+<td><strong>No.</strong> <code>Claim -[:CONCERNS_RISK]-&gt; RiskFactor</code> already exists</td>
+</tr>
+<tr>
+<td>New key</td>
+<td><strong>No.</strong> Nothing is re-keyed</td>
+</tr>
+<tr>
+<td>What changes</td>
+<td><strong>Which claim points at which theme</strong>, and where the heading's theme lives</td>
+</tr>
+</tbody>
+</table>
+<p>So it is not a Layer 1 amendment. But it does trip a rule Layer 1 already enforces:
+<code>CONSOLIDATED_INTO</code> ships "only where a filing explicitly supports the mapping", and
+<code>PEER_OF</code> is "sourced from SIC and stated as such, or it does not go in." <strong>An edge states
+its source.</strong> A theme a model assigned is a different source from a theme inherited from
+a heading, so <code>CONCERNS_RISK</code> has to carry which one it was. That is a property on an
+existing edge — a recorded decision, not a schema bump.</p>
+<h3>Diagram 1 — how a theme reaches a sentence today</h3>
+<pre class="mermaid">flowchart TB
+  H["Section · Item 1A heading<br>Business and Operational Risks"]
+  H --> C1["Claim<br>a supplier in Taiwan..."]
+  H --> C2["Claim<br>a breach of our systems..."]
+  H --> C3["Claim<br>attracting engineers..."]
+  C1 --> T["RiskFactor<br>business_operations"]
+  C2 --> T
+  C3 --> T
+
+  style T fill:#FFF2CC,stroke:#D6B656,color:#000000
+</pre>
+<p>Every claim takes the heading's theme <strong>by position</strong>. The breach sentence is filed under
+<code>business_operations</code> because of where it sits, not what it says.</p>
+<h3>Diagram 2 — the question that breaks</h3>
+<pre class="mermaid">flowchart LR
+  Q["what cyber risks<br>did Apple disclose?"] --> F["filter<br>risk_theme = cybersecurity_privacy"]
+  F --> R["0 claims"]
+  A["Apple's breach sentences<br>exist, and say so"] -. "filed under<br>business_operations" .-> R
+
+  style R fill:#F8CECC,stroke:#B85450,color:#000000
+</pre>
+<p>The evidence is in the corpus. The filter cannot reach it, because Apple never wrote a
+cybersecurity heading — only Microsoft did.</p>
+<h3>Diagram 3 — what the extra column changes</h3>
+<pre class="mermaid">flowchart TB
+  H["Section · heading<br>section_theme: business_operations<br><i>stays, as a property of the SECTION</i>"]
+  H --> C1["Claim<br>a supplier in Taiwan..."]
+  H --> C2["Claim<br>a breach of our systems..."]
+  H --> C3["Claim<br>attracting engineers..."]
+  C1 -->|CONCERNS_RISK<br>source: model| T1["RiskFactor<br>business_operations"]
+  C2 -->|CONCERNS_RISK<br>source: model| T2["RiskFactor<br>cybersecurity_privacy"]
+  C3 -->|CONCERNS_RISK<br>source: model| T1
+
+  style T2 fill:#D5E8D4,stroke:#82B366,color:#000000
+</pre>
+<p><strong>The move worth noticing.</strong> The heading's theme was never really a property of the
+sentence — it was a property of the <em>heading</em>, pushed down onto every sentence because
+nothing else existed. Diagram 3 puts it back where it belongs: <code>section_theme</code> on the
+Section, <code>CONCERNS_RISK</code> on the Claim. Two different facts that were conflated because
+only one of them could be produced.</p>
+<p>That also settles the "do we keep both?" question without doubling any edges. You do not
+end up with two <code>CONCERNS_RISK</code> edges per claim; you end up with one edge and one section
+property.</p>
+<h3>What it buys, as a query</h3>
+<table>
+<thead>
+<tr>
+<th>question</th>
+<th>today</th>
+<th>with the column</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cyber risks for <strong>Microsoft</strong></td>
+<td>works — it has a cyber heading</td>
+<td>works</td>
+</tr>
+<tr>
+<td>cyber risks for <strong>the other nine</strong></td>
+<td><strong>0 claims</strong></td>
+<td>the claims that say so</td>
+</tr>
+<tr>
+<td>supply chain risks, <strong>any filer</strong></td>
+<td><strong>0 claims</strong> — nobody writes that heading</td>
+<td>the claims that say so</td>
+</tr>
+<tr>
+<td>"which risks got more attention"</td>
+<td>heading counts only</td>
+<td>theme counts that survive a filer renaming its headings</td>
+</tr>
+</tbody>
+</table>
+<h3>The free gold set</h3>
+<p>The 72 mapped categories are ground truth for a sentence labeller: every sentence under a
+mapped heading already has a theme by inheritance. Train or prompt against the sentences,
+score against the heading. <strong>No new hand-labelling is needed to measure it</strong> — which is
+the part that usually kills this kind of work.</p>
+<h3>P4.4 — confirmed, and narrower than hoped</h3>
+<p>Risk categories come from <strong>10 of 10 10-Ks but only 2 of 10 10-Qs</strong> (MSFT and MU). So
+<em>"what risks are new in the latest 10-Q against the last 10-K"</em> is answerable for two
+filers out of ten. The rest file a 10-Q whose risk section says nothing to extract.</p>
+<hr />
+<h2>Slot names — should they match the contract keys?</h2>
+<p><strong>The tradeoff.</strong> One vocabulary is cheaper to hold in your head and impossible to drift.
+Two vocabularies name a resolution step that has to happen somewhere — and when it is
+unnamed, it fails silently.</p>
+<p>This project has already paid for drift once: <code>RENAMED_FILTERS</code> exists because
+<code>form_type</code>/<code>form</code>, <code>accession</code>/<code>accession_number</code> and <code>period_end</code>/<code>reporting_period_end</code>
+all happened. That is the argument for collapsing.</p>
+<p>The argument against collapsing entirely is that two of the slots are <strong>not renames, they
+are resolutions that can fail</strong>:</p>
+<ul>
+<li><code>filer</code> → <code>ticker</code> <strong>or</strong> <code>cik</code>. A question says "Medtronic"; something has to turn that
+  into a key. The Agent team's ticker map overlaps our corpus on MSFT and AAPL only, and
+  the other eight resolve to <code>None</code> with no filter set — which is the mechanism behind
+  <em>"Medtronic answers a Microsoft question."</em> Collapsing the name hides the step that
+  broke.</li>
+<li><code>period</code> → <code>fiscal_year</code> <strong>plus</strong> <code>fiscal_period</code>. "The last three fiscal years" is one
+  slot and two keys, and it is where the arity gap lives.</li>
+</ul>
+<p><strong>Proposed rule: a slot keeps its own name only when resolving it can fail. Otherwise it
+takes the contract key's name.</strong> That collapses <code>concept</code>, <code>section</code>, <code>segment</code>,
+<code>is_table</code> and <code>form</code> to the contract names, leaves <code>filer</code> and <code>period</code> distinct and
+documented as resolutions, and gives <code>peer</code> and <code>risk_theme</code> the same name on both sides
+since they need new keys anyway. Nine slot names, two that differ, each for a stated
+reason.</p>
+<p><strong>Who owns it:</strong> Layer 3 is <em>question routing, agreed with Agents, W6 then W10.</em> The
+mapping table belongs there, not in <code>question_bank_slots.py</code> — which should point at it
+rather than hold a second copy.</p>
+<hr />
+<h2>What was checked</h2>
+<p><strong>Against <code>origin/main</code> at <code>3ca2aab</code></strong>, after #89/#90/#93 merged — not the local
+worktree, which is on <code>c9b419b</code> and predates the fiscal work.</p>
+<ul>
+<li>Nine slots against <code>SHARED_FILTERS</code> / <code>STRUCTURED_FILTERS</code> in <code>graphrag/contract.py</code></li>
+<li><code>validate_filters</code> checks the key, never the value — arity is each arm's business</li>
+<li><code>graphrag/graph_backend.py</code> <code>_where_clause</code> — <code>IN $key</code> for any list value</li>
+<li><code>graphrag/graph_backend.py</code> <code>_fiscal_clause</code> — iterates <code>fiscal_year</code> and <code>ticker</code></li>
+<li><code>structured/fiscal.py</code> <code>window()</code> — takes one <code>fiscal_period</code>, which is the gap</li>
+<p class=correction><strong>Correction, 20 November 2026.</strong> <code>window()</code> is now called once per period, so this is no longer the gap. PR #101, open.</p>
+</ul>
+<p><strong>Corrected in the drafting.</strong> The first version of this slide claimed the fiscal filters
+were scalar and that 16 questions could not be expressed. They take lists; the real
+number is 2. The claim came from reading the stale worktree.</p>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true, theme: "neutral",
+                        themeVariables: { fontFamily: "Helvetica Neue, sans-serif" } });
+</script>
+</body>
+</html>
