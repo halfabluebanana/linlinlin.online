@@ -1,52 +1,25 @@
-<!doctype html>
-<html lang="en">
-<meta charset="utf-8">
-<meta name=robots content="noindex,nofollow">
-<title>Metadata labelling - one pager (2026-11-19)</title>
-<style>
-  :root { --ink:#1a1a1a; --grey:#6b7280; --rule:#e4e4e4; --rust:#a33a2a; }
-  body { max-width: 54rem; margin: 3rem auto 6rem; padding: 0 1.5rem;
-         font: 16px/1.65 -apple-system, "Helvetica Neue", Helvetica, sans-serif;
-         color: var(--ink); }
-  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 .4rem; }
-  h2 { font-size: 1.3rem; margin: 2.6rem 0 .8rem; padding-top: 1.2rem;
-        border-top: 1px solid var(--rule); }
-  h3 { font-size: 1.05rem; margin: 1.8rem 0 .5rem; }
-  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .86rem; }
-  th, td { text-align: left; vertical-align: top; padding: .45rem .6rem;
-            border-bottom: 1px solid var(--rule); }
-  th { background: #f7f8fa; font-weight: 600; }
-  code { font: .85em Menlo, monospace; background: #f4f4f5;
-          padding: .1em .35em; border-radius: 3px; }
-  pre code { display: block; padding: .8rem; overflow-x: auto; background: #f7f8fa; }
-  blockquote { margin: 1rem 0; padding: .3rem 0 .3rem 1rem;
-                border-left: 3px solid var(--rule); color: var(--grey); }
-  .mermaid { margin: 1.4rem 0; text-align: center; background: none; }
-  hr { border: 0; border-top: 1px solid var(--rule); margin: 2.4rem 0; }
-  a { color: var(--rust); }
-.omitted{color:#6b7280;font-size:.9em}.correction{border-left:3px solid #a33a2a;background:#fdf3f1;padding:.6rem .9rem;margin:.8rem 0;font-size:.93em;color:#7a2d20}.pages{margin:8px 0 2px;display:flex;flex-wrap:wrap;gap:6px}.pages .p{font-size:11px;padding:3px 9px;border-radius:5px;text-decoration:none;border:1px solid #d8d8d8;color:#0a3d91;background:#fff}.pages .p:hover{background:#f0f5ff}.pages .here{color:#555;background:#eceff4;border-color:#dcdcdc;font-weight:600}
-</style>
-<body>
-<h1>Metadata labelling — one pager\1
-<nav class=pages><a class=p href="gold-set-v2.html" title="which arm answers each question">Gold Set</a><a class=p href="retrieval-state-2026-11-20.html" title="what each arm does today">Retrieval state</a><a class=p href="retrieval-diagram-2026-11-20.html" title="the flow, and where it stops">How retrieval works</a><a class=p href="corpus-2026-11-20.html" title="what is loaded in each arm">Corpus</a><a class=p href="question-bank-2026-11-20.html" title="what the 58 questions actually ask for">Question bank</a><span class="p here" title="where an LLM would and would not help">Metadata labelling</span></nav>
-<p class=omitted><em>Speaker notes omitted from this copy.</em></p>
-<p><strong>Deck:</strong> <code>~/Desktop/KPMG_LLM-metadata-onepager_v1.pptx</code> — 5 slides
-<strong>For:</strong> KPMG, two argued slides + three appendix slides, 4–5 minutes
-<strong>Scope:</strong> what to label, decided from the question bank. Not a labelling run.
-<strong>Source:</strong> <code>Data Practicum - Business Use Cases</code>, 18 Nov — 3 personas × 4 use cases, <strong>58 candidate questions</strong>
-<strong>Built by:</strong> <code>tools/build_metadata_onepager.py</code>, counts computed from <code>tools/question_bank_slots.py</code>
-<strong>Previous:</strong> [[KPMG update - four slides (2026-11-05)]]</p>
-<blockquote>
-<p>The client's ask is "use an LLM for metadata labelling". That is a <em>how</em>. This
-settles <em>what</em>, and the answer turns out to be much smaller than the ask implies:
-one field, not every field.</p>
-</blockquote>
-<p><strong>The spine.</strong> Layer 1 of <code>schema-ids-operations.md</code> has said since 14 October that a
-node ships only if it names the question it answers. This is that rule applied to
-fields instead of nodes. The bank is what makes it answerable — and it did not produce
-a new taxonomy. It produced two gaps and three scope problems.</p>
-<hr />
-<h2>Slide — 58 questions, 9 slots, and we already have 7 of them</h2>
+<!doctype html><html lang=en><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noindex,nofollow"><title>Metadata labelling — where an LLM would and would not help</title><style>body{font:15px/1.55 -apple-system,BlinkMacSystemFont,sans-serif;margin:0;background:#fafafa;color:#1a1a1a}
+header{background:#fff;border-bottom:1px solid #ddd;padding:16px 20px}
+h1{font-size:17px;margin:0 0 6px}
+h2{font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:#555;margin:28px 0 8px}
+h3{font-size:13px;margin:20px 0 6px;color:#333}
+main{padding:0 20px 60px;max-width:104ch}
+.prov{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:#555;line-height:1.7}
+.sub{font-size:12px;color:#666;max-width:92ch;margin:8px 0 0}
+table{border-collapse:collapse;width:100%;background:#fff;margin-top:6px;font-size:13px}
+td,th{border-bottom:1px solid #e4e4e4;padding:8px 11px;text-align:left;vertical-align:top}
+th{background:#f2f2f2;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#555}
+tr:hover{background:#fff8e5}
+code{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#f2f2f2;padding:1px 4px;border-radius:3px}
+pre{background:#fff;border:1px solid #e4e4e4;border-radius:5px;padding:10px 12px;overflow-x:auto}
+pre code{background:none;padding:0;font-size:11.5px}
+blockquote{margin:12px 0;padding:2px 0 2px 14px;border-left:3px solid #e0e0e0;color:#555}
+hr{border:0;border-top:1px solid #e4e4e4;margin:30px 0}
+footer{border-top:1px solid #ddd;margin-top:40px;padding:14px 20px;font-size:11.5px;color:#888}
+.pages{margin:8px 0 2px;display:flex;flex-wrap:wrap;gap:6px}
+.pages .p{font-size:11px;padding:3px 9px;border-radius:5px;text-decoration:none;border:1px solid #d8d8d8;color:#0a3d91;background:#fff}
+.pages .p:hover{background:#f0f5ff}
+.pages .here{color:#555;background:#eceff4;border-color:#dcdcdc;font-weight:600}</style><header><h1>Where an LLM would and would not help with metadata — 19 November 2026</h1><nav class=pages><a class=p href="gold-set-v2.html" title="which arm answers each question">Gold Set</a><a class=p href="retrieval-state-2026-11-20.html" title="what each arm does today">Retrieval state</a><a class=p href="retrieval-diagram-2026-11-20.html" title="the flow, and where it stops">How retrieval works</a><a class=p href="corpus-2026-11-20.html" title="what is loaded in each arm">Corpus</a><span class="p here" title="where an LLM would and would not help">Metadata labelling</span></nav><div class=prov>source doc     : Data Practicum - Business Use Cases (18 Nov 2026)<br>questions      : 58 across 3 personas &#xb7; 4 use cases each<br>tagging        : tools/question_bank_slots.py &#xb7; one pass, one reader<br>measured from  : runs/2026-11_20filings_label-v2 &#xb7; filings.yaml at 3ca2aab<br>                 slot counts are computed, the tags behind them are judgements</div><p class=sub>A snapshot, not a live view. The slot counts are computed from the tagging file and will change if a question is re-tagged. The theme and salience numbers were measured on the 20-filing run, which is one year deep; the configured corpus is 233 filings over six years.</p></header><main><h2>Slide — 58 questions, 9 slots, and we already have 7 of them</h2>
 <table>
 <thead>
 <tr>
@@ -123,7 +96,6 @@ a new taxonomy. It produced two gaps and three scope problems.</p>
    <code>PEER_OF</code> is in the edge diagram, sourced from SIC, and not loaded. <code>fiscal_period</code> —
    every other filter takes a list; this one does not, which blocks the 2 questions
    wanting two quarters of the same fiscal year (S2.2, S4.3).</li>
-<p class=correction><strong>Correction, 20 November 2026.</strong> No longer true. <code>fiscal_period</code> accepts a list as of PR #101, which is open and <em>not yet merged</em>; S2.2 and S4.3 become expressible when it lands. The gap was real when this was written against <code>3ca2aab</code> &mdash; it surfaced as three gold questions raising on both arms, found by running the set rather than reading it.</p>
 <li><strong>9 of 58 are not answerable from filings at all.</strong> Which of the 58 are real analyst
    questions and which are illustrative is a scope decision, and it is KPMG's.</li>
 </ol>
@@ -680,41 +652,15 @@ its source.</strong> A theme a model assigned is a different source from a theme
 a heading, so <code>CONCERNS_RISK</code> has to carry which one it was. That is a property on an
 existing edge — a recorded decision, not a schema bump.</p>
 <h3>Diagram 1 — how a theme reaches a sentence today</h3>
-<pre class="mermaid">flowchart TB
-  H["Section · Item 1A heading<br>Business and Operational Risks"]
-  H --> C1["Claim<br>a supplier in Taiwan..."]
-  H --> C2["Claim<br>a breach of our systems..."]
-  H --> C3["Claim<br>attracting engineers..."]
-  C1 --> T["RiskFactor<br>business_operations"]
-  C2 --> T
-  C3 --> T
-
-  style T fill:#FFF2CC,stroke:#D6B656,color:#000000
-</pre>
+<svg viewBox="0 0 720 250" width="100%" style="max-width:720px;height:auto;display:block;margin:14px 0"><defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker></defs><g font-family="-apple-system,BlinkMacSystemFont,sans-serif"><rect x="190" y="8" width="340" height="34" rx="5" fill="#f2f2f2" stroke="#d8d8d8"/><text x="360.0" y="23.0" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1a1a"><tspan x="360.0" dy="0">Section · Item 1A heading</tspan><tspan x="360.0" dy="13">Business and Operational Risks</tspan></text><rect x="30" y="90" width="200" height="30" rx="5" fill="#fff" stroke="#d8d8d8"/><text x="130.0" y="109.0" text-anchor="middle" font-size="11" font-weight="400" fill="#1a1a1a"><tspan x="130.0" dy="0">a supplier in Taiwan…</tspan></text><line x1="360" y1="42" x2="130" y2="88" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><line x1="130" y1="120" x2="360" y2="172" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><rect x="270" y="90" width="200" height="30" rx="5" fill="#fff" stroke="#d8d8d8"/><text x="370.0" y="109.0" text-anchor="middle" font-size="11" font-weight="400" fill="#1a1a1a"><tspan x="370.0" dy="0">a breach of our systems…</tspan></text><line x1="360" y1="42" x2="370" y2="88" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><line x1="370" y1="120" x2="360" y2="172" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><rect x="510" y="90" width="200" height="30" rx="5" fill="#fff" stroke="#d8d8d8"/><text x="610.0" y="109.0" text-anchor="middle" font-size="11" font-weight="400" fill="#1a1a1a"><tspan x="610.0" dy="0">attracting engineers…</tspan></text><line x1="360" y1="42" x2="610" y2="88" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><line x1="610" y1="120" x2="360" y2="172" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><rect x="230" y="174" width="260" height="34" rx="5" fill="#fdf0d5" stroke="#e0c98a"/><text x="360.0" y="195.0" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1a1a"><tspan x="360.0" dy="0">RiskFactor · business_operations</tspan></text><text x="360" y="232" text-anchor="middle" font-size="11" fill="#555">every claim takes the heading&#x27;s theme, by position</text></g></svg>
 <p>Every claim takes the heading's theme <strong>by position</strong>. The breach sentence is filed under
 <code>business_operations</code> because of where it sits, not what it says.</p>
 <h3>Diagram 2 — the question that breaks</h3>
-<pre class="mermaid">flowchart LR
-  Q["what cyber risks<br>did Apple disclose?"] --> F["filter<br>risk_theme = cybersecurity_privacy"]
-  F --> R["0 claims"]
-  A["Apple's breach sentences<br>exist, and say so"] -. "filed under<br>business_operations" .-> R
-
-  style R fill:#F8CECC,stroke:#B85450,color:#000000
-</pre>
+<svg viewBox="0 0 720 190" width="100%" style="max-width:720px;height:auto;display:block;margin:14px 0"><defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker></defs><g font-family="-apple-system,BlinkMacSystemFont,sans-serif"><rect x="20" y="40" width="190" height="44" rx="5" fill="#fff" stroke="#d8d8d8"/><text x="115.0" y="60.0" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1a1a"><tspan x="115.0" dy="0">&#x201C;what cyber risks did</tspan><tspan x="115.0" dy="13">Apple disclose?&#x201D;</tspan></text><line x1="210" y1="62" x2="258" y2="62" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><rect x="260" y="40" width="200" height="44" rx="5" fill="#fff" stroke="#d8d8d8"/><text x="360.0" y="60.0" text-anchor="middle" font-size="11" font-weight="400" fill="#1a1a1a"><tspan x="360.0" dy="0">filter</tspan><tspan x="360.0" dy="13">risk_theme = cybersecurity_privacy</tspan></text><line x1="460" y1="62" x2="508" y2="62" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><rect x="510" y="40" width="170" height="44" rx="5" fill="#ffe3e3" stroke="#e8b4b4"/><text x="595.0" y="66.0" text-anchor="middle" font-size="13" font-weight="600" fill="#9b1c1c"><tspan x="595.0" dy="0">0 claims</tspan></text><rect x="260" y="125" width="200" height="40" rx="5" fill="#fff" stroke="#d8d8d8"/><text x="360.0" y="143.0" text-anchor="middle" font-size="11" font-weight="400" fill="#1a1a1a"><tspan x="360.0" dy="0">Apple&#x27;s breach sentences</tspan><tspan x="360.0" dy="13">exist, and say so</tspan></text><line x1="460" y1="145" x2="560" y2="92" stroke="#555" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#a)"/><text x="470" y="140" font-size="10.5" fill="#555">filed under business_operations</text></g></svg>
 <p>The evidence is in the corpus. The filter cannot reach it, because Apple never wrote a
 cybersecurity heading — only Microsoft did.</p>
 <h3>Diagram 3 — what the extra column changes</h3>
-<pre class="mermaid">flowchart TB
-  H["Section · heading<br>section_theme: business_operations<br><i>stays, as a property of the SECTION</i>"]
-  H --> C1["Claim<br>a supplier in Taiwan..."]
-  H --> C2["Claim<br>a breach of our systems..."]
-  H --> C3["Claim<br>attracting engineers..."]
-  C1 -->|CONCERNS_RISK<br>source: model| T1["RiskFactor<br>business_operations"]
-  C2 -->|CONCERNS_RISK<br>source: model| T2["RiskFactor<br>cybersecurity_privacy"]
-  C3 -->|CONCERNS_RISK<br>source: model| T1
-
-  style T2 fill:#D5E8D4,stroke:#82B366,color:#000000
-</pre>
+<svg viewBox="0 0 720 250" width="100%" style="max-width:720px;height:auto;display:block;margin:14px 0"><defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker></defs><g font-family="-apple-system,BlinkMacSystemFont,sans-serif"><rect x="190" y="8" width="340" height="34" rx="5" fill="#f2f2f2" stroke="#d8d8d8"/><text x="360.0" y="29.0" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1a1a"><tspan x="360.0" dy="0">Section · section_theme: business_operations</tspan></text><rect x="30" y="90" width="200" height="30" rx="5" fill="#fff" stroke="#d8d8d8"/><text x="130.0" y="109.0" text-anchor="middle" font-size="11" font-weight="400" fill="#1a1a1a"><tspan x="130.0" dy="0">a supplier in Taiwan…</tspan></text><line x1="360" y1="42" x2="130" y2="88" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><line x1="130" y1="120" x2="340" y2="172" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><rect x="270" y="90" width="200" height="30" rx="5" fill="#fff" stroke="#d8d8d8"/><text x="370.0" y="109.0" text-anchor="middle" font-size="11" font-weight="400" fill="#1a1a1a"><tspan x="370.0" dy="0">a breach of our systems…</tspan></text><line x1="360" y1="42" x2="370" y2="88" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><line x1="370" y1="120" x2="600" y2="172" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><rect x="510" y="90" width="200" height="30" rx="5" fill="#fff" stroke="#d8d8d8"/><text x="610.0" y="109.0" text-anchor="middle" font-size="11" font-weight="400" fill="#1a1a1a"><tspan x="610.0" dy="0">attracting engineers…</tspan></text><line x1="360" y1="42" x2="610" y2="88" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><line x1="610" y1="120" x2="340" y2="172" stroke="#555" stroke-width="1.2" marker-end="url(#a)"/><rect x="100" y="174" width="260" height="34" rx="5" fill="#fdf0d5" stroke="#e0c98a"/><text x="230.0" y="195.0" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1a1a"><tspan x="230.0" dy="0">RiskFactor · business_operations</tspan></text><rect x="400" y="174" width="280" height="34" rx="5" fill="#dcf5e7" stroke="#9ad4b6"/><text x="540.0" y="195.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0a7a46"><tspan x="540.0" dy="0">RiskFactor · cybersecurity_privacy</tspan></text><text x="360" y="232" text-anchor="middle" font-size="11" fill="#555">each claim takes the theme its own sentence states</text></g></svg>
 <p><strong>The move worth noticing.</strong> The heading's theme was never really a property of the
 sentence — it was a property of the <em>heading</em>, pushed down onto every sentence because
 nothing else existed. Diagram 3 puts it back where it belongs: <code>section_theme</code> on the
@@ -793,6 +739,110 @@ reason.</p>
 mapping table belongs there, not in <code>question_bank_slots.py</code> — which should point at it
 rather than hold a second copy.</p>
 <hr />
+<h2>Speaker notes</h2>
+<h3>The one the client asked about</h3>
+<p><code>risk_theme</code> is the answer to "put an LLM on metadata labelling", and it is the whole
+answer. The model's scope is <strong>one field across ten questions</strong>, not every field across
+every chunk — a far cheaper run than the ask implies, and the only one that would change
+retrieval.</p>
+<p>It already has a home. <code>RiskFactor</code> is a settled node (decision 2.4), and the decision
+says themes come from <strong>a documented list, not from each extracted phrase</strong>. So the job
+is a closed enum against CW's theme list with an explicit <code>unknown</code> — which is exactly
+the shape that can be measured. Hand-label 50–100 chunks as gold, report agreement
+<strong>per field</strong>, not in aggregate.</p>
+<h3>The period gap is smaller than it looks, and worth saying so</h3>
+<p>16 of 58 questions want more than one period, which sounds like a hole. It is mostly
+not. Checked against <code>main</code> at <code>3ca2aab</code>, after #89/#90/#93: <code>_where_clause</code> emits
+<code>IN $key</code> for any list value, and <code>_fiscal_clause</code> iterates both <code>fiscal_year</code> and
+<code>ticker</code>. So a list of fiscal years crossed with one <code>fiscal_period</code> already covers
+<em>"Q3 across 2020–2025"</em> (P1.1) and <em>"compared with the same quarter last year"</em> (L3.2,
+P4.1) — and <code>form</code> takes a list too, so the two cross-form questions (P1.3, P4.4) are
+expressible.</p>
+<p>What is <strong>not</strong> expressible is more than one <code>fiscal_period</code>, because it is handed to
+<code>fiscal.window</code> one value at a time. That blocks exactly two questions: <em>"net income and
+diluted EPS in each of the last four quarters"</em> (S2.2) and <em>"walk me through
+quarter-over-quarter variance"</em> (S4.3). Both want two quarters of the same fiscal year.</p>
+<p><strong>Say the correction out loud rather than burying it.</strong> The honest version is that the
+contract covers the bank better than expected, and the remaining work is narrow: one
+list, one unloaded edge, one labelled field.</p>
+<h3>Persona 3 Use Case 2 closes an open card</h3>
+<p>All five of its questions are about <strong>one debt maturity schedule</strong>, ending in <em>"do the
+reported buckets reconcile to the maturity-table total?"</em> <code>Table</code> and <code>Cell</code> have sat in
+Layer 1 since 13 October with the "question it answers" column empty — added by reading
+Data's migrations rather than by asking something. Naming a question for them is Alina's
+W6 card. <strong>This names it.</strong> Worth telling Alina directly, not only on the slide.</p>
+<h3>If asked "why not let the LLM label everything and see what sticks"</h3>
+<p>Because the failure is silent and it looks like a correct answer. A model that mislabels
+<code>fiscal_year</code> doesn't return an error — it returns a well-formed answer from the wrong
+year, with a citation. Same shape as the four wrong numbers on 5 Nov: every one a real
+fact, from a real filing, under the right concept, wrong only in a dimension, which is
+exactly why they read as answers.</p>
+<h3>The nine, resolved — one bucket was hiding three behaviours</h3>
+<p>A single "cannot answer" flag made the Agent do the same thing in four situations that
+each need something different. Split, 19 Nov:</p>
+<table>
+<thead>
+<tr>
+<th>flag</th>
+<th>questions</th>
+<th>what the system should do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GENERAL</code></td>
+<td>L1.2, L1.3</td>
+<td><strong>Answer it.</strong> No company and no filing in the question — "what is the difference between revenue and profit". Answer plainly from general knowledge and say it is not from a filing. Abstaining here is unhelpful, not safe</td>
+</tr>
+<tr>
+<td><code>SOURCE_GAP</code></td>
+<td>L4.5, S1.3, S1.4, S4.2</td>
+<td><strong>Abstain naming the missing source</strong> — market prices, a proxy statement, the open web, a market cap. "I can't, and here is what it would take" is a different answer from "I won't"</td>
+</tr>
+<tr>
+<td><code>GENERATION</code></td>
+<td>S1.1, P1.4</td>
+<td><strong>Not a retrieval request.</strong> Drafting a statement or building a model over material the user supplies. A different surface, and it should be routed, not refused</td>
+</tr>
+<tr>
+<td><code>ABSTAIN</code></td>
+<td>L4.2 moved here</td>
+<td>Whether layoffs are likely is prediction, which is the existing abstention case</td>
+</tr>
+</tbody>
+</table>
+<p>That leaves <strong>8 unreachable from the filings, in three kinds</strong>, and 7 abstentions.</p>
+<p><strong>Why the split matters beyond tidiness.</strong> This is directly #86's problem. Alison's
+contract has <code>answer / clarify / abstain / block</code> plus an <code>off_topic</code> reason that overlaps
+<code>abstain</code> and <code>out_of_scope</code> — the overlap I flagged on 19 Nov. These four rows are the
+evidence for what the categories need to distinguish: <em>answerable without us</em>, <em>right
+question wrong source</em>, <em>not retrieval</em>, and <em>no verdict available</em>. Worth sending her
+alongside the two outstanding questions.</p>
+<p>The ask back to KPMG is unchanged: <strong>which of the 58 are real analyst questions and which
+are illustrative.</strong> Illustrative ones are fine — they must not set the vocabulary, and
+they must not be in an eval set.</p>
+<h3>Seven are abstention signals, not scope problems</h3>
+<p><em>"Is the debt a problem", "should I be worried if I invest", "which is the safer place
+to work."</em> The evidence is retrievable; the verdict is not. Tagged <code>ABSTAIN</code>, and they
+belong to Alison's <strong>#86</strong> surface rather than to anything a schema fixes. <strong>Seven of 58
+is a larger abstention surface than the gold set suggests — worth telling her the
+number.</strong></p>
+<h3>What we need back</h3>
+<ol>
+<li>The real-versus-illustrative split on the 58.</li>
+<li><strong>Peer comparison is in scope for v1</strong> (decided 19 Nov). 7 questions need a second
+   filer; <code>PEER_OF</code> is in the edge diagram sourced from SIC, and loading it is the
+   outstanding work. <strong>Check the SIC spread first</strong> — if the filers land in different
+   codes the edge loads and still answers nothing.</li>
+</ol>
+<blockquote>
+<p>Notes — slide and notes build with
+<code>python3 tools/build_metadata_onepager.py --output ~/Desktop/metadata-onepager.pptx</code>.
+Re-tagging a question in <code>tools/question_bank_slots.py</code> re-draws the slide.
+Filter keys checked against <code>SHARED_FILTERS</code> / <code>STRUCTURED_FILTERS</code> in
+<code>graphrag/contract.py</code>.</p>
+</blockquote>
+<hr />
 <h2>What was checked</h2>
 <p><strong>Against <code>origin/main</code> at <code>3ca2aab</code></strong>, after #89/#90/#93 merged — not the local
 worktree, which is on <code>c9b419b</code> and predates the fiscal work.</p>
@@ -802,15 +852,7 @@ worktree, which is on <code>c9b419b</code> and predates the fiscal work.</p>
 <li><code>graphrag/graph_backend.py</code> <code>_where_clause</code> — <code>IN $key</code> for any list value</li>
 <li><code>graphrag/graph_backend.py</code> <code>_fiscal_clause</code> — iterates <code>fiscal_year</code> and <code>ticker</code></li>
 <li><code>structured/fiscal.py</code> <code>window()</code> — takes one <code>fiscal_period</code>, which is the gap</li>
-<p class=correction><strong>Correction, 20 November 2026.</strong> <code>window()</code> is now called once per period, so this is no longer the gap. PR #101, open.</p>
 </ul>
 <p><strong>Corrected in the drafting.</strong> The first version of this slide claimed the fiscal filters
 were scalar and that 16 questions could not be expressed. They take lists; the real
-number is 2. The claim came from reading the stale worktree.</p>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({ startOnLoad: true, theme: "neutral",
-                        themeVariables: { fontFamily: "Helvetica Neue, sans-serif" } });
-</script>
-</body>
-</html>
+number is 2. The claim came from reading the stale worktree.</p></main><footer>Generated by tools/build_question_bank_page.py from the working notes. Unlisted and noindex: it quotes a client use-case document and discusses another team&#x27;s work.</footer></html>
